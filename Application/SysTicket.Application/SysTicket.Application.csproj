@@ -7,14 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Commands\" />
-    <Folder Include="Handlers\Queries\" />
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AdaskoTheBeAsT.FluentValidation.SimpleInjector" Version="5.3.4" />
+    <PackageReference Include="AdaskoTheBeAsT.MediatR.SimpleInjector" Version="5.0.1" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
-    <PackageReference Include="MediatR.SimpleInjector" Version="9.0.0" />
     <PackageReference Include="SimpleInjector.Packaging" Version="5.0.0" />
   </ItemGroup>
 

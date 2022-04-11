@@ -1,12 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using SimpleInjector;
+using SimpleInjector.Lifestyles;
 using SysTicket.API.Common;
+using SysTicket.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSimpleInjector(SimpleInjectorContainer.Container, cfg =>
@@ -17,11 +17,14 @@ builder.Services.AddSimpleInjector(SimpleInjectorContainer.Container, cfg =>
     cfg.AddLogging();
 });
 
+builder.Services.AddDbContext<SysTicketContext>(
+    options => options.UseSqlServer("name=ConnectionStrings:SysTicket")
+);
+
 var app = builder.Build();
 
 app.Services.UseSimpleInjector(SimpleInjectorContainer.Container);
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -35,5 +38,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 SimpleInjectorContainer.InitializeContainer();
+
+using (var scope = AsyncScopedLifestyle.BeginScope(SimpleInjectorContainer.Container))
+{
+    var context = SimpleInjectorContainer.Container.GetInstance<SysTicketContext>();
+
+    context.Database.Migrate();
+}
 
 app.Run();

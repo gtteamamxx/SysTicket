@@ -1,7 +1,10 @@
-﻿using MediatR.SimpleInjector;
+﻿using AdaskoTheBeAsT.MediatR.SimpleInjector;
+using AdaskoTheBeAsT.FluentValidation.SimpleInjector;
+
 using SimpleInjector;
 using SimpleInjector.Packaging;
-using SysTicket.Domain.Common;
+using SysTicket.Application.Interfaces.Common;
+using SysTicket.Application.Pipelines;
 
 namespace SysTicket.Application.Common
 {
@@ -9,8 +12,19 @@ namespace SysTicket.Application.Common
     {
         public void RegisterServices(Container container)
         {
+            container.AddMediatR(cfg =>
+            {
+                cfg.WithAssembliesToScan(GetType().Assembly);
+                cfg.UsingPipelineProcessorBehaviors(typeof(ValidationPipeline<,>));
+            });
 
-            container.BuildMediator();
+            container.AddFluentValidation(cfg =>
+            {
+                cfg.WithAssembliesToScan(GetType().Assembly);
+                cfg.RegisterAsValidatorCollection();
+            });
+
+            container.Register<ISysTicketMapper, SysTicketMapper>(Lifestyle.Singleton);
         }
     }
 }

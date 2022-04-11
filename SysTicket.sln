@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.API", "SysTicket\SysTicket.API.csproj", "{43D7D752-2848-4D63-A178-968544FF4041}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.Application", "Application\SysTicket.Application\SysTicket.Application.csproj", "{04097B75-9B5A-490E-96B6-0B755E42D5DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.Infrastructure", "Infrastructure\SysTicket.Infrastructure\SysTicket.Infrastructure.csproj", "{50456E52-051A-419E-A242-2B47883C40A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.Domain", "Domain\SysTicket.Domain\SysTicket.Domain.csproj", "{421FC80B-9D12-45B2-BAD4-F43FDA63DD2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysTicket.Common", "Common\SysTicket.Common\SysTicket.Common.csproj", "{5D24F071-DC2D-4CA0-B1AA-D7B63B8F1623}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.Common", "Common\SysTicket.Common\SysTicket.Common.csproj", "{5D24F071-DC2D-4CA0-B1AA-D7B63B8F1623}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.API", "API\SysTicket.API.csproj", "{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6E103382-EDB9-4732-8F65-19F8B9C0AE25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{7DAF84E5-24DF-404E-BB00-3F8C8B4C4749}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{C8CE97FB-A40A-42EE-BFC6-EC46E7430CD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{43D7D752-2848-4D63-A178-968544FF4041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43D7D752-2848-4D63-A178-968544FF4041}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43D7D752-2848-4D63-A178-968544FF4041}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43D7D752-2848-4D63-A178-968544FF4041}.Release|Any CPU.Build.0 = Release|Any CPU
 		{04097B75-9B5A-490E-96B6-0B755E42D5DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04097B75-9B5A-490E-96B6-0B755E42D5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04097B75-9B5A-490E-96B6-0B755E42D5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,9 +41,17 @@ Global
 		{5D24F071-DC2D-4CA0-B1AA-D7B63B8F1623}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D24F071-DC2D-4CA0-B1AA-D7B63B8F1623}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D24F071-DC2D-4CA0-B1AA-D7B63B8F1623}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DAF84E5-24DF-404E-BB00-3F8C8B4C4749} = {6E103382-EDB9-4732-8F65-19F8B9C0AE25}
+		{C8CE97FB-A40A-42EE-BFC6-EC46E7430CD2} = {6E103382-EDB9-4732-8F65-19F8B9C0AE25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58232DE3-E907-47D4-8BC7-0BE61475C356}
