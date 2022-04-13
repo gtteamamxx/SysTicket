@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit", "Unit", "{7DAF84E5-2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{C8CE97FB-A40A-42EE-BFC6-EC46E7430CD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysTicket.Application.IntegrationTests", "Tests\Integration\SysTicket.Application.IntegrationTests\SysTicket.Application.IntegrationTests.csproj", "{5CDC925C-15AC-4D6F-B3B7-5D6B6428BBBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E84EAAF0-02AB-4BDB-8BBE-4330B5750C20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CDC925C-15AC-4D6F-B3B7-5D6B6428BBBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CDC925C-15AC-4D6F-B3B7-5D6B6428BBBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CDC925C-15AC-4D6F-B3B7-5D6B6428BBBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CDC925C-15AC-4D6F-B3B7-5D6B6428BBBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7DAF84E5-24DF-404E-BB00-3F8C8B4C4749} = {6E103382-EDB9-4732-8F65-19F8B9C0AE25}
 		{C8CE97FB-A40A-42EE-BFC6-EC46E7430CD2} = {6E103382-EDB9-4732-8F65-19F8B9C0AE25}
+		{5CDC925C-15AC-4D6F-B3B7-5D6B6428BBBF} = {C8CE97FB-A40A-42EE-BFC6-EC46E7430CD2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58232DE3-E907-47D4-8BC7-0BE61475C356}
