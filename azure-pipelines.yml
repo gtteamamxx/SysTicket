@@ -40,7 +40,7 @@ steps:
   inputs:
     reports: '$(Build.SourcesDirectory)/Tests/\*\*/coverage.cobertura.xml'
     targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
-    reporttypes: 'HtmlInline\_AzurePipelines;Cobertura;Badges'
+    reporttypes: 'HtmlInline;Cobertura;Badges'
 
 - task: PublishCodeCoverageResults@1
   inputs:
