@@ -10,6 +10,8 @@ namespace SysTicket.Infrastructure
 
         }
 
+        protected SysTicketContext() { }
+
         public virtual DbSet<User> Users { get; set; } = default!;
     }
 }

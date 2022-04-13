@@ -11,10 +11,14 @@ namespace SysTicket.Application.Common
 
         public SysTicketMapper()
         {
-            _mapper = new MapperConfiguration(cfg =>
+            var conf = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDTO>();
-            }).CreateMapper();
+            });
+
+            conf.AssertConfigurationIsValid();
+
+            _mapper = conf.CreateMapper();
         }
 
         public T Map<T>(object? entity) => _mapper.Map<T>(entity);
