@@ -33,11 +33,12 @@ steps:
   inputs:
     command: test
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: 'tests/\*\*/\*.csproj'
+    projects: 'Tests/\*\*/\*.csproj'
     nobuild: true
+
 - task: reportgenerator@5
   inputs:
-    reports: '$(Build.SourcesDirectory)/tests/\*\*/coverage.cobertura.xml'
+    reports: '$(Build.SourcesDirectory)/Tests/\*\*/coverage.cobertura.xml'
     targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
     reporttypes: 'HtmlInline\_AzurePipelines;Cobertura;Badges'
 
