@@ -1,0 +1,15 @@
+@import 'src/styles/colors';
+@import 'src/styles/variables';
+
+.top-bar-container {
+  height: $top-bar-height;
+  display: flex;
+  align-items: center;
+  background-color: $theme-color;
+  color: white;
+  font-weight: 600;
+
+  .title {
+    margin-left: 16px;
+  }
+}

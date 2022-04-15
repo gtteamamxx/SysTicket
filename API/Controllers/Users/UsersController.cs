@@ -18,18 +18,18 @@ namespace SysTicket.API.Controllers.Users
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public Task<UserDTO?> GetUser(string name, string password)
-            => _mediator.Send(new GetUserByNameAndPasswordQuery(
-                Name: name,
-                Password: password)
-            );
-
         [HttpPost]
         public Task CreateUserAsync([FromBody] CreateUserRequest createUserRequest)
             => _mediator.Send(new CreateUserCommand(
                 UserName: createUserRequest.UserName!,
                 Password: createUserRequest.Password!)
+            );
+
+        [HttpGet]
+        public Task<UserDTO?> GetUser(string name, string password)
+            => _mediator.Send(new GetUserByNameAndPasswordQuery(
+                Name: name,
+                Password: password)
             );
     }
 }
