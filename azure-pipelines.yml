@@ -58,7 +58,7 @@ steps:
 - script: |
     npm install
   displayName: 'npm install'
-  workingDirectory: '$(Build.SourcesDirectory)/UI/SysTicket.Client'
+  workingDirectory: 'UI/SysTicket.Client'
 
 - script: |
     npm run build
@@ -68,6 +68,16 @@ steps:
 - task: CopyFiles@2
   inputs:
     Contents: '$(Build.SourcesDirectory)/UI/SysTicket.Client/dist/**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- script: |
+    dotnet publish -c Release
+  displayName: 'Publish api'
+  workingDirectory: '$(Build.SourcesDirectory)/API'
+
+- task: CopyFiles@2
+  inputs:
+    Contents: '$(Build.SourcesDirectory)/API/bin/Release/net6.0/publish**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
