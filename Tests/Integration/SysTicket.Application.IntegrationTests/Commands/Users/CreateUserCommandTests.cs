@@ -4,7 +4,7 @@ using NUnit.Framework;
 using SysTicket.Application.Commands.Users;
 using SysTicket.Application.IntegrationTests.Common;
 
-namespace SysTicket.Application.IntegrationTests.Commands
+namespace SysTicket.Application.IntegrationTests.Commands.Users
 {
     [TestFixture]
     public class CreateUserCommandTests : TestBase
@@ -14,12 +14,13 @@ namespace SysTicket.Application.IntegrationTests.Commands
         {
             // Arrange
             string expectedUserName = "Test";
-            string expectedPassword = "Test2";
+            string password = "Test2";
+            string expectedPassword = "32E6E1E134F9CC8F14B05925667C118D19244AEBCE442D6FECD2AC38CDC97649";
 
             // Act
             await Mediator.Send(new CreateUserCommand(
                 UserName: expectedUserName,
-                Password: expectedPassword)
+                Password: password)
             );
 
             // Assert
@@ -39,6 +40,7 @@ namespace SysTicket.Application.IntegrationTests.Commands
             // Assert
             Assert.ThrowsAsync<ValidationException>(async () =>
             {
+                // Act
                 await Mediator.Send(new CreateUserCommand(
                     UserName: expectedUserName!,
                     Password: expectedPassword!)

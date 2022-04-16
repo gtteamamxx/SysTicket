@@ -1,0 +1,8 @@
+<div class="top-bar-container">
+    <span class="title">SysTicket</span>
+
+    <span>{{ currentPageTitle$ | async }}</span>
+
+
+    <button mat-button *ngIf="(isUserLogged$ | async) === false" (click)="login()">Zaloguj</button>
+</div>

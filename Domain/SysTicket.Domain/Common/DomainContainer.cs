@@ -2,8 +2,10 @@
 using SimpleInjector.Packaging;
 using SysTicket.Domain.Builders;
 using SysTicket.Domain.Factories;
+using SysTicket.Domain.Helpers;
 using SysTicket.Domain.Interfaces.Builders;
 using SysTicket.Domain.Interfaces.Factories;
+using SysTicket.Domain.Interfaces.Helpers;
 
 namespace SysTicket.Domain.Common
 {
@@ -11,6 +13,7 @@ namespace SysTicket.Domain.Common
     {
         public void RegisterServices(Container container)
         {
+            container.Register<IPasswordHashingService, PasswordHashingService>(Lifestyle.Singleton);
             container.Register<IUsersBuilder, UsersBuilder>(Lifestyle.Singleton);
             container.Register<IUsersFactory, UsersFactory>(Lifestyle.Scoped);
         }

@@ -21,6 +21,8 @@ namespace SysTicket.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
+
+            migrationBuilder.Sql("INSERT INTO Users (Name, Password) VALUES('Admin', 'c1c224b03cd9bc7b6a86d77f5dace40191766c485cd55dc48caf9ac873335d6f')");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
