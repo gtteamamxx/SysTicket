@@ -22,12 +22,15 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: VSBuild@1
+- script: |
+    dotnet publish -c Release
+  displayName: 'Publish api'
+  workingDirectory: '$(Build.SourcesDirectory)/API'
+
+- task: CopyFiles@2
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    Contents: '$(Build.SourcesDirectory)/API/bin/Release/net6.0/publish**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: DotNetCoreCLI@2
   displayName: dotnet test
@@ -68,16 +71,6 @@ steps:
 - task: CopyFiles@2
   inputs:
     Contents: '$(Build.SourcesDirectory)/UI/SysTicket.Client/dist/**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- script: |
-    dotnet publish -c Release
-  displayName: 'Publish api'
-  workingDirectory: '$(Build.SourcesDirectory)/API'
-
-- task: CopyFiles@2
-  inputs:
-    Contents: '$(Build.SourcesDirectory)/API/bin/Release/net6.0/publish**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
