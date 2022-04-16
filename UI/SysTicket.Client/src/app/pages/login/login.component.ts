@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { tap } from 'rxjs';
 import { UserModel } from 'src/app/core/models/user.model';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
@@ -41,10 +40,10 @@ export class LoginComponent {
     }).subscribe((user: UserModel | null) => {
       if (user != null) {
         this.store.dispatch(new UserStateActions.SetLoggedUser({ user }))
-          .pipe(
-            tap(() => this.notificationsService.showInfo('Zalogowano jako ' + user.name + ".", { timeoutInMs: 2000 })),
-            tap(() => this.navigationService.navigateToMainPage())
-          ).subscribe();
+          .subscribe(() => {
+            this.notificationsService.showInfo('Zalogowano jako ' + user.name + ".", { timeoutInMs: 2000 });
+            this.navigationService.navigateToMainPage()
+          });
       } else {
         this.notificationsService.showInfo('Nie znaleziono takiego użytkownika.');
       }
