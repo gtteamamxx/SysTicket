@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
 import { CurrentPageStateActions as Actions } from './current-page.state.actions';
@@ -12,6 +13,7 @@ interface CurrentPageStateModel {
     title: null,
   },
 })
+@Injectable()
 export class CurrentPageState {
   @Selector()
   static title(state: CurrentPageStateModel): string | null {
