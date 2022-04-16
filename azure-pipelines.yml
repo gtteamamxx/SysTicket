@@ -14,7 +14,6 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-
 steps:
 - task: NuGetToolInstaller@1
 
@@ -58,7 +57,7 @@ steps:
 - script: |
     npm install
   displayName: 'npm install'
-  workingDirectory: '$(Build.SourcesDirectory)UI/SysTicket.Client'
+  workingDirectory: '$(Build.SourcesDirectory)/UI/SysTicket.Client'
 
 - script: |
     npm run build
