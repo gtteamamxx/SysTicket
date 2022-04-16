@@ -15,35 +15,24 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+- task: NodeTool@0
   inputs:
-    restoreSolution: '$(solution)'
+    versionSpec: '10.x'
+    checkLatest: true
+  displayName: 'Install Node.js'
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+  workingDirectory: '$(Build.SourcesDirectory)/UI/SysTicket.Client'
 
-- task: DotNetCoreCLI@2
-  displayName: dotnet test
+- task: CopyFiles@2
   inputs:
-    command: test
-    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: 'Tests/\*\*/\*.csproj'
-    nobuild: true
+    Contents: '$(Build.SourcesDirectory)/UI/SysTicket.Client/dist/**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: reportgenerator@5
-  inputs:
-    reports: '$(Build.SourcesDirectory)/Tests/\*\*/coverage.cobertura.xml'
-    targetdir: '$(Build.SourcesDirectory)/CodeCoverage'
-    reporttypes: 'HtmlInline;Cobertura;Badges'
-
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+- task: PublishBuildArtifacts@1
+  inputs: 
+    PathtoPublish: $(Build.ArtifactStagingDirectory)
+    ArtifactName: 'www'
