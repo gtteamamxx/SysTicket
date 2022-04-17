@@ -22,6 +22,9 @@ export class TopBarComponent {
   @Select(UserState.isUserLogged)
   isUserLogged$!: Observable<boolean>;
 
+  @Select(CurrentPageState.isOnLoginPage)
+  isOnLoginPage$!: Observable<boolean>;
+
   constructor(private readonly navigationService: NavigationService) { }
 
   login(): void {

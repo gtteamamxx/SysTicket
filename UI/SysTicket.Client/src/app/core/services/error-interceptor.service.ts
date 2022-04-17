@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(req)
             .pipe(
                 catchError((err: HttpEvent<any>) => {
-                    this.notificationsService.showInfo('Wystąpił problem podczas wykonywania tego zapytania.');
+                    this.notificationsService.showInfo('Wystąpił problem podczas połączenia z serwerem.');
 
                     throw throwError(() => err);
                 })

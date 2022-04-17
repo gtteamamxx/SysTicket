@@ -27,6 +27,7 @@ const common = [
     developmentMode: !environment.production,
   })
 ]
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

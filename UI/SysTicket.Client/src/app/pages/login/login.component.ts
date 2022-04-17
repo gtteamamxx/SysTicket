@@ -4,11 +4,12 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { UserModel } from 'src/app/core/models/user.model';
+import { User } from 'src/app/core/models/user.model';
 import { NavigationService } from 'src/app/core/services/navigation.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { UsersService } from 'src/app/core/services/users.service';
 import { UserStateActions } from 'src/app/core/store/user.state.actions';
+import { LoginFacade } from './login.facade';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ import { UserStateActions } from 'src/app/core/store/user.state.actions';
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [LoginFacade]
 })
 export class LoginComponent {
   loginForm = new FormGroup({
@@ -23,30 +25,16 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required])
   })
 
-  constructor(
-    private readonly store: Store,
-    private readonly navigationService: NavigationService,
-    private readonly notificationsService: NotificationsService,
-    private readonly usersService: UsersService) { }
+  constructor(private readonly loginFacade: LoginFacade) { }
 
   login(): void {
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.usersService.login({
-      name: this.loginForm.get('login')?.value,
-      password: this.loginForm.get('password')?.value
-    }).subscribe((user: UserModel | null) => {
-      if (user != null) {
-        this.store.dispatch(new UserStateActions.SetLoggedUser({ user }))
-          .subscribe(() => {
-            this.notificationsService.showInfo('Zalogowano jako ' + user.name + ".", { timeoutInMs: 2000 });
-            this.navigationService.navigateToMainPage()
-          });
-      } else {
-        this.notificationsService.showInfo('Nie znaleziono takiego użytkownika.');
-      }
-    });
+    this.loginFacade.login(
+      this.loginForm.get('login')?.value,
+      this.loginForm.get('password')?.value
+    );
   }
 }

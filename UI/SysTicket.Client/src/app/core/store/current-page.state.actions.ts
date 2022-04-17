@@ -1,10 +1,11 @@
 export namespace CurrentPageStateActions {
-  export class SetCurrentPageTitle {
-    static type = '[Current Page State] Set Current Page';
+  export class SetCurrentPageInfo {
+    static type = '[Current Page State] Set Current Page Info';
     constructor(
       public payload: {
-        title: string | null;
+        title: string | undefined;
+        url: string
       }
-    ) {}
+    ) { }
   }
 }

@@ -2,11 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
-import { ActivationEnd, Router } from '@angular/router';
-import { Store } from '@ngxs/store';
-import { CurrentPageStateActions } from './core/store/current-page.state.actions';
+import { CurrentPageListenerService } from './core/services/current-page-listener.service';
 
 @Component({
   selector: 'app-root',
@@ -16,17 +14,9 @@ import { CurrentPageStateActions } from './core/store/current-page.state.actions
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly store: Store, private readonly router: Router) {}
+  constructor(private readonly currentPageListenerService: CurrentPageListenerService) { }
 
   ngOnInit(): void {
-    this.router.events.subscribe((event) => {
-      if (event instanceof ActivationEnd) {
-        const pageTitle: string = event.snapshot.firstChild?.data['title'];
-
-        this.store.dispatch(
-          new CurrentPageStateActions.SetCurrentPageTitle({ title: pageTitle })
-        );
-      }
-    });
+    this.currentPageListenerService.startListening();
   }
 }
