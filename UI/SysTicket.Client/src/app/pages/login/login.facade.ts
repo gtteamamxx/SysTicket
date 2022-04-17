@@ -1,8 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngxs/store";
+import { debounceTime } from "rxjs";
 import { User } from "src/app/core/models/user.model";
 import { NavigationService } from "src/app/core/services/navigation.service";
 import { NotificationsService } from "src/app/core/services/notifications.service";
+import { SpinnerService } from "src/app/core/services/spinner.service";
 import { UsersService } from "src/app/core/services/users.service";
 import { UserStateActions } from "src/app/core/store/user.state.actions";
 
@@ -12,9 +14,12 @@ export class LoginFacade {
         private readonly store: Store,
         private readonly navigationService: NavigationService,
         private readonly notificationsService: NotificationsService,
+        private readonly spinner: SpinnerService,
         private readonly usersService: UsersService) { }
 
     login(name: string, password: string): void {
+        this.spinner.show('Trwa logowanie...');
+
         this.usersService.login({ name, password })
             .subscribe((user: User | null) => {
                 if (user != null) {
@@ -26,6 +31,7 @@ export class LoginFacade {
                 } else {
                     this.notificationsService.showInfo('Nie znaleziono takiego użytkownika.');
                 }
-            });
+            })
+            .add(() => this.spinner.hide());
     }
 }
