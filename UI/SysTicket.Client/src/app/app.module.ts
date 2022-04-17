@@ -7,13 +7,15 @@ import { NgxsModule } from '@ngxs/store';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SpinnerModule } from './core/components/spinner/spinner.module';
 import { TopBarModule } from './core/components/top-bar/top-bar.module';
 import { ErrorInterceptor } from './core/services/error-interceptor.service';
 import { CurrentPageState } from './core/store/current-page.state';
 import { UserState } from './core/store/user.state';
 
 const components = [
-  TopBarModule
+  TopBarModule,
+  SpinnerModule
 ];
 
 const states = [
