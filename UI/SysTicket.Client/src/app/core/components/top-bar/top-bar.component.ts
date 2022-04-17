@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component, ViewEncapsulation
 } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { NavigationService } from '../../services/navigation.service';
+import { NotificationsService } from '../../services/notifications.service';
 import { CurrentPageState } from '../../store/current-page.state';
 import { UserState } from '../../store/user.state';
+import { UserStateActions } from '../../store/user.state.actions';
 
 @Component({
   selector: 'app-top-bar',
@@ -25,9 +27,21 @@ export class TopBarComponent {
   @Select(CurrentPageState.isOnLoginPage)
   isOnLoginPage$!: Observable<boolean>;
 
-  constructor(private readonly navigationService: NavigationService) { }
+  constructor(
+    private readonly store: Store,
+    private readonly notificationsService: NotificationsService,
+    private readonly navigationService: NavigationService) { }
 
   login(): void {
     this.navigationService.navigateToLoginPage();
+  }
+
+  logout(): void {
+    this.store.dispatch(new UserStateActions.Logout())
+      .subscribe()
+      .add(() => {
+        this.navigationService.navigateToMainPage();
+        this.notificationsService.showInfo('Wylogowano pomyślnie.');
+      });
   }
 }
