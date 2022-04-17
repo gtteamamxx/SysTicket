@@ -13,4 +13,11 @@
   .title {
     margin-left: 16px;
   }
+
+  .current-page-title {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
 }

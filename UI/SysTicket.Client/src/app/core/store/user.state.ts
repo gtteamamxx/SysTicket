@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
 import { User } from '../models/user.model';
+import { LocalStorageService } from '../services/local-storage.service';
 import { UserStateActions as Actions } from './user.state.actions';
 
 interface UserStateModel {
@@ -25,13 +26,20 @@ export class UserState {
     return state.loggedUser != null;
   }
 
+  constructor(private readonly localStorageService: LocalStorageService) {
+  }
+
   @Action(Actions.SetLoggedUser)
-  setLoggedUser(
-    ctx: StateContext<UserStateModel>,
-    action: Actions.SetLoggedUser
-  ): void {
-    ctx.patchState({
-      loggedUser: action.payload.user,
-    });
+  setLoggedUser(ctx: StateContext<UserStateModel>, action: Actions.SetLoggedUser): void {
+    ctx.patchState({ loggedUser: action.payload.user });
+
+    this.localStorageService.saveUser(action.payload.user);
+  }
+
+  @Action(Actions.Logout)
+  logout(ctx: StateContext<UserStateModel>): void {
+    ctx.patchState({ loggedUser: null });
+
+    this.localStorageService.clearUser();
   }
 }

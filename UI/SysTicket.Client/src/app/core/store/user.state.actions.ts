@@ -5,8 +5,12 @@ export namespace UserStateActions {
     static type = '[User State] Set Logged User';
     constructor(
       public payload: {
-        user: User | null;
+        user: User;
       }
     ) { }
+  }
+
+  export class Logout {
+    static type = '[User State] Logout';
   }
 }
