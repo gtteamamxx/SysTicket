@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
-import { UserModel } from '../models/user.model';
+import { User } from '../models/user.model';
 import { UserStateActions as Actions } from './user.state.actions';
 
 interface UserStateModel {
-  loggedUser: UserModel | null | undefined;
+  loggedUser: User | null | undefined;
 }
 
 @State({
@@ -16,7 +16,7 @@ interface UserStateModel {
 @Injectable()
 export class UserState {
   @Selector()
-  static loggedUser(state: UserStateModel): UserModel | null | undefined {
+  static loggedUser(state: UserStateModel): User | null | undefined {
     return state.loggedUser;
   }
 

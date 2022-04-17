@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SysTicketRoutes } from 'src/app/core/models/common/systticket-routes.model';
 import { LoginComponent } from './login.component';
 
-const routes: Routes = [
+const routes: SysTicketRoutes = [
   {
     path: '',
     data: {
@@ -16,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LoginRoutingModule {}
+export class LoginRoutingModule { }
