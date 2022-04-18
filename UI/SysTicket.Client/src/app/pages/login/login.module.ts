@@ -17,4 +17,4 @@ import { LoginComponent } from './login.component';
   ],
   declarations: [LoginComponent],
 })
-export class TopBarModule {}
+export class LoginModule {}

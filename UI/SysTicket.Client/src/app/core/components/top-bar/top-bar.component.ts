@@ -25,8 +25,14 @@ export class TopBarComponent {
   @Select(UserState.isUserLogged)
   isUserLogged$!: Observable<boolean>;
 
+  @Select(UserState.isUserAdmin)
+  isUserAdmin$!: Observable<boolean>;
+
   @Select(CurrentPageState.isOnLoginPage)
   isOnLoginPage$!: Observable<boolean>;
+
+  @Select(CurrentPageState.isOnManageUsersPage)
+  isOnManageUsersPage$!: Observable<boolean>;
 
   constructor(
     private readonly store: Store,
@@ -36,6 +42,10 @@ export class TopBarComponent {
 
   login(): void {
     this.navigationService.navigateToLoginPage();
+  }
+
+  manageUsers(): void {
+    this.navigationService.navigateToManageUsers();
   }
 
   logout(): void {

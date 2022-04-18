@@ -26,6 +26,11 @@ export class UserState {
     return state.loggedUser != null;
   }
 
+  @Selector()
+  static isUserAdmin(state: UserStateModel): boolean {
+    return state.loggedUser?.isAdmin === true;
+  }
+
   constructor(private readonly localStorageService: LocalStorageService) {}
 
   @Action(Actions.SetLoggedUser)
