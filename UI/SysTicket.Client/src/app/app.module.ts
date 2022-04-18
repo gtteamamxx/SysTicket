@@ -14,22 +14,17 @@ import { ErrorInterceptor } from './core/services/error-interceptor.service';
 import { CurrentPageState } from './core/store/current-page.state';
 import { UserState } from './core/store/user.state';
 
-const components = [
-  TopBarModule,
-  SpinnerModule
-];
+const components = [TopBarModule, SpinnerModule];
 
-const states = [
-  CurrentPageState, UserState
-];
+const states = [CurrentPageState, UserState];
 
 const common = [
   HttpClientModule,
   MatSnackBarModule,
   NgxsModule.forRoot(states, {
     developmentMode: !environment.production,
-  })
-]
+  }),
+];
 
 @NgModule({
   declarations: [AppComponent],
@@ -44,19 +39,21 @@ const common = [
     {
       multi: true,
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor
+      useClass: ErrorInterceptor,
     },
     {
       multi: true,
       deps: [AppInitializerService],
       provide: APP_INITIALIZER,
-      useFactory: initializeAppFactory
-    }
+      useFactory: initializeAppFactory,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
-function initializeAppFactory(appInitializerService: AppInitializerService): () => Promise<boolean> {
+function initializeAppFactory(
+  appInitializerService: AppInitializerService
+): () => Promise<boolean> {
   return () => appInitializerService.init();
 }

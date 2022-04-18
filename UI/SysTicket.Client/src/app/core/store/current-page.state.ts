@@ -13,7 +13,7 @@ interface CurrentPageStateModel {
   name: new StateToken<CurrentPageStateModel>('appState'),
   defaults: {
     title: null,
-    currentUrl: null
+    currentUrl: null,
   },
 })
 @Injectable()
@@ -35,7 +35,7 @@ export class CurrentPageState {
   ): void {
     ctx.patchState({
       title: action.payload.title,
-      currentUrl: action.payload.url
+      currentUrl: action.payload.url,
     });
   }
 }

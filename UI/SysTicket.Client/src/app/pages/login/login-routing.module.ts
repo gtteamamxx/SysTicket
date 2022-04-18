@@ -20,4 +20,4 @@ const routes: SysTicketRoutes = [
   providers: [LoginGuard],
   exports: [RouterModule],
 })
-export class LoginRoutingModule { }
+export class LoginRoutingModule {}

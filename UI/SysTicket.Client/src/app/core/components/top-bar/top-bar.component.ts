@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
-  Component, ViewEncapsulation
+  Component,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -30,14 +31,16 @@ export class TopBarComponent {
   constructor(
     private readonly store: Store,
     private readonly notificationsService: NotificationsService,
-    private readonly navigationService: NavigationService) { }
+    private readonly navigationService: NavigationService
+  ) {}
 
   login(): void {
     this.navigationService.navigateToLoginPage();
   }
 
   logout(): void {
-    this.store.dispatch(new UserStateActions.Logout())
+    this.store
+      .dispatch(new UserStateActions.Logout())
       .subscribe()
       .add(() => {
         this.navigationService.navigateToMainPage();

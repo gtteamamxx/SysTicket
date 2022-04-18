@@ -7,7 +7,14 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
 @NgModule({
-  imports: [LoginRoutingModule, MatCardModule, MatButtonModule, MatInputModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    LoginRoutingModule,
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   declarations: [LoginComponent],
 })
-export class TopBarModule { }
+export class TopBarModule {}

@@ -4,9 +4,12 @@
     <span class="current-page-title">{{ currentPageTitle$ | async }}</span>
 
     <div class="buttons-contanier">
-        <button mat-button *ngIf="(isUserLogged$ | async) === false && (isOnLoginPage$ | async) === false"
-            (click)="login()">Zaloguj</button>
+        <button mat-button
+                *ngIf="(isUserLogged$ | async) === false && (isOnLoginPage$ | async) === false"
+                (click)="login()">Zaloguj</button>
 
-        <button mat-button *ngIf="(isUserLogged$ | async) === true" (click)="logout()">Wyloguj</button>
+        <button mat-button
+                *ngIf="(isUserLogged$ | async) === true"
+                (click)="logout()">Wyloguj</button>
     </div>
 </div>

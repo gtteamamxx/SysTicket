@@ -1,34 +1,42 @@
-import { Injectable } from "@angular/core";
-import { MatSnackBar, MatSnackBarRef } from "@angular/material/snack-bar";
-import { SpinnerComponent } from "../components/spinner/spinner.component";
+import { Injectable } from '@angular/core';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerService {
-    private matSnackbarRef: MatSnackBarRef<SpinnerComponent> | undefined;
-    private timeout: any | undefined;
+  get isVisible(): boolean {
+    return this._isVisible;
+  }
 
-    constructor(private snackbar: MatSnackBar) { }
+  private _isVisible: boolean = false;
+  private matSnackbarRef: MatSnackBarRef<SpinnerComponent> | undefined;
+  private timeout: any | undefined;
 
-    show(title: string): void {
-        this.matSnackbarRef?.dismiss(); // close current if exists
+  constructor(private snackbar: MatSnackBar) {}
 
-        this.timeout = setTimeout(() => {
-            this.matSnackbarRef = this.snackbar.openFromComponent(SpinnerComponent, {
-                duration: 999999
-            });
+  show(title: string): void {
+    this.matSnackbarRef?.dismiss(); // close current if exists
 
-            this.matSnackbarRef.instance.setTitle(title);
-        }, 300)
+    this.timeout = setTimeout(() => {
+      this.matSnackbarRef = this.snackbar.openFromComponent(SpinnerComponent, {
+        duration: 999999,
+      });
+
+      this._isVisible = true;
+
+      this.matSnackbarRef.instance.setTitle(title);
+    }, 100);
+  }
+
+  hide(): void {
+    if (this.timeout != null && !this._isVisible) {
+      clearTimeout(this.timeout);
+      return;
     }
 
-    hide(): void {
-        if (this.timeout != null) {
-            clearTimeout(this.timeout);
-            return;
-        }
-
-        setTimeout(() => {
-            this.matSnackbarRef?.dismiss();
-        }, 500)
-    }
+    setTimeout(() => {
+      this._isVisible = false;
+      this.matSnackbarRef?.dismiss();
+    }, 500);
+  }
 }

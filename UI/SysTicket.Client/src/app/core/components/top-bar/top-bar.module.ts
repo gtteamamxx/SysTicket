@@ -8,4 +8,4 @@ import { TopBarComponent } from './top-bar.component';
   declarations: [TopBarComponent],
   exports: [TopBarComponent],
 })
-export class TopBarModule { }
+export class TopBarModule {}
