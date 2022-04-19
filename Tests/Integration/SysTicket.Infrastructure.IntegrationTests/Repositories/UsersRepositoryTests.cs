@@ -1,10 +1,10 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using SysTicket.Application.IntegrationTests.Common;
 using SysTicket.Domain.Entities;
+using SysTicket.Infrastructure.IntegrationTests.Common;
 using SysTicket.Infrastructure.Repositories;
 
-namespace SysTicket.Application.InfrastructureTests.Repositories
+namespace SysTicket.Infrastructure.IntegrationTests.Repositories
 {
     [TestFixture]
     internal class UsersRepositoryTests : RepositoryTestBase<UsersRepository>

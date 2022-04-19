@@ -6,6 +6,8 @@ namespace SysTicket.Domain.Interfaces.Repositories
     {
         Task CreateUserAsync(User user, CancellationToken cancellationToken);
 
+        Task<IReadOnlyCollection<User>> GetAllUsersAsync(CancellationToken cancellationToken);
+
         Task<User?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken);
     }
 }

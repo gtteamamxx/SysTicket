@@ -4,6 +4,6 @@ namespace SysTicket.Domain.Interfaces.Builders
 {
     public interface IUsersBuilder
     {
-        User Create(string name, string password);
+        User Create(string name, string password, bool isAdmin);
     }
 }

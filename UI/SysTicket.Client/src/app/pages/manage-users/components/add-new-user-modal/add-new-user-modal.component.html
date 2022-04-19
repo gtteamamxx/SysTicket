@@ -1,0 +1,52 @@
+<div class="add-new-user-modal-container">
+    <h2>Dodawanie nowego użytkownika</h2>
+    <form class="form-container"
+          [formGroup]="userForm">
+        <mat-form-field floatLabel="always">
+            <mat-label>Login</mat-label>
+
+            <input matInput
+                   #login
+                   formControlName="login">
+
+            <mat-error>
+                Login musi mieć od 3 do 32 znaków.
+            </mat-error>
+
+            <mat-hint align="end">{{ login.value?.length ?? 0}} / 32</mat-hint>
+        </mat-form-field>
+
+        <br />
+        <mat-form-field floatLabel="always">
+            <mat-label>Hasło</mat-label>
+
+            <input matInput
+                   type="password"
+                   #password
+                   formControlName="password">
+
+            <mat-error>
+                Hasło musi mieć minimum 8 znaków w tym jedna duża litera oraz jedna cyfra.
+
+                <span *ngIf="(password.value?.length ?? 0) < 8">(wpisanych znaków: {{ password.value?.length ?? 0 }})</span>
+            </mat-error>
+
+        </mat-form-field>
+
+        <br />
+        <mat-checkbox formControlName="isAdmin">
+            Uprawnienia administratora
+        </mat-checkbox>
+
+        <div class="buttons-container">
+            <button mat-raised-button
+                    class="add-button"
+                    [disabled]="userForm.invalid"
+                    type="submit"
+                    (click)="addNewUser()">Dodaj</button>
+            <button mat-raised-button
+                    type="button"
+                    (click)="cancel()">Anuluj</button>
+        </div>
+    </form>
+</div>

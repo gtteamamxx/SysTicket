@@ -16,8 +16,10 @@ namespace SysTicket.Infrastructure.Repositories
         public async Task CreateUserAsync(User user, CancellationToken cancellationToken)
             => await _context.AddAsync(user, cancellationToken);
 
+        public async Task<IReadOnlyCollection<User>> GetAllUsersAsync(CancellationToken cancellationToken)
+            => (await _context.Users.ToListAsync(cancellationToken)).AsReadOnly();
+
         public Task<User?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken)
             => _context.Users.FirstOrDefaultAsync(x => x.Name == name && x.Password == password, cancellationToken: cancellationToken);
-        
     }
 }

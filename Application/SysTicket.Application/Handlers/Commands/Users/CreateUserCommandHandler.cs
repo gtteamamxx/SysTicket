@@ -7,8 +7,8 @@ namespace SysTicket.Application.Handlers.Commands.Users
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     {
-        private readonly IUsersFactory _usersFactory;
         private readonly ISysTicketUnitOfWork _sysTicketUnitOfWork;
+        private readonly IUsersFactory _usersFactory;
 
         public CreateUserCommandHandler(
             IUsersFactory usersFactory,

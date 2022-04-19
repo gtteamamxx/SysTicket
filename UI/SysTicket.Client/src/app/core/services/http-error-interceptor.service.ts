@@ -10,7 +10,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { NotificationsService } from './notifications.service';
 
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor {
+export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(private readonly notificationsService: NotificationsService) {}
 
   intercept(

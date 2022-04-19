@@ -2,8 +2,10 @@
 {
     public interface ICreateUser
     {
-        string UserName { get; }
+        bool IsAdmin { get; }
 
-        string Password { get;}
+        string Password { get; }
+
+        string UserName { get; }
     }
 }
