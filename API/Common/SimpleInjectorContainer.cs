@@ -11,11 +11,11 @@ namespace SysTicket.API.Common
 
         public static void InitializeContainer()
         {
-            Container.RegisterPackages(new[] 
-            { 
-                typeof(ApplicationContainer).Assembly, 
-                typeof(DomainContainer).Assembly, 
-                typeof(InfrastructureContainer).Assembly 
+            Container.RegisterPackages(new[]
+            {
+                typeof(ApplicationContainer).Assembly,
+                typeof(DomainContainer).Assembly,
+                typeof(InfrastructureContainer).Assembly
             });
 
             Container.Verify();

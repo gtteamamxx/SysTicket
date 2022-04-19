@@ -5,16 +5,16 @@ using SysTicket.Domain.Common;
 using SysTicket.Infrastructure;
 using SysTicket.Infrastructure.Common;
 
-namespace SysTicket.Application.IntegrationTests.Common
+namespace SysTicket.Infrastructure.IntegrationTests.Common
 {
-    public class RepositoryTestBase<T> where T: class
+    public class RepositoryTestBase<T> where T : class
     {
         public Container Container = new();
 
         public T Repository => Container.GetInstance<T>();
 
         public SysTicketContext Context => Container.GetInstance<SysTicketContext>();
-        
+
         private Scope _scope = null!;
 
         [SetUp]

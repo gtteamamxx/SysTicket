@@ -4,18 +4,21 @@ namespace SysTicket.Domain.Entities
 {
     public class User
     {
-        public User()
-        {
-        }
-
-        public User(string name, string password)
+        public User(string name, string password, bool isAdmin)
         {
             Name = name;
             Password = password;
+            IsAdmin = isAdmin;
+        }
+
+        internal User()
+        {
         }
 
         [Key]
         public int Id { get; set; }
+
+        public bool IsAdmin { get; set; }
 
         [StringLength(100)]
         public string? Name { get; set; }

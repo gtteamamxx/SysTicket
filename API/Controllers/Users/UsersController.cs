@@ -19,17 +19,24 @@ namespace SysTicket.API.Controllers.Users
         }
 
         [HttpPost]
-        public Task CreateUserAsync([FromBody] CreateUserRequest createUserRequest)
+        public Task CreateUserAsync([FromBody] CreateUserRequest createUserRequest, CancellationToken cancellationToken)
             => _mediator.Send(new CreateUserCommand(
                 UserName: createUserRequest.UserName!,
-                Password: createUserRequest.Password!)
+                Password: createUserRequest.Password!,
+                IsAdmin: createUserRequest.IsAdmin),
+                cancellationToken
             );
 
+        [HttpGet("all")]
+        public Task<IReadOnlyCollection<UserDTO>> GetAllUsersAsync(CancellationToken cancellationToken)
+            => _mediator.Send(new GetAllUsersQuery(), cancellationToken);
+
         [HttpGet]
-        public Task<UserDTO?> GetUser(string name, string password)
+        public Task<UserDTO?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken)
             => _mediator.Send(new GetUserByNameAndPasswordQuery(
                 Name: name,
-                Password: password)
+                Password: password),
+                cancellationToken
             );
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SysTicket.Infrastructure;
 
-namespace SysTicket.Application.IntegrationTests.Common
+namespace SysTicket.Infrastructure.IntegrationTests.Common
 {
     internal class SysTicketInMemoryContext : SysTicketContext
     {

@@ -1,0 +1,73 @@
+.manage-users-container {
+  .header-container {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    margin-left: 16px;
+    position: relative;
+
+    > span {
+      margin-left: 8px;
+    }
+
+    .add-new-user-button {
+      position: absolute;
+      right: 16px;
+      padding: 3px;
+      padding-right: 8px;
+      color: white;
+      background-color: #64b51a;
+
+      @media screen and (max-width: 555px) {
+        .text {
+          display: none;
+        }
+      }
+    }
+
+    @media screen and (max-width: 410px) {
+      flex-direction: column;
+      text-align: center;
+
+      .add-new-user-button {
+        position: unset;
+
+        .mat-button-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .text {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .items-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+
+    mat-card {
+      margin: 8px;
+      width: 300px;
+
+      .mat-card-header-text {
+        margin: 0px;
+      }
+
+      mat-card-title {
+        display: flex;
+        align-items: center;
+
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
+}

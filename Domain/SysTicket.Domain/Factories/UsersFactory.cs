@@ -29,7 +29,8 @@ namespace SysTicket.Domain.Factories
 
             User user = _usersBuilder.Create(
                 name: input.UserName,
-                password: hashedPassword
+                password: hashedPassword,
+                isAdmin: input.IsAdmin
             );
 
             await _usersRepository.CreateUserAsync(user, cancellationToken);

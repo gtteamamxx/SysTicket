@@ -1,7 +1,7 @@
-import { Routes } from "@angular/router";
+import { Routes } from '@angular/router';
 
 export interface SysTicketRoutes extends Routes {
-    data?: {
-        title?: string
-    }
+  data?: {
+    title?: string;
+  };
 }

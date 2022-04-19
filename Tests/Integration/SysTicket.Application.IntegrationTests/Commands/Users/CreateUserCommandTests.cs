@@ -16,16 +16,20 @@ namespace SysTicket.Application.IntegrationTests.Commands.Users
             string expectedUserName = "Test";
             string password = "Test2";
             string expectedPassword = "32E6E1E134F9CC8F14B05925667C118D19244AEBCE442D6FECD2AC38CDC97649";
+            bool isAdmin = false;
 
             // Act
             await Mediator.Send(new CreateUserCommand(
                 UserName: expectedUserName,
-                Password: password)
+                Password: password,
+                IsAdmin: isAdmin)
             );
 
             // Assert
             Context.Users
-                .FirstOrDefault(x => x.Name == expectedUserName && x.Password == expectedPassword)
+                .FirstOrDefault(x => x.Name == expectedUserName
+                    && x.Password == expectedPassword
+                    && x.IsAdmin == isAdmin)
                 .Should()
                 .NotBeNull();
         }
@@ -43,7 +47,8 @@ namespace SysTicket.Application.IntegrationTests.Commands.Users
                 // Act
                 await Mediator.Send(new CreateUserCommand(
                     UserName: expectedUserName!,
-                    Password: expectedPassword!)
+                    Password: expectedPassword!,
+                    IsAdmin: false)
                 );
             });
         }

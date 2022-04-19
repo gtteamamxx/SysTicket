@@ -3,10 +3,23 @@
 
     <span class="current-page-title">{{ currentPageTitle$ | async }}</span>
 
-    <div class="buttons-contanier">
-        <button mat-button *ngIf="(isUserLogged$ | async) === false && (isOnLoginPage$ | async) === false"
-            (click)="login()">Zaloguj</button>
+    <div class="buttons-container">
+        <button *ngIf="(isUserLogged$ | async) === false && (isOnLoginPage$ | async) === false"
+                mat-button
+                (click)="login()">
+            Zaloguj
+        </button>
 
-        <button mat-button *ngIf="(isUserLogged$ | async) === true" (click)="logout()">Wyloguj</button>
+        <button *ngIf="(isUserAdmin$ | async) && (isOnManageUsersPage$ | async) === false"
+                mat-button
+                (click)="manageUsers()">
+            Zarządzaj użytkownikami
+        </button>
+
+        <button *ngIf="isUserLogged$ | async"
+                mat-button
+                (click)="logout()">
+            Wyloguj
+        </button>
     </div>
 </div>

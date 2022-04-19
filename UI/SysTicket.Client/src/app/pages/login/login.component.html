@@ -6,7 +6,9 @@
             <mat-card-content>
                 <mat-form-field floatLabel="always">
                     <mat-label>Login</mat-label>
-                    <input matInput formControlName="login" placeholder="Wpisz swój login">
+                    <input matInput
+                           formControlName="login"
+                           placeholder="Wpisz swój login">
 
                     <mat-error>
                         Login jest wymagany
@@ -15,7 +17,10 @@
 
                 <mat-form-field floatLabel="always">
                     <mat-label>Hasło</mat-label>
-                    <input matInput type="password" formControlName="password" placeholder="Wpisz swoje hasło">
+                    <input matInput
+                           type="password"
+                           formControlName="password"
+                           placeholder="Wpisz swoje hasło">
 
                     <mat-error>
                         Hasło jest wymagane
@@ -24,7 +29,9 @@
             </mat-card-content>
 
             <mat-card-actions>
-                <button mat-raised-button class="login-button" (click)="login()">Zaloguj</button>
+                <button mat-raised-button
+                        class="login-button"
+                        (click)="login()">Zaloguj</button>
             </mat-card-actions>
         </mat-card>
     </form>

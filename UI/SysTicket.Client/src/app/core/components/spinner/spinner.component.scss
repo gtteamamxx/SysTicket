@@ -1,13 +1,13 @@
 .spinner-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    mat-spinner {
-        margin-left: 16px;
-    }
+  mat-spinner {
+    margin-left: 16px;
+  }
 }
 
 .mat-snack-bar-container {
-    min-width: 230px;
+  min-width: 230px;
 }

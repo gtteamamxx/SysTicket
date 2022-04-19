@@ -7,7 +7,7 @@ export namespace UserStateActions {
       public payload: {
         user: User;
       }
-    ) { }
+    ) {}
   }
 
   export class Logout {

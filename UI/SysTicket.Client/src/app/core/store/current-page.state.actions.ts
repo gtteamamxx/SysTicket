@@ -4,8 +4,8 @@ export namespace CurrentPageStateActions {
     constructor(
       public payload: {
         title: string | undefined;
-        url: string
+        url: string;
       }
-    ) { }
+    ) {}
   }
 }

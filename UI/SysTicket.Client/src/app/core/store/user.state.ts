@@ -26,11 +26,18 @@ export class UserState {
     return state.loggedUser != null;
   }
 
-  constructor(private readonly localStorageService: LocalStorageService) {
+  @Selector()
+  static isUserAdmin(state: UserStateModel): boolean {
+    return state.loggedUser?.isAdmin === true;
   }
 
+  constructor(private readonly localStorageService: LocalStorageService) {}
+
   @Action(Actions.SetLoggedUser)
-  setLoggedUser(ctx: StateContext<UserStateModel>, action: Actions.SetLoggedUser): void {
+  setLoggedUser(
+    ctx: StateContext<UserStateModel>,
+    action: Actions.SetLoggedUser
+  ): void {
     ctx.patchState({ loggedUser: action.payload.user });
 
     this.localStorageService.saveUser(action.payload.user);

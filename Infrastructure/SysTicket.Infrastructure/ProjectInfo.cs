@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("SysTicket.Application.InfrastructureTests")]
+[assembly: InternalsVisibleTo("SysTicket.Infrastructure.IntegrationTests")]
 
 namespace SysTicket.Infrastructure
 {

@@ -13,7 +13,7 @@ interface CurrentPageStateModel {
   name: new StateToken<CurrentPageStateModel>('appState'),
   defaults: {
     title: null,
-    currentUrl: null
+    currentUrl: null,
   },
 })
 @Injectable()
@@ -28,14 +28,21 @@ export class CurrentPageState {
     return state.currentUrl?.includes(Constants.loginPage) === true;
   }
 
+  @Selector()
+  static isOnManageUsersPage(state: CurrentPageStateModel): boolean {
+    return state.currentUrl?.includes(Constants.manageUsers) === true;
+  }
+
   @Action(Actions.SetCurrentPageInfo)
   setCurrentPageTItle(
     ctx: StateContext<CurrentPageStateModel>,
     action: Actions.SetCurrentPageInfo
   ): void {
+    document.title = action.payload.title!;
+
     ctx.patchState({
       title: action.payload.title,
-      currentUrl: action.payload.url
+      currentUrl: action.payload.url,
     });
   }
 }

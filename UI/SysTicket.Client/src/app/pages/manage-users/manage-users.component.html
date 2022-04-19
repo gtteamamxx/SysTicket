@@ -1,0 +1,36 @@
+<div class="manage-users-container">
+  <div mat-subheader
+       class="header-container">
+    <mat-icon mat-list-icon>manage_accounts</mat-icon>
+    <span>Lista wszystkich użytkowników. <br />Wybierz użytkownika i wykonaj na nim akcję.</span>
+
+    <button mat-raised-button
+            class="add-new-user-button"
+            (click)="addNewUser()">
+      <mat-icon>add</mat-icon>
+      <span class="text">Dodaj nowego użytkownika</span>
+    </button>
+  </div>
+
+  <div class="items-container">
+    <mat-card *ngFor="let user of (users$ | async)">
+      <mat-card-header>
+
+        <mat-card-title>
+          <mat-icon class="icon">person</mat-icon>
+          <span>{{ user.name }}</span>
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          <div mat-line>Administrator: {{ user.isAdmin ? 'Tak' : 'Nie' }}</div>
+        </mat-card-subtitle>
+
+      </mat-card-header>
+
+      <mat-card-actions>
+        <button mat-button>Usuń</button>
+        <button mat-button>Edytuj</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
