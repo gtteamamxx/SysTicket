@@ -42,7 +42,7 @@
 }
 
 @media screen and (max-height: 400px) {
-  .cdk-overlay-pane {
+  .cdk-overlay-pane.add-new-user-modal {
     height: 345px !important;
   }
 }
