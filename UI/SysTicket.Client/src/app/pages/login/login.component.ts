@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginFacade } from './login.facade';
 
@@ -27,9 +23,6 @@ export class LoginComponent {
       return;
     }
 
-    this.loginFacade.login(
-      this.loginForm.get('login')?.value,
-      this.loginForm.get('password')?.value
-    );
+    this.loginFacade.login(this.loginForm.get('login')?.value, this.loginForm.get('password')?.value);
   }
 }

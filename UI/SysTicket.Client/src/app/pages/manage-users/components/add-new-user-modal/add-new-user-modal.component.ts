@@ -51,7 +51,7 @@ export class AddNewUserModalComponent implements OnInit {
         password: this.userForm.get('password')!.value,
       })
       .subscribe(() => {
-        this.notificationsService.showSuccess(`Pomyślnie dodano użytkownika '${this.userForm.get('login')!.value}'!`);
+        this.notificationsService.showSuccess({ message: `Pomyślnie dodano użytkownika '${this.userForm.get('login')!.value}'!` });
 
         this.matDialogRef.close(true);
       })

@@ -10,7 +10,7 @@ import { UserStateActions } from 'src/app/core/store/user.state.actions';
 @Injectable()
 export class LoginFacade {
   constructor(
-    private readonly store: Store,
+    private readonly store: Store, //
     private readonly navigationService: NavigationService,
     private readonly notificationsService: NotificationsService,
     private readonly spinner: SpinnerService,
@@ -28,19 +28,12 @@ export class LoginFacade {
       .login({ name, password })
       .subscribe((user: User | null) => {
         if (user != null) {
-          this.store
-            .dispatch(new UserStateActions.SetLoggedUser({ user }))
-            .subscribe(() => {
-              this.notificationsService.showInfo(
-                'Zalogowano jako ' + user.name + '.',
-                { timeoutInMs: 2000 }
-              );
-              this.navigationService.navigateToMainPage();
-            });
+          this.store.dispatch(new UserStateActions.SetLoggedUser({ user })).subscribe(() => {
+            this.notificationsService.showInfo({ message: 'Zalogowano jako ' + user.name + '.', config: { timeoutInMs: 2000 } });
+            this.navigationService.navigateToMainPage();
+          });
         } else {
-          this.notificationsService.showInfo(
-            'Nie znaleziono takiego użytkownika.'
-          );
+          this.notificationsService.showInfo({ message: 'Nie znaleziono takiego użytkownika.' });
         }
       })
       .add(() => this.spinner.hide());

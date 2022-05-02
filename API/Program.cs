@@ -2,11 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using SysTicket.API.Common;
+using SysTicket.API.Filters;
 using SysTicket.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(cfg =>
+{
+    cfg.Filters.Add(new ValidationFailureExceptionFilter());
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSimpleInjector(SimpleInjectorContainer.Container, cfg =>

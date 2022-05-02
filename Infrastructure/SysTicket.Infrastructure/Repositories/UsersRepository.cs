@@ -21,5 +21,8 @@ namespace SysTicket.Infrastructure.Repositories
 
         public Task<User?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken)
             => _context.Users.FirstOrDefaultAsync(x => x.Name == name && x.Password == password, cancellationToken: cancellationToken);
+
+        public Task<bool> IsUserExistWithUserName(string name)
+            => _context.Users.AnyAsync(x => x.Name == name);
     }
 }

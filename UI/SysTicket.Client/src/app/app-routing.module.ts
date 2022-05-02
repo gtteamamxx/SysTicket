@@ -10,15 +10,11 @@ const routes: Routes = [
   },
   {
     path: Constants.loginPage,
-    loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginModule),
+    loadChildren: () => import('./pages/login/login.module').then((m) => m.LoginModule),
   },
   {
     path: Constants.manageUsers,
-    loadChildren: () =>
-      import('./pages/manage-users/manage-users.module').then(
-        (m) => m.ManageUsersModule
-      ),
+    loadChildren: () => import('./pages/manage-users/manage-users.module').then((m) => m.ManageUsersModule),
   },
 ];
 
