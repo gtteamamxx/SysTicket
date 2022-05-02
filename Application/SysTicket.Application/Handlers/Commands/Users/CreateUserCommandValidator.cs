@@ -14,10 +14,12 @@ namespace SysTicket.Application.Handlers.Commands.Users
             _usersRepository = usersRepository;
 
             RuleFor(x => x.UserName)
-                .NotEmpty();
+                .NotEmpty()
+                .Length(3, 32);
 
             RuleFor(x => x.Password)
-                .NotEmpty();
+                .NotEmpty()
+                .MinimumLength(8);
         }
 
         public override async Task<ValidationResult> ValidateAsync(ValidationContext<CreateUserCommand> context, CancellationToken cancellation = default)

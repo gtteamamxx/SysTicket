@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SysTicket.Infrastructure;
 
@@ -10,9 +11,10 @@ using SysTicket.Infrastructure;
 namespace SysTicket.Infrastructure.Migrations
 {
     [DbContext(typeof(SysTicketContext))]
-    partial class SysTicketContextModelSnapshot : ModelSnapshot
+    [Migration("20220502182613_Change_UserName_Length_From_100_To_32")]
+    partial class Change_UserName_Length_From_100_To_32
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

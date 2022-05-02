@@ -20,7 +20,7 @@ namespace SysTicket.Domain.Entities
 
         public bool IsAdmin { get; set; }
 
-        [StringLength(100)]
+        [StringLength(32)]
         public string? Name { get; set; }
 
         [StringLength(64)]

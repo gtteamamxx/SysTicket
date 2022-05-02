@@ -3,6 +3,7 @@ using FluentValidation;
 using NUnit.Framework;
 using SysTicket.Application.Commands.Users;
 using SysTicket.Application.IntegrationTests.Common;
+using SysTicket.Domain.Entities;
 
 namespace SysTicket.Application.IntegrationTests.Commands.Users
 {
@@ -14,8 +15,8 @@ namespace SysTicket.Application.IntegrationTests.Commands.Users
         {
             // Arrange
             string expectedUserName = "Test";
-            string password = "Test2";
-            string expectedPassword = "32E6E1E134F9CC8F14B05925667C118D19244AEBCE442D6FECD2AC38CDC97649";
+            string password = "Test2345";
+            string expectedPassword = "647613861bb5ae3daacd079d2e98d3fabc342b7bf32a69d1e34e401182b90d06".ToUpper();
             bool isAdmin = false;
 
             // Act
@@ -48,6 +49,89 @@ namespace SysTicket.Application.IntegrationTests.Commands.Users
                 await Mediator.Send(new CreateUserCommand(
                     UserName: expectedUserName!,
                     Password: expectedPassword!,
+                    IsAdmin: false)
+                );
+            });
+        }
+
+        [Test]
+        public void Should_Throw_Exception_When_Name_Length_Is_Greater_Than_3_Chars()
+        {
+            // Arrange
+            string? expectedUserName
+                = string.Join("", Enumerable.Range(0, 33).Select(x => "a"));
+            string? expectedPassword = "12345678";
+
+            // Assert
+            Assert.ThrowsAsync<ValidationException>(async () =>
+            {
+                // Act
+                await Mediator.Send(new CreateUserCommand(
+                    UserName: expectedUserName!,
+                    Password: expectedPassword!,
+                    IsAdmin: false)
+                );
+            });
+        }
+
+        [Test]
+        public void Should_Throw_Exception_When_Name_Length_Is_Less_Than_3_Chars()
+        {
+            // Arrange
+            string? expectedUserName = "ka";
+            string? expectedPassword = "12345678";
+
+            // Assert
+            Assert.ThrowsAsync<ValidationException>(async () =>
+            {
+                // Act
+                await Mediator.Send(new CreateUserCommand(
+                    UserName: expectedUserName!,
+                    Password: expectedPassword!,
+                    IsAdmin: false)
+                );
+            });
+        }
+
+        [Test]
+        public void Should_Throw_Exception_When_Password_Length_Is_Less_Than_8_Chars()
+        {
+            // Arrange
+            string? expectedUserName = "kas";
+            string? expectedPassword = "1234";
+
+            // Assert
+            Assert.ThrowsAsync<ValidationException>(async () =>
+            {
+                // Act
+                await Mediator.Send(new CreateUserCommand(
+                    UserName: expectedUserName!,
+                    Password: expectedPassword!,
+                    IsAdmin: false)
+                );
+            });
+        }
+
+        [Test]
+        public void Should_Throw_Exception_When_User_Name_Already_Exists()
+        {
+            // Arrange
+            string name = "test";
+
+            Context.Users.Add(new User()
+            {
+                Name = name
+            });
+
+            Context.SaveChanges();
+
+            // Assert
+            Assert.ThrowsAsync<ValidationException>(async () =>
+            {
+                // Act
+                await Mediator.Send(new CreateUserCommand(
+                    UserName: name,
+                    Password: "12345678",
                     IsAdmin: false)
                 );
             });
