@@ -4,6 +4,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +38,7 @@ const states = [CurrentPageState, UserState, SettingsState];
 const common = [
   HttpClientModule,
   MatSnackBarModule,
+  SimpleNotificationsModule.forRoot(),
   NgxsModule.forRoot(states, {
     developmentMode: !environment.production,
   }),
@@ -44,13 +46,7 @@ const common = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ...common,
-    ...components,
-  ],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ...common, ...components],
   providers: [
     ...httpInterceptors,
     {
@@ -64,8 +60,6 @@ const common = [
 })
 export class AppModule {}
 
-function initializeAppFactory(
-  appInitializerService: AppInitializerService
-): () => Observable<boolean> {
+function initializeAppFactory(appInitializerService: AppInitializerService): () => Observable<boolean> {
   return () => appInitializerService.init();
 }

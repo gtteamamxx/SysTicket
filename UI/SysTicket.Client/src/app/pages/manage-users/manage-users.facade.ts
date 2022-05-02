@@ -8,7 +8,7 @@ import { ManageUsersStateActions } from './store/manage-users.state.actions';
 @Injectable()
 export class ManageUsersFacade implements OnDestroy {
   constructor(
-    private readonly store: Store,
+    private readonly store: Store, //
     private readonly modal: MatDialog,
     private readonly spinner: SpinnerService
   ) {}
