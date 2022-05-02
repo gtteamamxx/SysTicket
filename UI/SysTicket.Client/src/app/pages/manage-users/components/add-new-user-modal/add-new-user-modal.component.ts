@@ -1,17 +1,9 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
-import {
-  CreateNewUserRequest,
-  UsersService,
-} from 'src/app/core/services/users.service';
+import { CreateNewUserRequest, UsersService } from 'src/app/core/services/users.service';
 
 @Component({
   selector: 'app-add-new-user-modal',
@@ -22,11 +14,7 @@ import {
 })
 export class AddNewUserModalComponent implements OnInit {
   userForm = new FormGroup({
-    login: new FormControl('', [
-      Validators.minLength(3),
-      Validators.maxLength(32),
-      Validators.required,
-    ]),
+    login: new FormControl('', [Validators.minLength(3), Validators.maxLength(32), Validators.required]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
@@ -37,7 +25,7 @@ export class AddNewUserModalComponent implements OnInit {
   });
 
   constructor(
-    private readonly usersService: UsersService,
+    private readonly usersService: UsersService, //
     private readonly notificationsService: NotificationsService,
     private readonly spinner: SpinnerService,
     private readonly matDialogRef: MatDialogRef<AddNewUserModalComponent>
@@ -54,6 +42,7 @@ export class AddNewUserModalComponent implements OnInit {
     }
 
     this.spinner.show('Dodawanie nowego użytkownika...');
+    this.userForm.disable();
 
     this.usersService
       .createNewUser(<CreateNewUserRequest>{
@@ -62,12 +51,14 @@ export class AddNewUserModalComponent implements OnInit {
         password: this.userForm.get('password')!.value,
       })
       .subscribe(() => {
-        this.notificationsService.showInfo(
-          `Pomyślnie dodano użytkownika '${this.userForm.get('login')!.value}'!`
-        );
+        this.notificationsService.showSuccess(`Pomyślnie dodano użytkownika '${this.userForm.get('login')!.value}'!`);
+
         this.matDialogRef.close(true);
       })
-      .add(() => this.spinner.hide());
+      .add(() => {
+        this.userForm.enable();
+        this.spinner.hide();
+      });
   }
 
   cancel(): void {
