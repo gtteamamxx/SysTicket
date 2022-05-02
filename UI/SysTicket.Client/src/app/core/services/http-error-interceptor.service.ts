@@ -1,5 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { NotificationsService } from './notifications.service';
@@ -10,8 +9,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
-      catchError((err: HttpEvent<any>) => {
-        this.notificationsService.showInfo('Wystąpił problem podczas połączenia z serwerem.');
+      catchError((err: HttpErrorResponse) => {
+        const errorsObject: {
+          errors: string;
+        } = JSON.parse(err.error);
+
+        if (errorsObject.errors != null) {
+          this.notificationsService.showError({ message: errorsObject.errors });
+        } else {
+          this.notificationsService.showError({ message: 'Wystąpił problem podczas połączenia z serwerem.' });
+        }
 
         throw throwError(() => err);
       })

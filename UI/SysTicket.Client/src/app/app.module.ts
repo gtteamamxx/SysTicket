@@ -31,12 +31,19 @@ const httpInterceptors = [
   },
 ];
 
-const components = [TopBarModule, SpinnerModule];
+const components = [
+  TopBarModule, //
+  SpinnerModule,
+];
 
-const states = [CurrentPageState, UserState, SettingsState];
+const states = [
+  CurrentPageState, //
+  UserState,
+  SettingsState,
+];
 
 const common = [
-  HttpClientModule,
+  HttpClientModule, //
   MatSnackBarModule,
   SimpleNotificationsModule.forRoot(),
   NgxsModule.forRoot(states, {
@@ -46,7 +53,13 @@ const common = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ...common, ...components],
+  imports: [
+    BrowserModule, //
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ...common,
+    ...components,
+  ],
   providers: [
     ...httpInterceptors,
     {

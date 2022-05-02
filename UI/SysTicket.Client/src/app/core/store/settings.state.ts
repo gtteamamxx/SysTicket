@@ -20,10 +20,7 @@ export class SettingsState {
   }
 
   @Action(SettingsStateActions.SetApiUrl)
-  logout(
-    ctx: StateContext<SettingsStateModel>,
-    action: SettingsStateActions.SetApiUrl
-  ): void {
+  logout(ctx: StateContext<SettingsStateModel>, action: SettingsStateActions.SetApiUrl): void {
     ctx.patchState({ apiUrl: action.payload.apiUrl });
   }
 }

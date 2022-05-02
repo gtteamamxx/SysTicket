@@ -9,5 +9,7 @@ namespace SysTicket.Domain.Interfaces.Repositories
         Task<IReadOnlyCollection<User>> GetAllUsersAsync(CancellationToken cancellationToken);
 
         Task<User?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken);
+
+        Task<bool> IsUserExistWithUserName(string name);
     }
 }

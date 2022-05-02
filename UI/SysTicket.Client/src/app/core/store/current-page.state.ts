@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
 import { Constants } from '../resources/constants';
 import { CurrentPageStateActions as Actions } from './current-page.state.actions';
@@ -34,10 +33,7 @@ export class CurrentPageState {
   }
 
   @Action(Actions.SetCurrentPageInfo)
-  setCurrentPageTItle(
-    ctx: StateContext<CurrentPageStateModel>,
-    action: Actions.SetCurrentPageInfo
-  ): void {
+  setCurrentPageTItle(ctx: StateContext<CurrentPageStateModel>, action: Actions.SetCurrentPageInfo): void {
     document.title = action.payload.title!;
 
     ctx.patchState({

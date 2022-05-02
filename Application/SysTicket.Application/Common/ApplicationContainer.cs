@@ -14,14 +14,15 @@ namespace SysTicket.Application.Common
         {
             container.AddMediatR(cfg =>
             {
-                cfg.WithAssembliesToScan(GetType().Assembly);
-                cfg.UsingPipelineProcessorBehaviors(typeof(ValidationPipeline<,>));
+                cfg.WithAssembliesToScan(GetType().Assembly)
+                   .UsingPipelineProcessorBehaviors(typeof(ValidationPipeline<,>));
             });
 
             container.AddFluentValidation(cfg =>
             {
-                cfg.WithAssembliesToScan(GetType().Assembly);
-                cfg.RegisterAsValidatorCollection();
+                cfg.WithAssembliesToScan(GetType().Assembly)
+                   .RegisterAsValidatorCollection()
+                   .AsScoped();
             });
 
             container.Register<ISysTicketMapper, SysTicketMapper>(Lifestyle.Singleton);

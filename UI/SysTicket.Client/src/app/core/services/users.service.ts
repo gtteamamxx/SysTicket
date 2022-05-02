@@ -14,28 +14,19 @@ export interface CreateNewUserRequest {
 @Injectable({ providedIn: 'root' })
 export class UsersService {
   constructor(
-    private readonly store: Store,
+    private readonly store: Store, //
     private readonly http: HttpClient
   ) {}
 
   login(payload: { name: string; password: string }): Observable<User> {
-    return this.http.get<User>(
-      `${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users?name=${
-        payload.name
-      }&password=${payload.password}`
-    );
+    return this.http.get<User>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users?name=${payload.name}&password=${payload.password}`);
   }
 
   createNewUser(payload: CreateNewUserRequest): Observable<void> {
-    return this.http.post<void>(
-      `${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users`,
-      JSON.stringify(payload)
-    );
+    return this.http.post<void>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users`, JSON.stringify(payload));
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(
-      `${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users/all`
-    );
+    return this.http.get<User[]>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users/all`);
   }
 }

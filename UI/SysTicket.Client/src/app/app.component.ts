@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CurrentPageListenerService } from './core/services/current-page-listener.service';
 
 @Component({
@@ -14,9 +9,7 @@ import { CurrentPageListenerService } from './core/services/current-page-listene
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private readonly currentPageListenerService: CurrentPageListenerService
-  ) {}
+  constructor(private readonly currentPageListenerService: CurrentPageListenerService) {}
 
   ngOnInit(): void {
     this.currentPageListenerService.startListening();

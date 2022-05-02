@@ -7,7 +7,7 @@ import { LocalStorageService } from './local-storage.service';
 @Injectable({ providedIn: 'root' })
 export class RestoreUserSessionService {
   constructor(
-    private readonly localStorageService: LocalStorageService,
+    private readonly localStorageService: LocalStorageService, //
     private readonly store: Store
   ) {}
 

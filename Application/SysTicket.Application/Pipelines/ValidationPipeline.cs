@@ -4,29 +4,35 @@ using MediatR;
 
 namespace SysTicket.Application.Pipelines
 {
-    public class ValidationPipeline<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> 
+    public class ValidationPipeline<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : class, IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-        public ValidationPipeline(IEnumerable<IValidator<TRequest>> validators) 
+        public ValidationPipeline(IEnumerable<IValidator<TRequest>> validators)
             => _validators = validators;
 
-        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
-            if (!_validators.Any()) return next();
-            
+            if (!_validators.Any()) return await next();
+
             var context = new ValidationContext<TRequest>(request);
 
-            IEnumerable<ValidationFailure>? errors = _validators
-                .Select(x => x.Validate(context))
-                .SelectMany(x => x.Errors)
-                .Where(x => x != null)
-                .ToList();
-            
+            List<ValidationFailure> errors = new();
+
+            foreach (IValidator<TRequest>? validator in _validators)
+            {
+                ValidationResult? validationResult = await validator.ValidateAsync(context);
+
+                List<ValidationFailure>? validationErrors = validationResult?.Errors;
+
+                if (validationErrors?.Any() == true)
+                    errors.AddRange(validationErrors);
+            }
+
             if (errors.Any()) throw new ValidationException(errors);
 
-            return next();
+            return await next();
         }
     }
 }

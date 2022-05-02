@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { catchError, map, Observable, of } from 'rxjs';
 import { SettingsStateActions } from '../store/settings.state.actions';
 import { RestoreUserSessionService } from './restore-user-session.service';
@@ -8,7 +8,7 @@ import { RestoreUserSessionService } from './restore-user-session.service';
 @Injectable({ providedIn: 'root' })
 export class AppInitializerService {
   constructor(
-    private readonly http: HttpClient,
+    private readonly http: HttpClient, //
     private readonly store: Store,
     private readonly restoreUserSessionService: RestoreUserSessionService
   ) {}
@@ -18,9 +18,7 @@ export class AppInitializerService {
 
     return this.http.get('./assets/settings.json').pipe(
       map((settings: Object & any) => {
-        this.store.dispatch(
-          new SettingsStateActions.SetApiUrl({ apiUrl: settings.apiUrl })
-        );
+        this.store.dispatch(new SettingsStateActions.SetApiUrl({ apiUrl: settings.apiUrl }));
         return true;
       }),
       catchError(() => {

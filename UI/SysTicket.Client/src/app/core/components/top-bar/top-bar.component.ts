@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { NavigationService } from '../../services/navigation.service';
@@ -35,7 +31,7 @@ export class TopBarComponent {
   isOnManageUsersPage$!: Observable<boolean>;
 
   constructor(
-    private readonly store: Store,
+    private readonly store: Store, //
     private readonly notificationsService: NotificationsService,
     private readonly navigationService: NavigationService
   ) {}
@@ -54,7 +50,7 @@ export class TopBarComponent {
       .subscribe()
       .add(() => {
         this.navigationService.navigateToMainPage();
-        this.notificationsService.showInfo('Wylogowano pomyślnie.');
+        this.notificationsService.showInfo({ message: 'Wylogowano pomyślnie.' });
       });
   }
 }

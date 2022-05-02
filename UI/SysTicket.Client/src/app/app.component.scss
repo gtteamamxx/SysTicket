@@ -7,3 +7,7 @@
     height: 100%;
   }
 }
+
+.simple-notification-wrapper {
+  z-index: 99999 !important; // notifications always on top
+}
