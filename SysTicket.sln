@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.Application.UnitT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SysTicket.Infrastructure.IntegrationTests", "Tests\Integration\SysTicket.Infrastructure.IntegrationTests\SysTicket.Infrastructure.IntegrationTests.csproj", "{CD3B47BE-D5C7-4363-B8D7-0D6F26D859FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysTicket.API.UnitTests", "Tests\Unit\SysTicket.API.UnitTests\SysTicket.API.UnitTests.csproj", "{5C848B59-B403-4611-B3D9-93BCEA08A9F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{CD3B47BE-D5C7-4363-B8D7-0D6F26D859FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD3B47BE-D5C7-4363-B8D7-0D6F26D859FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD3B47BE-D5C7-4363-B8D7-0D6F26D859FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C848B59-B403-4611-B3D9-93BCEA08A9F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C848B59-B403-4611-B3D9-93BCEA08A9F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C848B59-B403-4611-B3D9-93BCEA08A9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C848B59-B403-4611-B3D9-93BCEA08A9F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{5CDC925C-15AC-4D6F-B3B7-5D6B6428BBBF} = {C8CE97FB-A40A-42EE-BFC6-EC46E7430CD2}
 		{7C274133-4301-41D8-88FE-0BC8E7865387} = {7DAF84E5-24DF-404E-BB00-3F8C8B4C4749}
 		{CD3B47BE-D5C7-4363-B8D7-0D6F26D859FC} = {C8CE97FB-A40A-42EE-BFC6-EC46E7430CD2}
+		{5C848B59-B403-4611-B3D9-93BCEA08A9F8} = {7DAF84E5-24DF-404E-BB00-3F8C8B4C4749}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58232DE3-E907-47D4-8BC7-0BE61475C356}
