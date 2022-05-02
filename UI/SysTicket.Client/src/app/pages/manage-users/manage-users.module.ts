@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { NgxsModule } from '@ngxs/store';
+import { AddNewUesrModalOpener } from './components/add-new-user-modal/add-new-user-modal-opener';
 import { AddNewUserModalComponent } from './components/add-new-user-modal/add-new-user-modal.component';
 import { ManageUsersRouting } from './manage-users-routing.module';
 import { ManageUsersComponent } from './manage-users.component';
@@ -32,5 +33,6 @@ import { ManageUsersState } from './store/manage-users.state';
     NgxsModule.forFeature([ManageUsersState]),
   ],
   declarations: [ManageUsersComponent, AddNewUserModalComponent],
+  providers: [AddNewUesrModalOpener],
 })
 export class ManageUsersModule {}
