@@ -15,6 +15,8 @@ namespace SysTicket.Domain.Entities
         {
         }
 
+        public ICollection<Event> Events { get; set; } = new HashSet<Event>();
+
         [Key]
         public int Id { get; set; }
 
