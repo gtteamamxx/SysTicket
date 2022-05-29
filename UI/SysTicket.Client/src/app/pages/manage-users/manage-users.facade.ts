@@ -10,7 +10,7 @@ export class ManageUsersFacade implements OnDestroy {
     private readonly store: Store, //
     private readonly addNewUserModalOpener: AddNewUesrModalOpener,
     private readonly spinner: SpinnerService
-  ) {}
+  ) { }
 
   ngOnDestroy(): void {
     this.store.dispatch(new ManageUsersStateActions.Clear());
@@ -21,11 +21,12 @@ export class ManageUsersFacade implements OnDestroy {
   }
 
   openAddNewUserModal(): void {
-    this.addNewUserModalOpener.openAddNewUserModal().subscribe((result: boolean | undefined) => {
-      if (result === true) {
-        this.loadUsersList();
-      }
-    });
+    this.addNewUserModalOpener.openAddNewUserModal()
+      .subscribe((result: boolean | undefined) => {
+        if (result === true) {
+          this.loadUsersList();
+        }
+      });
   }
 
   private loadUsersList(): void {

@@ -1,42 +1,31 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
-import { SpinnerComponent } from '../components/spinner/spinner.component';
+import { Store } from '@ngxs/store';
+import { SpinnerState } from '../store/spinner.state';
+import { SpinnerStateActions } from '../store/spinner.state.actions';
 
 @Injectable({ providedIn: 'root' })
 export class SpinnerService {
   get isVisible(): boolean {
-    return this._isVisible;
+    return this.store.selectSnapshot(SpinnerState.isVisible);
   }
 
-  private _isVisible: boolean = false;
-  private matSnackbarRef: MatSnackBarRef<SpinnerComponent> | undefined;
-  private timeout: any | undefined;
+  private spinnerCount = 0;
 
-  constructor(private snackbar: MatSnackBar) {}
+  constructor(private store: Store) { }
 
-  show(title: string): void {
-    this.matSnackbarRef?.dismiss(); // close current if exists
-
-    this.timeout = setTimeout(() => {
-      this.matSnackbarRef = this.snackbar.openFromComponent(SpinnerComponent, {
-        duration: 999999,
-      });
-
-      this._isVisible = true;
-
-      this.matSnackbarRef.instance.setTitle(title);
-    }, 100);
+  show(text?: string): void {
+    this.store.dispatch(new SpinnerStateActions.SetVisibility({ isVisible: true, loadingText: text }));
+    this.spinnerCount++;
   }
 
   hide(): void {
-    if (this.timeout != null && !this._isVisible) {
-      clearTimeout(this.timeout);
-      return;
-    }
-
     setTimeout(() => {
-      this._isVisible = false;
-      this.matSnackbarRef?.dismiss();
-    }, 500);
+      this.spinnerCount--;
+
+      if (this.spinnerCount <= 0) {
+        this.store.dispatch(new SpinnerStateActions.SetVisibility({ isVisible: false }));
+        this.spinnerCount = 0;
+      }
+    }, 300);
   }
 }
