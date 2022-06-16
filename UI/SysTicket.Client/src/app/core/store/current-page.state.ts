@@ -9,7 +9,7 @@ interface CurrentPageStateModel {
 }
 
 @State({
-  name: new StateToken<CurrentPageStateModel>('appState'),
+  name: new StateToken<CurrentPageStateModel>('currentPageState'),
   defaults: {
     title: null,
     currentUrl: null,

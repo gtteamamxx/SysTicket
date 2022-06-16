@@ -1,6 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
@@ -16,6 +16,7 @@ import { HttpErrorInterceptor } from './core/services/http-error-interceptor.ser
 import { HttpHeadersInterceptor } from './core/services/http-headers-interceptor.service';
 import { CurrentPageState } from './core/store/current-page.state';
 import { SettingsState } from './core/store/settings.state';
+import { SpinnerState } from './core/store/spinner.state';
 import { UserState } from './core/store/user.state';
 
 const httpInterceptors = [
@@ -40,11 +41,12 @@ const states = [
   CurrentPageState, //
   UserState,
   SettingsState,
+  SpinnerState
 ];
 
 const common = [
   HttpClientModule, //
-  MatSnackBarModule,
+  MatProgressSpinnerModule,
   SimpleNotificationsModule.forRoot(),
   NgxsModule.forRoot(states, {
     developmentMode: !environment.production,
@@ -71,7 +73,7 @@ const common = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
 
 function initializeAppFactory(appInitializerService: AppInitializerService): () => Observable<boolean> {
   return () => appInitializerService.init();
