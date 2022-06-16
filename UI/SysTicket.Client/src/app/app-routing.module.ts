@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
     path: Constants.loginPage,
