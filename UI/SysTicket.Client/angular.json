@@ -110,5 +110,8 @@
       }
     }
   },
-  "defaultProject": "SysTicket.Client"
+  "defaultProject": "SysTicket.Client",
+  "cli": {
+    "analytics": false
+  }
 }
