@@ -12,8 +12,8 @@ import { LoginFacade } from './login.facade';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    login: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    login: new FormControl<string>('', [Validators.required]),
+    password: new FormControl<string>('', [Validators.required]),
   });
 
   constructor(private readonly loginFacade: LoginFacade) {}
@@ -23,6 +23,6 @@ export class LoginComponent {
       return;
     }
 
-    this.loginFacade.login(this.loginForm.get('login')?.value, this.loginForm.get('password')?.value);
+    this.loginFacade.login(this.loginForm.get('login')?.value!, this.loginForm.get('password')?.value!);
   }
 }
