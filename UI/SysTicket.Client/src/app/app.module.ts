@@ -1,6 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
@@ -41,12 +40,11 @@ const states = [
   CurrentPageState, //
   UserState,
   SettingsState,
-  SpinnerState
+  SpinnerState,
 ];
 
 const common = [
   HttpClientModule, //
-  MatProgressSpinnerModule,
   SimpleNotificationsModule.forRoot(),
   NgxsModule.forRoot(states, {
     developmentMode: !environment.production,
@@ -73,7 +71,7 @@ const common = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 function initializeAppFactory(appInitializerService: AppInitializerService): () => Observable<boolean> {
   return () => appInitializerService.init();

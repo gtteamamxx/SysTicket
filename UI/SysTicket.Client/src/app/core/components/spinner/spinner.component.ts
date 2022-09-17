@@ -1,20 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { SpinnerState } from '../../store/spinner.state';
 
 @Component({
-  templateUrl: './spinner.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  selector: 'app-spinner',
+  templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss'],
 })
 export class SpinnerComponent {
-  title: string | undefined;
+  @Select(SpinnerState.isVisible)
+  isSpinnerVisible$!: Observable<boolean>;
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
-  setTitle(title: string): void {
-    if (title !== this.title) {
-      this.title = title;
-      this.cdr.markForCheck();
-    }
-  }
+  @Select(SpinnerState.loadingText)
+  spinnerLoadingText$!: Observable<string | null>;
 }

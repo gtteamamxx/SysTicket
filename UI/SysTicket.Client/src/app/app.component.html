@@ -1,16 +1,11 @@
 <div class="app-container">
     <app-top-bar></app-top-bar>
 
-    <router-outlet></router-outlet>
-
-    <div *ngIf="isSpinnerVisible$ | async" class="spinner-container">
-        <mat-progress-spinner mode="indeterminate">
-        </mat-progress-spinner>
-
-        <span *ngIf="(spinnerLoadingText$ | async) != null" class="loading-text">
-            {{ spinnerLoadingText$ | async }}
-        </span>
+    <div class="content-container">
+        <router-outlet></router-outlet>
     </div>
+    
+    <app-spinner></app-spinner>
 </div>
 
 <simple-notifications></simple-notifications>

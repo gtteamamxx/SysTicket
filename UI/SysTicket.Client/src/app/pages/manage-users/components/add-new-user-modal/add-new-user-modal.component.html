@@ -13,7 +13,7 @@
                 Login musi mieć od 3 do 32 znaków.
             </mat-error>
 
-            <mat-hint align="end">{{ login.value?.length ?? 0}} / 32</mat-hint>
+            <mat-hint align="end">{{ login.value.length }} / 32</mat-hint>
         </mat-form-field>
 
         <br />
@@ -28,7 +28,7 @@
             <mat-error>
                 Hasło musi mieć minimum 8 znaków w tym jedna duża litera oraz jedna cyfra.
 
-                <span *ngIf="(password.value?.length ?? 0) < 8">(wpisanych znaków: {{ password.value?.length ?? 0 }})</span>
+                <span *ngIf="(password.value?.length ?? 0) < 8">(wpisanych znaków: {{ password.value.length }})</span>
             </mat-error>
 
         </mat-form-field>
