@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { LoginFacade } from './login.facade';
 
 @Component({
@@ -11,9 +11,9 @@ import { LoginFacade } from './login.facade';
   providers: [LoginFacade],
 })
 export class LoginComponent {
-  loginForm = new FormGroup({
-    login: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+  loginForm = new UntypedFormGroup({
+    login: new UntypedFormControl('', [Validators.required]),
+    password: new UntypedFormControl('', [Validators.required]),
   });
 
   constructor(private readonly loginFacade: LoginFacade) {}

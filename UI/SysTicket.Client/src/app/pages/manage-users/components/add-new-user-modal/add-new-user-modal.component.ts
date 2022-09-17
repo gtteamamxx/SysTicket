@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
 import { SpinnerService } from 'src/app/core/services/spinner.service';
@@ -13,15 +13,15 @@ import { CreateNewUserRequest, UsersService } from 'src/app/core/services/users.
   encapsulation: ViewEncapsulation.None,
 })
 export class AddNewUserModalComponent implements OnInit {
-  userForm = new FormGroup({
-    login: new FormControl('', [Validators.minLength(3), Validators.maxLength(32), Validators.required]),
-    password: new FormControl('', [
+  userForm = new UntypedFormGroup({
+    login: new UntypedFormControl('', [Validators.minLength(3), Validators.maxLength(32), Validators.required]),
+    password: new UntypedFormControl('', [
       Validators.required,
       Validators.minLength(8),
       Validators.pattern('^.*[A-Z]+.*$'), // minimum jedna duża litera
       Validators.pattern('^.*[0-9]+.*$'), // minimum jedna cyfra
     ]),
-    isAdmin: new FormControl(false),
+    isAdmin: new UntypedFormControl(false),
   });
 
   constructor(
