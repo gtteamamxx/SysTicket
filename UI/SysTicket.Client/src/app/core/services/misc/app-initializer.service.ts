@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { catchError, map, Observable, of } from 'rxjs';
-import { SettingsStateActions } from '../store/settings.state.actions';
+import { SettingsStateActions } from '../../store/settings.state.actions';
 import { RestoreUserSessionService } from './restore-user-session.service';
 
 @Injectable({ providedIn: 'root' })

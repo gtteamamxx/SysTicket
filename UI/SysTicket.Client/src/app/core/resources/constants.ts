@@ -1,4 +1,7 @@
 export class Constants {
   static loginPage: string = 'login';
-  static manageUsers: string = 'manage-users';
+  static manageUsersPage: string = 'manage-users';
+
+  static eventsPage: string = 'events';
+  static addEventPage: string = 'add-event';
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
 import { User } from 'src/app/core/models/user.model';
-import { UsersService } from 'src/app/core/services/users.service';
+import { UsersService } from 'src/app/core/services/http/users.service';
 import { ManageUsersStateActions as Actions } from './manage-users.state.actions';
 
 interface ManageUsersStateModel {

@@ -1,13 +1,16 @@
 <div class="top-bar-container">
     <span class="title">SysTicket</span>
 
-    <span class="current-page-title">{{ currentPageTitle$ | async }}</span>
-
     <div class="buttons-container">
         <button *ngIf="(isUserLogged$ | async) === false && (isOnLoginPage$ | async) === false"
                 mat-button
                 (click)="login()">
             Zaloguj
+        </button>
+        
+        <button mat-button
+                (click)="addEvent()">
+            Dodaj wydarzenie
         </button>
 
         <button *ngIf="(isUserAdmin$ | async) && (isOnManageUsersPage$ | async) === false"

@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { SpinnerService } from 'src/app/core/services/spinner.service';
+import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
 import { AddNewUserModalOpener } from './components/add-new-user-modal/add-new-user-modal-opener';
 import { ManageUsersStateActions } from './store/manage-users.state.actions';
 

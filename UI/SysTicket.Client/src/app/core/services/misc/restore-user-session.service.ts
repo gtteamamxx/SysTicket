@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { User } from '../models/user.model';
-import { UserStateActions } from '../store/user.state.actions';
+import { User } from '../../models/user.model';
+import { UserStateActions } from '../../store/user.state.actions';
 import { LocalStorageService } from './local-storage.service';
 
 @Injectable({ providedIn: 'root' })

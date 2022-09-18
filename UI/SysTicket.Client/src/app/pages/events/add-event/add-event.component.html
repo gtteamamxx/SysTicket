@@ -1,0 +1,29 @@
+<div class="add-event-container">
+	<mat-vertical-stepper labelPosition="bottom">
+		<mat-step [stepControl]="generalTab.eventDetailsFormGroup">
+			<ng-template matStepLabel>Dane wydarzenia</ng-template>
+
+			<app-general #generalTab></app-general>
+
+			<button class="add-button"
+					mat-raised-button
+					(click)="onAddEventClick()">
+				<mat-icon>add</mat-icon>
+				Dodaj wydarzenie
+			</button>
+		</mat-step>
+
+		<mat-step [stepControl]="imagesTab.imagesFormGroup">
+			<ng-template matStepLabel>Zdjęcia</ng-template>
+
+			<app-images #imagesTab></app-images>
+
+			<button class="add-button"
+					mat-raised-button
+					(click)="onAddEventClick()">
+				<mat-icon>add</mat-icon>
+				Dodaj wydarzenie
+			</button>
+		</mat-step>
+	</mat-vertical-stepper>
+</div>

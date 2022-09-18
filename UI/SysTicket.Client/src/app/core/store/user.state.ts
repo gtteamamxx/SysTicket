@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
 import { User } from '../models/user.model';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from '../services/misc/local-storage.service';
 import { UserStateActions as Actions } from './user.state.actions';
 
 interface UserStateModel {

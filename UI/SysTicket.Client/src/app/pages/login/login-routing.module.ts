@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SysTicketRoutes } from 'src/app/core/models/common/systticket-routes.model';
+import { SysTicketRoutes } from 'src/app/core/models/common/systicket-routes.model';
 import { LoginComponent } from './login.component';
 import { LoginGuard } from './login.guard';
 

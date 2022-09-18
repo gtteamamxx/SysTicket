@@ -1,0 +1,68 @@
+<form class="event-details-form"
+      [formGroup]="eventDetailsFormGroup">
+    <div class="inputs-container">
+        <mat-form-field floatLabel="always"
+                        appearance="fill">
+            <mat-label>Nazwa wydarzenia</mat-label>
+            <input matInput
+                   formControlName="title">
+            <mat-hint align="end">{{ eventDetailsFormGroup.controls.title.value?.length }} / 128 </mat-hint>
+
+            <mat-error>Nazwa wydarzenia musi zawierać od 3 do 128 znaków.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always"
+                        appearance="fill">
+            <mat-label>Data wydarzenia od</mat-label>
+
+            <input matInput
+                   formControlName="dateFrom"
+                   [min]="minDate"
+                   [ngxMatDatetimePicker]="pickerFrom">
+
+            <mat-datepicker-toggle matSuffix
+                                   [for]="$any(pickerFrom)">
+            </mat-datepicker-toggle>
+
+            <ngx-mat-datetime-picker #pickerFrom>
+            </ngx-mat-datetime-picker>
+
+            <mat-error *ngIf="eventDetailsFormGroup.controls.dateFrom.invalid">
+                Podaj datę rozpoczęcia wydarzenia. Data nie może być w przeszłości.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field floatLabel="always"
+                        appearance="fill">
+            <mat-label>Data wydarzenia do</mat-label>
+
+            <input matInput
+                   [min]="minDate"
+                   formControlName="dateTo"
+                   [ngxMatDatetimePicker]="pickerTo">
+
+            <mat-datepicker-toggle matSuffix
+                                   [for]="$any(pickerTo)">
+            </mat-datepicker-toggle>
+
+            <ngx-mat-datetime-picker #pickerTo>
+            </ngx-mat-datetime-picker>
+
+            <mat-error *ngIf="eventDetailsFormGroup.controls.dateTo.invalid">
+                Podaj datę zakończenia wydarzenia.
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="html-editor"
+                    appearance="fill">
+        <input matInput
+               formControlName="body">
+
+        <angular-editor formControlName="body"
+                        [config]="editorConfig">
+        </angular-editor>
+
+        <mat-error *ngIf="eventDetailsFormGroup.controls.body.invalid">Opis wydarzenia jest wymagany.</mat-error>
+    </mat-form-field>
+</form>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Constants } from '../resources/constants';
+import { Constants } from '../../resources/constants';
 
 @Injectable({ providedIn: 'root' })
 export class NavigationService {
@@ -10,11 +10,15 @@ export class NavigationService {
     this.router.navigateByUrl('/');
   }
 
-  navigateToManageUsers(): void {
-    this.router.navigate([Constants.manageUsers]);
+  navigateToManageUsersPage(): void {
+    this.router.navigate([Constants.manageUsersPage]);
   }
 
   navigateToLoginPage(): void {
     this.router.navigate([Constants.loginPage]);
+  }
+
+  navigateToAddEventPage() {
+    this.router.navigate([Constants.eventsPage, Constants.addEventPage]);
   }
 }

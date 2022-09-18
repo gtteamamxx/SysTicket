@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { User } from '../models/user.model';
-import { SettingsState } from '../store/settings.state';
+import { User } from '../../models/user.model';
+import { SettingsState } from '../../store/settings.state';
 
 export interface CreateNewUserRequest {
   userName: string;

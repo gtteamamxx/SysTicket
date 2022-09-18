@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { CurrentPageListenerService } from './core/services/current-page-listener.service';
+import { CurrentPageListenerService } from './core/services/misc/current-page-listener.service';
 
 @Component({
   selector: 'app-root',
