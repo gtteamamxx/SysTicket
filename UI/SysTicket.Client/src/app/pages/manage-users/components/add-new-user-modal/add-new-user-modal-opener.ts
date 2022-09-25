@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AddNewUserModalComponent } from './add-new-user-modal.component';
 
 @Injectable()
-export class AddNewUesrModalOpener {
+export class AddNewUserModalOpener {
   constructor(private readonly modal: MatDialog) {}
 
   openAddNewUserModal(): Observable<boolean | undefined> {

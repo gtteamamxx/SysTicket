@@ -1,10 +1,5 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SysTicket.Application.DTO.Users;
 using SysTicket.Application.IntegrationTests.Common;
 using SysTicket.Application.Queries.Users;

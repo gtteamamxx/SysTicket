@@ -14,14 +14,14 @@ import { CreateNewUserRequest, UsersService } from 'src/app/core/services/users.
 })
 export class AddNewUserModalComponent implements OnInit {
   userForm = new FormGroup({
-    login: new FormControl('', [Validators.minLength(3), Validators.maxLength(32), Validators.required]),
-    password: new FormControl('', [
+    login: new FormControl<string>('', [Validators.minLength(3), Validators.maxLength(32), Validators.required]),
+    password: new FormControl<string>('', [
       Validators.required,
       Validators.minLength(8),
       Validators.pattern('^.*[A-Z]+.*$'), // minimum jedna duża litera
       Validators.pattern('^.*[0-9]+.*$'), // minimum jedna cyfra
     ]),
-    isAdmin: new FormControl(false),
+    isAdmin: new FormControl<boolean>(false),
   });
 
   constructor(

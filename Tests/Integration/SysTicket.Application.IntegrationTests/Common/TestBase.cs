@@ -4,6 +4,7 @@ using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using SysTicket.Application.Common;
 using SysTicket.Domain.Common;
+using SysTicket.Domain.Interfaces.Common;
 using SysTicket.Infrastructure;
 using SysTicket.Infrastructure.Common;
 
@@ -13,11 +14,19 @@ namespace SysTicket.Application.IntegrationTests.Common
     {
         public Container Container = new();
 
+        private Scope _scope = null!;
+
         public SysTicketContext Context => Container.GetInstance<SysTicketContext>();
-        
+
         public IMediator Mediator => Container.GetInstance<IMediator>();
 
-        private Scope _scope = null!;
+        public ISysTicketUnitOfWork UnitOfWork => Container.GetInstance<ISysTicketUnitOfWork>();
+
+        [TearDown]
+        public void AfterEachTest()
+        {
+            _scope.Dispose();
+        }
 
         [SetUp]
         public void BeforeEachTest()
@@ -39,12 +48,6 @@ namespace SysTicket.Application.IntegrationTests.Common
             Container.Verify();
 
             _scope = AsyncScopedLifestyle.BeginScope(Container);
-        }
-
-        [TearDown]
-        public void AfterEachTest()
-        {
-            _scope.Dispose();
         }
     }
 }

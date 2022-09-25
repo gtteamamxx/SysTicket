@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SysTicket.Infrastructure;
 
 namespace SysTicket.Infrastructure.IntegrationTests.Common
 {

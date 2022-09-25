@@ -26,6 +26,8 @@ namespace SysTicket.Application.IntegrationTests.Commands.Users
                 IsAdmin: isAdmin)
             );
 
+            await UnitOfWork.SaveChangesAsync(default);
+
             // Assert
             Context.Users
                 .FirstOrDefault(x => x.Name == expectedUserName

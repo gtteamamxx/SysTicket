@@ -1,6 +1,5 @@
-﻿using AdaskoTheBeAsT.MediatR.SimpleInjector;
-using AdaskoTheBeAsT.FluentValidation.SimpleInjector;
-
+﻿using AdaskoTheBeAsT.FluentValidation.SimpleInjector;
+using AdaskoTheBeAsT.MediatR.SimpleInjector;
 using SimpleInjector;
 using SimpleInjector.Packaging;
 using SysTicket.Application.Interfaces.Common;

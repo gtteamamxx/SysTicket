@@ -16,6 +16,9 @@ namespace SysTicket.Domain.Common
             container.Register<IPasswordHashingService, PasswordHashingService>(Lifestyle.Singleton);
             container.Register<IUsersBuilder, UsersBuilder>(Lifestyle.Singleton);
             container.Register<IUsersFactory, UsersFactory>(Lifestyle.Scoped);
+
+            container.Register<IEventsBuilder, EventsBuilder>(Lifestyle.Singleton);
+            container.Register<IEventsFactory, EventsFactory>(Lifestyle.Scoped);
         }
     }
 }
