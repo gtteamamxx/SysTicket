@@ -1,62 +1,48 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SysTicket.Domain.Interfaces.Common;
 
 namespace SysTicket.Domain.Entities
 {
-    public class Event
+    public class Event : IId
     {
         public Event(
+            string title,
+            string body,
+            DateTime dateFrom,
+            DateTime dateTo,
             int userId,
-            string name,
-            DateTime start,
-            DateTime end,
-            string description,
-            byte[] coverImage,
-            IList<EventImage> images)
+            string logoBase64)
         {
+            Title = title;
+            Body = body;
+            DateFrom = dateFrom;
+            DateTo = dateTo;
             UserId = userId;
-            Name = name;
-            StartDate = start;
-            EndDate = end;
-            Description = description;
-            CoverImage = coverImage;
-
-            if (images.Any(x => x.EventId != default))
-            {
-                throw new ArgumentException("Cannot add other event images to new event");
-            }
-
-            Images = images;
+            LogoBase64 = logoBase64;
         }
 
         internal Event()
         {
         }
 
-        [Required]
-        public byte[] CoverImage { get; set; } = default!;
+        public string? Body { get; set; }
 
-        [Required]
-        public string Description { get; set; } = default!;
+        public DateTime DateFrom { get; set; }
 
-        [Required]
-        public DateTime EndDate { get; set; } = default!;
+        public DateTime DateTo { get; set; }
 
         [Key]
         public int Id { get; set; }
 
-        public virtual ICollection<EventImage> Images { get; set; } = new HashSet<EventImage>();
+        public string? LogoBase64 { get; set; }
 
-        [StringLength(128)]
-        public string Name { get; set; } = default!;
-
-        [Required]
-        public DateTime StartDate { get; set; } = default!;
+        [StringLength(maximumLength: 128)]
+        public string? Title { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; } = default!;
 
-        [Required]
-        public int UserId { get; set; } = default!;
+        public int UserId { get; set; }
     }
 }

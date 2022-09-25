@@ -10,6 +10,8 @@ namespace SysTicket.Domain.Interfaces.Repositories
 
         Task<User?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken);
 
-        Task<bool> IsUserExistWithUserName(string name);
+        Task<bool> IsUserExistById(int id);
+
+        Task<bool> IsUserExistByUserName(string name);
     }
 }

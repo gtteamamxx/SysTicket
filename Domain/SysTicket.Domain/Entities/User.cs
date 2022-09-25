@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using SysTicket.Domain.Interfaces.Common;
 
 namespace SysTicket.Domain.Entities
 {
-    public class User
+    public class User : IId
     {
         public User(string name, string password, bool isAdmin)
         {
@@ -15,7 +16,7 @@ namespace SysTicket.Domain.Entities
         {
         }
 
-        public ICollection<Event> Events { get; set; } = new HashSet<Event>();
+        public virtual ICollection<Event> Events { get; set; } = new HashSet<Event>();
 
         [Key]
         public int Id { get; set; }
