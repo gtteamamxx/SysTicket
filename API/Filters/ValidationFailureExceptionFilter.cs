@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace SysTicket.API.Filters
 {
@@ -15,7 +16,7 @@ namespace SysTicket.API.Filters
 
                 context.ExceptionHandled = true;
 
-                context.HttpContext.Response.StatusCode = 500; // Internal server error
+                context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                 context.Result = new JsonResult(
                     JsonConvert.SerializeObject(new

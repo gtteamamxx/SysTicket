@@ -7,7 +7,7 @@ using SysTicket.Application.Handlers.Commands.Users;
 using SysTicket.Application.UnitTests.Common;
 using SysTicket.Domain.Interfaces.Repositories;
 
-namespace SysTicket.Application.UnitTests.Handlers.Commands
+namespace SysTicket.Application.UnitTests.Handlers.Commands.Users
 {
     [TestFixture]
     internal class CreateUserCommandValidatorTests : TestBase<CreateUserCommandValidator>
@@ -59,7 +59,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
-                .Setup(x => x.IsUserExistWithUserName(command.UserName))
+                .Setup(x => x.IsUserExistByUserName(command.UserName))
                 .Returns(Task.FromResult(true));
 
             // Assert

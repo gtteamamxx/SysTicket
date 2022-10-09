@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CreateNewUserRequest, UsersService } from 'src/app/core/services/http/users.service';
 import { NotificationsService } from 'src/app/core/services/misc/notifications.service';
 import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
-import { CreateNewUserRequest, UsersService } from 'src/app/core/services/http/users.service';
 
 interface UserForm {
   login: FormControl<string | null>;

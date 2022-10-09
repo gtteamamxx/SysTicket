@@ -14,6 +14,10 @@ namespace SysTicket.Infrastructure
         protected SysTicketContext()
         { }
 
+        public virtual DbSet<EventPrice> EventPrices { get; set; } = default!;
+
+        public virtual DbSet<Event> Events { get; set; } = default!;
+
         public virtual DbSet<User> Users { get; set; } = default!;
     }
 }

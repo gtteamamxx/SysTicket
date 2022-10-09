@@ -31,7 +31,7 @@ namespace SysTicket.Application.Handlers.Commands.Users
 
         private async Task CheckDuplicateAsync(ValidationContext<CreateUserCommand> context)
         {
-            if (await _usersRepository.IsUserExistWithUserName(context.InstanceToValidate.UserName))
+            if (await _usersRepository.IsUserExistByUserName(context.InstanceToValidate.UserName))
             {
                 context.AddFailure("Nazwa użytkownika jest już zajęta.");
             }

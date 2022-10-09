@@ -1,30 +1,19 @@
-﻿using MediatR;
-using SysTicket.Application.Commands.Users;
-using SysTicket.Domain.Interfaces.Common;
+﻿using SysTicket.Application.Commands.Users;
+using SysTicket.Common.CQRS;
 using SysTicket.Domain.Interfaces.Factories;
 
 namespace SysTicket.Application.Handlers.Commands.Users
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
+    public class CreateUserCommandHandler : CommandHandler<CreateUserCommand>
     {
-        private readonly ISysTicketUnitOfWork _sysTicketUnitOfWork;
         private readonly IUsersFactory _usersFactory;
 
-        public CreateUserCommandHandler(
-            IUsersFactory usersFactory,
-            ISysTicketUnitOfWork sysTicketUnitOfWork)
+        public CreateUserCommandHandler(IUsersFactory usersFactory)
         {
             _usersFactory = usersFactory;
-            _sysTicketUnitOfWork = sysTicketUnitOfWork;
         }
 
-        public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
-        {
-            await _usersFactory.CreateUserAsync(request, cancellationToken);
-
-            await _sysTicketUnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
-        }
+        public override Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
+            => _usersFactory.CreateUserAsync(request, cancellationToken);
     }
 }

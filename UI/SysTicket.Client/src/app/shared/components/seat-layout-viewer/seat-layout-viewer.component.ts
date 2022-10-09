@@ -84,8 +84,8 @@ export class SeatLayoutViewerComponent implements OnChanges {
   }
 
   private emitLayoutMetadata(): void {
-    const regions: string[] = (<HTMLElement[]>Array.from(this.contentDiv.nativeElement.getElementsByClassName('region'))) //
-      .map((regionHtml: HTMLElement) => regionHtml.textContent!);
+    const regions: string[] = Array.from(new Set((<HTMLElement[]>Array.from(this.contentDiv.nativeElement.getElementsByClassName('chair'))) //
+      .map(x => x.id.split('.')[0])));
 
     this.onLoad.emit(<LayoutConfig>{
       regions: regions,

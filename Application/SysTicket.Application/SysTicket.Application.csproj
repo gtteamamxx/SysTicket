@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AdaskoTheBeAsT.FluentValidation.SimpleInjector" Version="5.3.4" />
-    <PackageReference Include="AdaskoTheBeAsT.MediatR.SimpleInjector" Version="5.0.1" />
+    <PackageReference Include="AdaskoTheBeAsT.FluentValidation.SimpleInjector" Version="6.3.0" />
+    <PackageReference Include="AdaskoTheBeAsT.MediatR.SimpleInjector" Version="5.1.0" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="coverlet.collector" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
@@ -18,12 +18,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="FluentValidation" Version="10.4.0" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="HtmlAgilityPack.NetCore" Version="1.5.0.1" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="SimpleInjector.Packaging" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\SysTicket.Common\SysTicket.Common.csproj" />
     <ProjectReference Include="..\..\Domain\SysTicket.Domain\SysTicket.Domain.csproj" />
   </ItemGroup>
 
