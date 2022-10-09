@@ -10,13 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerModule } from './core/components/spinner/spinner.module';
 import { TopBarModule } from './core/components/top-bar/top-bar.module';
-import { AppInitializerService } from './core/services/misc/app-initializer.service';
 import { HttpErrorInterceptor } from './core/services/interceptors/http-error-interceptor.service';
 import { HttpHeadersInterceptor } from './core/services/interceptors/http-headers-interceptor.service';
+import { AppInitializerService } from './core/services/misc/app-initializer.service';
 import { CurrentPageState } from './core/store/current-page.state';
 import { SettingsState } from './core/store/settings.state';
 import { SpinnerState } from './core/store/spinner.state';
 import { UserState } from './core/store/user.state';
+import { SeatLayoutViewerComponent } from './shared/components/seat-layout-viewer/seat-layout-viewer.component';
 
 const httpInterceptors = [
   {
@@ -31,7 +32,7 @@ const httpInterceptors = [
   },
 ];
 
-const components = [
+const componentModules = [
   TopBarModule, //
   SpinnerModule,
 ];
@@ -58,7 +59,7 @@ const common = [
     AppRoutingModule,
     BrowserAnimationsModule,
     ...common,
-    ...components,
+    ...componentModules,
   ],
   providers: [
     ...httpInterceptors,

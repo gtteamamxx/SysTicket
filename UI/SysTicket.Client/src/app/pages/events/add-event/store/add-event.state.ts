@@ -46,6 +46,8 @@ export class AddEventState {
             dateTo: action.payload.dateTo,
             userId: this.store.selectSnapshot(UserState.loggedUser)?.id!,
             logoBase64: logoB64,
+            layout: action.payload.layout,
+            regionPrices: action.payload.regionPrices,
           })
           .pipe(
             tap((eventId: number) => {

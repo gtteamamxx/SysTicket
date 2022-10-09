@@ -14,10 +14,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NgxsModule } from '@ngxs/store';
+import { SeatLayoutViewerComponent } from 'src/app/shared/components/seat-layout-viewer/seat-layout-viewer.component';
 import { AddEventRouting } from './add-event-routing.module';
 import { AddEventComponent } from './add-event.component';
 import { GeneralComponent } from './steps/general/general.component';
 import { ImagesComponent } from './steps/images/images.component';
+import { LayoutComponent } from './steps/layout/layout.component';
+import { SelectPredefinedLayoutModalComponent } from './steps/layout/select-predefined-layout-modal/select-predefined-layout-modal.component';
 import { AddEventState } from './store/add-event.state';
 
 const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
@@ -33,7 +36,13 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
 };
 
 @NgModule({
-  declarations: [AddEventComponent, GeneralComponent, ImagesComponent],
+  declarations: [
+    AddEventComponent, //
+    GeneralComponent,
+    ImagesComponent,
+    LayoutComponent,
+    SelectPredefinedLayoutModalComponent,
+  ],
   imports: [
     AddEventRouting, //
     FormsModule,
@@ -46,11 +55,13 @@ const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
     AngularEditorModule,
     MatCardModule,
     MatIconModule,
+    MatFormFieldModule,
     MatDatepickerModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatMomentModule,
     NgxMatFileInputModule,
+    SeatLayoutViewerComponent,
     NgxsModule.forFeature([AddEventState]),
   ],
   providers: [

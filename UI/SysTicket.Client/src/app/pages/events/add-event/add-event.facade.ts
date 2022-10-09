@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { RegionPrices } from 'src/app/core/models/event.model';
 import { NotificationsService } from 'src/app/core/services/misc/notifications.service';
 import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
 import { AddEventState } from './store/add-event.state';
@@ -23,6 +24,8 @@ export class AddEventFacade implements OnDestroy {
     dateFrom: Date;
     dateTo: Date;
     logo: File;
+    layout: string;
+    regionPrices: RegionPrices;
   }) {
     payload.dateFrom.setSeconds(0, 0);
     payload.dateTo.setSeconds(0, 0);

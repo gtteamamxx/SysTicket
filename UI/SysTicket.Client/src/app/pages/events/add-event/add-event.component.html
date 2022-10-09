@@ -5,18 +5,19 @@
 
 			<app-general #generalTab></app-general>
 
-			<button class="add-button"
-					mat-raised-button
-					(click)="onAddEventClick()">
-				<mat-icon>add</mat-icon>
-				Dodaj wydarzenie
-			</button>
 		</mat-step>
 
 		<mat-step [stepControl]="imagesTab.imagesFormGroup">
 			<ng-template matStepLabel>Zdjęcia</ng-template>
 
 			<app-images #imagesTab></app-images>
+
+		</mat-step>
+
+		<mat-step [stepControl]="layoutTab.layoutFormGroup">
+			<ng-template matStepLabel>Układ hali [Desktop]</ng-template>
+
+			<app-layout #layoutTab></app-layout>
 
 			<button class="add-button"
 					mat-raised-button

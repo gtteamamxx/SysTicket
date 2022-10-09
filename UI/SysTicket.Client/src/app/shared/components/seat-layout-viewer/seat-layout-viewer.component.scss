@@ -1,0 +1,49 @@
+.seat-layout-viewer-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  svg {
+    max-width: 60vw;
+  }
+
+  .chair {
+    &:hover {
+      fill: #888888 !important;
+      cursor: pointer;
+    }
+
+    &.taken {
+      fill: red !important;
+    }
+
+    &.selected {
+      fill: green !important;
+    }
+  }
+
+  .tooltip {
+    font-weight: 400;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    background: white;
+    color: #000000de;
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+    max-width: 400px;
+
+    .tooltip-container {
+      display: flex;
+      flex-direction: column;
+
+      .region {
+        font-weight: bold;
+      }
+
+      .seat-number {
+        color: red;
+      }
+    }
+  }
+}

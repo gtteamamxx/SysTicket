@@ -1,5 +1,8 @@
 <div class="top-bar-container">
-    <span class="title">SysTicket</span>
+    <span class="title"
+          (click)="home()">
+        SysTicket
+    </span>
 
     <div class="buttons-container">
         <button *ngIf="(isUserLogged$ | async) === false && (isOnLoginPage$ | async) === false"
@@ -7,8 +10,9 @@
                 (click)="login()">
             Zaloguj
         </button>
-        
-        <button mat-button
+
+        <button *ngIf="(isUserAdmin$ | async) && (isOnAddEventPage$ | async) === false"
+                mat-button
                 (click)="addEvent()">
             Dodaj wydarzenie
         </button>

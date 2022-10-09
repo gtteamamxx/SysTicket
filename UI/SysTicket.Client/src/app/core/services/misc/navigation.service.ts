@@ -21,4 +21,8 @@ export class NavigationService {
   navigateToAddEventPage() {
     this.router.navigate([Constants.eventsPage, Constants.addEventPage]);
   }
+
+  navigateToHome() {
+    this.router.navigate([Constants.homePage]);
+  }
 }

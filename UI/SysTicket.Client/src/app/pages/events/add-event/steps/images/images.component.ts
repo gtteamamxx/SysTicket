@@ -21,15 +21,15 @@ const NO_IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/
   encapsulation: ViewEncapsulation.None,
 })
 export class ImagesComponent implements OnInit, OnDestroy {
-  imagesFormGroup = new FormGroup<ImagesFormGroup>({
-    logo: new FormControl<File>(null!, [Validators.required]),
-  });
-
-  previewImageSrc: any = NO_IMAGE_URL;
-
   get isValid(): boolean {
     return this.imagesFormGroup.valid;
   }
+
+  previewImageSrc: any = NO_IMAGE_URL;
+
+  imagesFormGroup = new FormGroup<ImagesFormGroup>({
+    logo: new FormControl<File>(null!, [Validators.required]),
+  });
 
   private subscription!: Subscription;
 
@@ -46,7 +46,7 @@ export class ImagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
   getStepData(): ImagesStepData {

@@ -1,3 +1,5 @@
+import { RegionPrices } from 'src/app/core/models/event.model';
+
 export namespace AddEventActions {
   export class AddEvent {
     static type = '[Add Event State] Add Event';
@@ -9,6 +11,8 @@ export namespace AddEventActions {
         dateFrom: Date;
         dateTo: Date;
         logo: File;
+        layout: string;
+        regionPrices: RegionPrices;
       }
     ) {}
   }

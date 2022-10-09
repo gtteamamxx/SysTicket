@@ -1,3 +1,4 @@
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -27,6 +28,9 @@ export class TopBarComponent {
   @Select(CurrentPageState.isOnManageUsersPage)
   isOnManageUsersPage$!: Observable<boolean>;
 
+  @Select(CurrentPageState.isOnAddEventPage)
+  isOnAddEventPage$!: Observable<boolean>;
+
   constructor(
     private readonly store: Store, //
     private readonly notificationsService: NotificationsService,
@@ -43,6 +47,10 @@ export class TopBarComponent {
 
   addEvent(): void {
     this.navigationService.navigateToAddEventPage();
+  }
+
+  home(): void {
+    this.navigationService.navigateToHome();
   }
 
   logout(): void {

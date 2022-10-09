@@ -1,0 +1,13 @@
+.event-preview-container {
+  height: 100%;
+
+  .mat-card-header-text {
+    margin: 0px;
+  }
+
+  .mat-card-image {
+    object-fit: cover;
+    cursor: pointer;
+    max-height: 280px;
+  }
+}

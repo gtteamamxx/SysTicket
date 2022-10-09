@@ -1,12 +1,13 @@
+import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Constants } from './core/resources/constants';
 
 const routes: Routes = [
   {
-    path: '',
+    path: Constants.homePage,
     pathMatch: 'full',
-    redirectTo: '',
+    loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
   },
   {
     path: Constants.loginPage,

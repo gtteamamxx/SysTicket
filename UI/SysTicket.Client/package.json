@@ -27,7 +27,9 @@
     "@kolkov/angular-editor": "^3.0.0-beta.0",
     "@ngxs/store": "^3.7.5",
     "angular2-notifications": "^12.0.0",
+    "masonry-layout": "^4.2.2",
     "moment": "^2.29.4",
+    "ngx-masonry": "^13.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -1,4 +1,6 @@
 export class Constants {
+  static homePage: string = '';
+
   static loginPage: string = 'login';
   static manageUsersPage: string = 'manage-users';
 

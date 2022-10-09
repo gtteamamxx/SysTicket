@@ -32,6 +32,11 @@ export class CurrentPageState {
     return state.currentUrl?.includes(Constants.manageUsersPage) === true;
   }
 
+  @Selector()
+  static isOnAddEventPage(state: CurrentPageStateModel): boolean {
+    return state.currentUrl?.includes(Constants.addEventPage) === true;
+  }
+
   @Action(Actions.SetCurrentPageInfo)
   setCurrentPageTItle(ctx: StateContext<CurrentPageStateModel>, action: Actions.SetCurrentPageInfo): void {
     document.title = action.payload.title!;
