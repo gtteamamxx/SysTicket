@@ -1,6 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
@@ -11,13 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpinnerModule } from './core/components/spinner/spinner.module';
 import { TopBarModule } from './core/components/top-bar/top-bar.module';
-import { AppInitializerService } from './core/services/app-initializer.service';
-import { HttpErrorInterceptor } from './core/services/http-error-interceptor.service';
-import { HttpHeadersInterceptor } from './core/services/http-headers-interceptor.service';
+import { HttpErrorInterceptor } from './core/services/interceptors/http-error-interceptor.service';
+import { HttpHeadersInterceptor } from './core/services/interceptors/http-headers-interceptor.service';
+import { AppInitializerService } from './core/services/misc/app-initializer.service';
 import { CurrentPageState } from './core/store/current-page.state';
 import { SettingsState } from './core/store/settings.state';
 import { SpinnerState } from './core/store/spinner.state';
 import { UserState } from './core/store/user.state';
+import { SeatLayoutViewerComponent } from './shared/components/seat-layout-viewer/seat-layout-viewer.component';
 
 const httpInterceptors = [
   {
@@ -32,7 +32,7 @@ const httpInterceptors = [
   },
 ];
 
-const components = [
+const componentModules = [
   TopBarModule, //
   SpinnerModule,
 ];
@@ -41,12 +41,11 @@ const states = [
   CurrentPageState, //
   UserState,
   SettingsState,
-  SpinnerState
+  SpinnerState,
 ];
 
 const common = [
   HttpClientModule, //
-  MatProgressSpinnerModule,
   SimpleNotificationsModule.forRoot(),
   NgxsModule.forRoot(states, {
     developmentMode: !environment.production,
@@ -60,7 +59,7 @@ const common = [
     AppRoutingModule,
     BrowserAnimationsModule,
     ...common,
-    ...components,
+    ...componentModules,
   ],
   providers: [
     ...httpInterceptors,
@@ -73,7 +72,7 @@ const common = [
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 function initializeAppFactory(appInitializerService: AppInitializerService): () => Observable<boolean> {
   return () => appInitializerService.init();

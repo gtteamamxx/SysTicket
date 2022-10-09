@@ -1,0 +1,19 @@
+<form class="images-form"
+      [formGroup]="imagesFormGroup">
+  <img class="preview"
+       [src]="previewImageSrc">
+
+  <br />
+
+  <mat-form-field appearance="fill"
+                  floatLabel="always">
+    <mat-label>Logo wydarzenia</mat-label>
+
+    <ngx-mat-file-input formControlName="logo"
+                        placeholder="Wybierz obraz"
+                        accept="image/*">
+    </ngx-mat-file-input>
+
+    <mat-error>Musisz wybrać obrazek dla wydarzenia.</mat-error>
+  </mat-form-field>
+</form>

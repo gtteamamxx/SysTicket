@@ -1,0 +1,20 @@
+@import 'src/styles/colors';
+
+.add-event-container {
+  height: 100%;
+
+  mat-vertical-stepper {
+    min-height: 100%;
+
+    .mat-vertical-content {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 0px;
+    }
+
+    .add-button {
+      margin: 8px;
+      align-self: center;
+    }
+  }
+}

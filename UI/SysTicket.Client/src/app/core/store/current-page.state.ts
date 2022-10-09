@@ -29,7 +29,12 @@ export class CurrentPageState {
 
   @Selector()
   static isOnManageUsersPage(state: CurrentPageStateModel): boolean {
-    return state.currentUrl?.includes(Constants.manageUsers) === true;
+    return state.currentUrl?.includes(Constants.manageUsersPage) === true;
+  }
+
+  @Selector()
+  static isOnAddEventPage(state: CurrentPageStateModel): boolean {
+    return state.currentUrl?.includes(Constants.addEventPage) === true;
   }
 
   @Action(Actions.SetCurrentPageInfo)

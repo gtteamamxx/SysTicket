@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { User } from 'src/app/core/models/user.model';
-import { NavigationService } from 'src/app/core/services/navigation.service';
-import { NotificationsService } from 'src/app/core/services/notifications.service';
-import { SpinnerService } from 'src/app/core/services/spinner.service';
-import { UsersService } from 'src/app/core/services/users.service';
+import { NavigationService } from 'src/app/core/services/misc/navigation.service';
+import { NotificationsService } from 'src/app/core/services/misc/notifications.service';
+import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
+import { UsersService } from 'src/app/core/services/http/users.service';
 import { UserStateActions } from 'src/app/core/store/user.state.actions';
 
 @Injectable()

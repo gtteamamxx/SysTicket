@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { SpinnerService } from 'src/app/core/services/spinner.service';
+import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
 import { AddNewUserModalOpener } from './components/add-new-user-modal/add-new-user-modal-opener';
 import { ManageUsersStateActions } from './store/manage-users.state.actions';
 
@@ -10,7 +10,7 @@ export class ManageUsersFacade implements OnDestroy {
     private readonly store: Store, //
     private readonly addNewUserModalOpener: AddNewUserModalOpener,
     private readonly spinner: SpinnerService
-  ) { }
+  ) {}
 
   ngOnDestroy(): void {
     this.store.dispatch(new ManageUsersStateActions.Clear());
@@ -21,12 +21,11 @@ export class ManageUsersFacade implements OnDestroy {
   }
 
   openAddNewUserModal(): void {
-    this.addNewUserModalOpener.openAddNewUserModal()
-      .subscribe((result: boolean | undefined) => {
-        if (result === true) {
-          this.loadUsersList();
-        }
-      });
+    this.addNewUserModalOpener.openAddNewUserModal().subscribe((result: boolean | undefined) => {
+      if (result === true) {
+        this.loadUsersList();
+      }
+    });
   }
 
   private loadUsersList(): void {

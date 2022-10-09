@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { CurrentPageListenerService } from './core/services/current-page-listener.service';
-import { SpinnerState } from './core/store/spinner.state';
+import { CurrentPageListenerService } from './core/services/misc/current-page-listener.service';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +9,7 @@ import { SpinnerState } from './core/store/spinner.state';
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  @Select(SpinnerState.isVisible)
-  isSpinnerVisible$!: Observable<boolean>;
-
-
-  @Select(SpinnerState.loadingText)
-  spinnerLoadingText$!: Observable<string | null>;
-
-  constructor(
-    private readonly currentPageListenerService: CurrentPageListenerService) { }
+  constructor(private readonly currentPageListenerService: CurrentPageListenerService) {}
 
   ngOnInit(): void {
     this.currentPageListenerService.startListening();

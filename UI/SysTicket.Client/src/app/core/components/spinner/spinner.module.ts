@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SpinnerComponent } from './spinner.component';
 
 @NgModule({
-  imports: [BrowserModule, MatProgressSpinnerModule],
   declarations: [SpinnerComponent],
+  imports: [BrowserModule, MatProgressSpinnerModule],
+  exports: [SpinnerComponent],
 })
 export class SpinnerModule {}

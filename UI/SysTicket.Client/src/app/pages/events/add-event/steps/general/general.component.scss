@@ -1,0 +1,53 @@
+.event-details-form {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+
+  .inputs-container {
+    display: flex;
+
+    > :first-child {
+      padding-left: 0px;
+    }
+
+    > :last-child {
+      padding-right: 0px;
+    }
+
+    mat-form-field {
+      width: 100%;
+      padding: 16px;
+      min-width: 0px;
+    }
+  }
+
+  .html-editor {
+    width: 100%;
+
+    .mat-form-field-infix,
+    .mat-form-field-flex {
+      padding-top: 0px;
+    }
+
+    input[matInput] {
+      display: none;
+    }
+
+    .angular-editor-textarea {
+      background-color: white !important;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .inputs-container {
+      flex-direction: column;
+
+      mat-form-field {
+        width: 100%;
+        padding: 0px;
+        margin-top: 16px;
+      }
+    }
+  }
+}

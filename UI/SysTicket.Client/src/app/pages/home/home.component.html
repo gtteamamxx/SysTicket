@@ -1,0 +1,35 @@
+<div class="home-container">
+    <div class="header-container">
+        <h1>Nadchodzące wydarzenia</h1>
+        <div class="filter-container">
+
+        </div>
+    </div>
+
+    <div class="events-container">
+        <ngx-masonry [options]="{ 
+                        fitWidth: true,
+                        resize: true,
+                        horizontalOrder: true
+                     }">
+            <app-event-preview *ngFor="let event of events$ | async"
+                               ngxMasonryItem
+                               class="event"
+                               [title]="event.title!"
+                               [body]="event.body!"
+                               [dateFrom]="event.dateFrom!"
+                               [dateTo]="event.dateTo!"
+                               [img]="event.headerImgBase64!">
+            </app-event-preview>
+        </ngx-masonry>
+    </div>
+
+    <div class="paginator-container">
+        <mat-paginator [length]="totalEventsCount$ | async"
+                       [pageSize]="pageSize$ | async"
+                       [pageSizeOptions]="[5, 10, 15, 20]"
+                       aria-label="Wybierz stronę"
+                       (page)="onEventsPaginationChange($event)">
+        </mat-paginator>
+    </div>
+</div>

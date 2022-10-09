@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginFacade } from './login.facade';
 
+interface LoginForm {
+  login: FormControl<string | null>;
+  password: FormControl<string | null>;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,9 +16,9 @@ import { LoginFacade } from './login.facade';
   providers: [LoginFacade],
 })
 export class LoginComponent {
-  loginForm = new FormGroup({
-    login: new FormControl<string>('', [Validators.required]),
-    password: new FormControl<string>('', [Validators.required]),
+  loginForm = new FormGroup<LoginForm>({
+    login: new FormControl<string | null>('', [Validators.required]),
+    password: new FormControl<string | null>('', [Validators.required]),
   });
 
   constructor(private readonly loginFacade: LoginFacade) {}
@@ -23,6 +28,9 @@ export class LoginComponent {
       return;
     }
 
-    this.loginFacade.login(this.loginForm.get('login')?.value!, this.loginForm.get('password')?.value!);
+    this.loginFacade.login(
+      this.loginForm.controls.login.value!, //
+      this.loginForm.controls.password.value!
+    );
   }
 }

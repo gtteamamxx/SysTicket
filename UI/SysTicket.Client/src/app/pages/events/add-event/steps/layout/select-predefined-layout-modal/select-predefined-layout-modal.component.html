@@ -1,0 +1,7 @@
+<div class="select-predefined-layout-modal-container">
+    <h2>Wybierz układ hali</h2>
+
+    <img *ngFor="let hallSrc of predefinedLayouts"
+         (click)="selectHall(hallSrc)"
+         [src]="hallSrc">
+</div>

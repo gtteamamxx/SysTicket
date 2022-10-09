@@ -1,0 +1,16 @@
+.layout-container {
+  padding: 16px;
+
+  app-seat-layout-viewer {
+    max-width: 60vw;
+  }
+
+  .regions-container {
+    display: flex;
+    flex-direction: column;
+
+    mat-form-field {
+      max-width: 300px;
+    }
+  }
+}

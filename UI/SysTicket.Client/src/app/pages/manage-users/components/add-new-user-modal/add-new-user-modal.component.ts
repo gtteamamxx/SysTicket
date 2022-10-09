@@ -1,9 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NotificationsService } from 'src/app/core/services/notifications.service';
-import { SpinnerService } from 'src/app/core/services/spinner.service';
-import { CreateNewUserRequest, UsersService } from 'src/app/core/services/users.service';
+import { CreateNewUserRequest, UsersService } from 'src/app/core/services/http/users.service';
+import { NotificationsService } from 'src/app/core/services/misc/notifications.service';
+import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
+
+interface UserForm {
+  login: FormControl<string | null>;
+  password: FormControl<string | null>;
+  isAdmin: FormControl<boolean | null>;
+}
 
 @Component({
   selector: 'app-add-new-user-modal',
@@ -13,7 +19,7 @@ import { CreateNewUserRequest, UsersService } from 'src/app/core/services/users.
   encapsulation: ViewEncapsulation.None,
 })
 export class AddNewUserModalComponent implements OnInit {
-  userForm = new FormGroup({
+  userForm = new FormGroup<UserForm>({
     login: new FormControl<string>('', [Validators.minLength(3), Validators.maxLength(32), Validators.required]),
     password: new FormControl<string>('', [
       Validators.required,
@@ -21,7 +27,7 @@ export class AddNewUserModalComponent implements OnInit {
       Validators.pattern('^.*[A-Z]+.*$'), // minimum jedna duża litera
       Validators.pattern('^.*[0-9]+.*$'), // minimum jedna cyfra
     ]),
-    isAdmin: new FormControl<boolean>(false),
+    isAdmin: new FormControl<boolean | null>(false),
   });
 
   constructor(
@@ -46,12 +52,12 @@ export class AddNewUserModalComponent implements OnInit {
 
     this.usersService
       .createNewUser(<CreateNewUserRequest>{
-        isAdmin: this.userForm.get('isAdmin')!.value,
-        userName: this.userForm.get('login')!.value,
-        password: this.userForm.get('password')!.value,
+        isAdmin: this.userForm.controls.isAdmin.value,
+        userName: this.userForm.controls.login.value,
+        password: this.userForm.controls.password.value,
       })
       .subscribe(() => {
-        this.notificationsService.showSuccess({ message: `Pomyślnie dodano użytkownika '${this.userForm.get('login')!.value}'!` });
+        this.notificationsService.showSuccess({ message: `Pomyślnie dodano użytkownika '${this.userForm.controls.login.value}'!` });
 
         this.matDialogRef.close(true);
       })

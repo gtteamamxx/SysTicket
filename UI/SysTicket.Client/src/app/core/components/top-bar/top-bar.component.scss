@@ -8,18 +8,13 @@
   background-color: $theme-color;
   color: white;
   justify-content: space-between;
+  overflow: auto;
   box-shadow: 0 0 4px 4px #00000063;
 
   .title {
     margin-left: 16px;
     font-weight: 600;
-  }
-
-  .current-page-title {
-    position: absolute;
-    display: flex;
-    width: 100%;
-    justify-content: center;
+    cursor: pointer;
   }
 
   .buttons-container {
