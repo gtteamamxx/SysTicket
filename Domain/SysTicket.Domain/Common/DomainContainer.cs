@@ -18,6 +18,7 @@ namespace SysTicket.Domain.Common
             container.Register<IUsersFactory, UsersFactory>(Lifestyle.Scoped);
 
             container.Register<IEventsBuilder, EventsBuilder>(Lifestyle.Singleton);
+            container.Register<IEventsPriceBuilder, EventsPriceBuilder>(Lifestyle.Singleton);
             container.Register<IEventsFactory, EventsFactory>(Lifestyle.Scoped);
         }
     }

@@ -12,7 +12,9 @@ namespace SysTicket.Domain.Entities
             DateTime dateFrom,
             DateTime dateTo,
             int userId,
-            string logoBase64)
+            string logoBase64,
+            string layout,
+            List<EventPrice> eventPrices)
         {
             Title = title;
             Body = body;
@@ -20,6 +22,8 @@ namespace SysTicket.Domain.Entities
             DateTo = dateTo;
             UserId = userId;
             LogoBase64 = logoBase64;
+            Layout = layout;
+            EventPrices = eventPrices;
         }
 
         internal Event()
@@ -32,8 +36,13 @@ namespace SysTicket.Domain.Entities
 
         public DateTime DateTo { get; set; }
 
+        public virtual ICollection<EventPrice> EventPrices { get; set; } = new HashSet<EventPrice>();
+
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        public string? Layout { get; set; }
 
         public string? LogoBase64 { get; set; }
 

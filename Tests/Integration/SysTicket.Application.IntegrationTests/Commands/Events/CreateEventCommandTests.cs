@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using SysTicket.Application.Commands.Events;
 using SysTicket.Application.IntegrationTests.Common;
@@ -23,6 +24,19 @@ namespace SysTicket.Application.IntegrationTests.Commands.Events
             User expectedUser = new User();
             string expectedLogoB64 = "sample";
 
+            string expectedLayout = @"""
+            <svg>
+                <path class=""chair"" id=""A.1""></path>
+                <path class=""chair"" id=""B.1""></path>
+            </svg>
+            """;
+
+            RegionPrices expectedPrices = new RegionPrices
+            {
+                ["A"] = 20,
+                ["B"] = 30
+            };
+
             Context.Users.Add(expectedUser);
             Context.SaveChanges();
 
@@ -33,13 +47,16 @@ namespace SysTicket.Application.IntegrationTests.Commands.Events
                 expectedDateFrom,
                 expectedDateTo,
                 expectedUser.Id,
-                expectedLogoB64
+                expectedLogoB64,
+                expectedLayout,
+                expectedPrices
             ));
 
             await UnitOfWork.SaveChangesAsync(default);
 
             // Assert
-            Event? @event = Context.Events.Find(eventId.GetId());
+            Event? @event = Context.Events.Include(x => x.EventPrices)
+                .FirstOrDefault(x => x.Id == eventId.GetId());
 
             @event.Should().NotBeNull();
 
@@ -48,7 +65,16 @@ namespace SysTicket.Application.IntegrationTests.Commands.Events
             @event!.DateFrom.Should().Be(expectedDateFrom);
             @event!.DateTo.Should().Be(expectedDateTo);
             @event!.UserId.Should().Be(expectedUser.Id);
-            @event!.LogoBase64.Should().Be(expectedLogoB64);
+            @event!.Layout.Should().Be(expectedLayout);
+
+            @event!.EventPrices.Should().HaveCount(expectedPrices.Count);
+            foreach (KeyValuePair<string, double> eventPrice in expectedPrices)
+            {
+                EventPrice? item = @event.EventPrices.SingleOrDefault(x => x.Region == eventPrice.Key);
+
+                item.Should().NotBeNull();
+                item!.Price.Should().Be(eventPrice.Value);
+            }
         }
     }
 }

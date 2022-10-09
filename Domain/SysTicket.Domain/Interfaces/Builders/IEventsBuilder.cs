@@ -10,7 +10,9 @@ namespace SysTicket.Domain.Interfaces.Builders
             DateTime dateFrom,
             DateTime dateTo,
             int userId,
-            string logoBase64
+            string logoBase64,
+            string layout,
+            RegionPrices regionPrices
         );
     }
 }

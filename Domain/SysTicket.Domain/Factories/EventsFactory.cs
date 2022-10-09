@@ -27,7 +27,9 @@ namespace SysTicket.Domain.Factories
                 input.DateFrom,
                 input.DateTo,
                 input.UserId,
-                input.LogoBase64
+                input.LogoBase64,
+                input.Layout,
+                input.RegionPrices
             );
 
             await _eventsRepository.CreateEventAsync(@event, cancellationToken);

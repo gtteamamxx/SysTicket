@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SysTicket.API.Models.Requests.Events;
 using SysTicket.Application.Commands.Events;
 using SysTicket.Application.Interfaces.Common;
+using SysTicket.Application.Queries.Events;
 using SysTicket.Domain.Interfaces.Common;
 
 namespace SysTicket.API.Controllers.Events
@@ -31,7 +32,9 @@ namespace SysTicket.API.Controllers.Events
                     createEventRequest.DateFrom,
                     createEventRequest.DateTo,
                     createEventRequest.UserId,
-                    createEventRequest.LogoBase64!
+                    createEventRequest.LogoBase64!,
+                    createEventRequest.Layout,
+                    createEventRequest.RegionPrices
                 ),
                 cancellationToken
             );
@@ -40,5 +43,9 @@ namespace SysTicket.API.Controllers.Events
 
             return result.GetId();
         }
+
+        [HttpGet]
+        public Task<GetAllEventsByPaginationResponse> GetAllEventsAsync(int pageIndex, int pageSize)
+            => _mediator.Send(new GetAllEventsByPaginationQuery(pageIndex, pageSize));
     }
 }

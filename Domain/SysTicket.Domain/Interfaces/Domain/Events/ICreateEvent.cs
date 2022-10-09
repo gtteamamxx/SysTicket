@@ -1,4 +1,6 @@
-﻿namespace SysTicket.Domain.Interfaces.Domain.Events
+﻿using SysTicket.Domain.Entities;
+
+namespace SysTicket.Domain.Interfaces.Domain.Events
 {
     public interface ICreateEvent
     {
@@ -8,7 +10,11 @@
 
         DateTime DateTo { get; }
 
+        string Layout { get; }
+
         string LogoBase64 { get; }
+
+        RegionPrices RegionPrices { get; }
 
         string Title { get; }
 

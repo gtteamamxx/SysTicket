@@ -1,4 +1,6 @@
-﻿namespace SysTicket.API.Models.Requests.Events
+﻿using SysTicket.Domain.Entities;
+
+namespace SysTicket.API.Models.Requests.Events
 {
     public class CreateEventRequest
     {
@@ -8,7 +10,11 @@
 
         public DateTime DateTo { get; set; }
 
+        public string Layout { get; set; } = default!;
+
         public string? LogoBase64 { get; set; }
+
+        public RegionPrices RegionPrices { get; set; } = default!;
 
         public string? Title { get; set; }
 

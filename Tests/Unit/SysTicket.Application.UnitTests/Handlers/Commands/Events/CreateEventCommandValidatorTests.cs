@@ -5,6 +5,7 @@ using NUnit.Framework;
 using SysTicket.Application.Commands.Events;
 using SysTicket.Application.Handlers.Commands.Events;
 using SysTicket.Application.UnitTests.Common;
+using SysTicket.Domain.Entities;
 using SysTicket.Domain.Interfaces.Repositories;
 
 namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
@@ -18,11 +19,13 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
             // Arrange
             var command = new CreateEventCommand(
                Title: "abcdef",
-               Body: String.Empty,
+               Body: string.Empty,
                DateFrom: default,
                DateTo: default,
                UserId: 1,
-               LogoBase64: Guid.NewGuid().ToString()
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
@@ -47,7 +50,63 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                DateFrom: DateTime.Now.AddDays(1),
                DateTo: DateTime.Now,
                UserId: 1,
-               LogoBase64: Guid.NewGuid().ToString()
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
+            );
+
+            Fixture.Freeze<Mock<IUsersRepository>>()
+               .Setup(x => x.IsUserExistById(1))
+               .Returns(Task.FromResult(true));
+
+            // Assert
+            Assert.Throws<ValidationException>(() =>
+            {
+                // Act
+                Service.ValidateAndThrow(command);
+            });
+        }
+
+        [Test]
+        public void Validate_Should_Throw_Exception_When_Layout_Empty()
+        {
+            // Arrange
+            var command = new CreateEventCommand(
+               Title: "abcdef",
+               Body: "some body",
+               DateFrom: default,
+               DateTo: default,
+               UserId: 1,
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: string.Empty,
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
+            );
+
+            Fixture.Freeze<Mock<IUsersRepository>>()
+               .Setup(x => x.IsUserExistById(1))
+               .Returns(Task.FromResult(true));
+
+            // Assert
+            Assert.Throws<ValidationException>(() =>
+            {
+                // Act
+                Service.ValidateAndThrow(command);
+            });
+        }
+
+        [Test]
+        public void Validate_Should_Throw_Exception_When_Layout_Invalid()
+        {
+            // Arrange
+            var command = new CreateEventCommand(
+               Title: "abcdef",
+               Body: "some body",
+               DateFrom: default,
+               DateTo: default,
+               UserId: 1,
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg>",
+               RegionPrices: new RegionPrices()
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
@@ -72,7 +131,90 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                DateFrom: DateTime.Now,
                DateTo: DateTime.Now,
                UserId: 1,
-               LogoBase64: ""
+               LogoBase64: "",
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
+            );
+
+            Fixture.Freeze<Mock<IUsersRepository>>()
+               .Setup(x => x.IsUserExistById(1))
+               .Returns(Task.FromResult(true));
+
+            // Assert
+            Assert.Throws<ValidationException>(() =>
+            {
+                // Act
+                Service.ValidateAndThrow(command);
+            });
+        }
+
+        [Test]
+        public void Validate_Should_Throw_Exception_When_No_Chairs()
+        {
+            // Arrange
+            var command = new CreateEventCommand(
+               Title: "abcdef",
+               Body: "some body",
+               DateFrom: default,
+               DateTo: default,
+               UserId: 1,
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg><path></path></svg>",
+               RegionPrices: new RegionPrices()
+            );
+
+            Fixture.Freeze<Mock<IUsersRepository>>()
+               .Setup(x => x.IsUserExistById(1))
+               .Returns(Task.FromResult(true));
+
+            // Assert
+            Assert.Throws<ValidationException>(() =>
+            {
+                // Act
+                Service.ValidateAndThrow(command);
+            });
+        }
+
+        [Test]
+        public void Validate_Should_Throw_Exception_When_Region_Not_Have_Price()
+        {
+            // Arrange
+            var command = new CreateEventCommand(
+               Title: "abcdef",
+               Body: "some body",
+               DateFrom: default,
+               DateTo: default,
+               UserId: 1,
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: @"""<svg><path class=""chair"" id=""A.1""></path></svg>""",
+               RegionPrices: new RegionPrices()
+            );
+
+            Fixture.Freeze<Mock<IUsersRepository>>()
+               .Setup(x => x.IsUserExistById(1))
+               .Returns(Task.FromResult(true));
+
+            // Assert
+            Assert.Throws<ValidationException>(() =>
+            {
+                // Act
+                Service.ValidateAndThrow(command);
+            });
+        }
+
+        [Test]
+        public void Validate_Should_Throw_Exception_When_RegionPrices_Empty()
+        {
+            // Arrange
+            var command = new CreateEventCommand(
+               Title: "abcdef",
+               Body: "some body",
+               DateFrom: default,
+               DateTo: default,
+               UserId: 1,
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices()
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
@@ -97,7 +239,9 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                DateFrom: default,
                DateTo: default,
                UserId: 1,
-               LogoBase64: Guid.NewGuid().ToString()
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
@@ -122,7 +266,9 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                DateFrom: default,
                DateTo: default,
                UserId: 1,
-               LogoBase64: Guid.NewGuid().ToString()
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
@@ -147,7 +293,9 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                DateFrom: default,
                DateTo: default,
                UserId: 1,
-               LogoBase64: Guid.NewGuid().ToString()
+               LogoBase64: Guid.NewGuid().ToString(),
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
@@ -172,7 +320,9 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                DateFrom: DateTime.Now,
                DateTo: DateTime.Now,
                UserId: 1,
-               LogoBase64: ""
+               LogoBase64: "",
+               Layout: "<svg></svg>",
+               RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
             Fixture.Freeze<Mock<IUsersRepository>>()
