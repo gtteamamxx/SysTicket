@@ -1,0 +1,17 @@
+.event-details-container {
+  height: calc(100% - 32px);
+  padding: 16px;
+
+  .mat-card {
+    min-height: calc(100% - 32px);
+
+    .mat-card-header-text {
+      margin: 0px;
+    }
+
+    .mat-card-image {
+      object-fit: contain;
+      height: 280px;
+    }
+  }
+}

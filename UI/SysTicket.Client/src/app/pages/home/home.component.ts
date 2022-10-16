@@ -38,4 +38,8 @@ export class HomeComponent implements OnInit {
       ...event,
     });
   }
+
+  onEventSeeDetailsClick(event: Event): void {
+    this.facade.navigateToEventDetails(event);
+  }
 }

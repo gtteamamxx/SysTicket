@@ -25,7 +25,13 @@ namespace SysTicket.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
 
-        public Task<int> GetAllEventsCount()
+        public Task<int> GetAllEventsCountAsync()
             => _context.Events.CountAsync();
+
+        public Task<Event?> GetEventDetailsAsync(int eventId)
+            => _context.Events
+                .Include(x => x.EventPrices)
+                .Include(x => x.User)
+                .FirstOrDefaultAsync(x => x.Id == eventId);
     }
 }

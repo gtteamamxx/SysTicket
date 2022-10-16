@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SysTicket.API.Models.Requests.Events;
 using SysTicket.Application.Commands.Events;
+using SysTicket.Application.DTO.Events;
 using SysTicket.Application.Interfaces.Common;
 using SysTicket.Application.Queries.Events;
 using SysTicket.Domain.Interfaces.Common;
@@ -47,5 +48,9 @@ namespace SysTicket.API.Controllers.Events
         [HttpGet]
         public Task<GetAllEventsByPaginationResponse> GetAllEventsAsync(int pageIndex, int pageSize)
             => _mediator.Send(new GetAllEventsByPaginationQuery(pageIndex, pageSize));
+
+        [HttpGet("{eventId}")]
+        public Task<EventDetailsDTO> GetEventDetailsAsync(int eventId)
+            => _mediator.Send(new GetEventDetailsQuery(eventId));
     }
 }

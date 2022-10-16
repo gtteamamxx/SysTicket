@@ -18,11 +18,15 @@ export class NavigationService {
     this.router.navigate([Constants.loginPage]);
   }
 
-  navigateToAddEventPage() {
+  navigateToAddEventPage(): void {
     this.router.navigate([Constants.eventsPage, Constants.addEventPage]);
   }
 
-  navigateToHome() {
+  navigateToEventPage(eventId: number) {
+    return this.router.navigate([Constants.eventsPage, eventId]);
+  }
+
+  navigateToHome(): void {
     this.router.navigate([Constants.homePage]);
   }
 }

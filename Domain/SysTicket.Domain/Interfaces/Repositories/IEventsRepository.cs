@@ -8,6 +8,8 @@ namespace SysTicket.Domain.Interfaces.Repositories
 
         Task<List<Event>> GetAllEventsByPaginationAsync(int pageIndex, int pageSize);
 
-        Task<int> GetAllEventsCount();
+        Task<int> GetAllEventsCountAsync();
+
+        Task<Event?> GetEventDetailsAsync(int eventId);
     }
 }

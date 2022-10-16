@@ -1,6 +1,6 @@
 import { RegionPrices } from './region-prices.model';
 
-export interface Event {
+export interface EventDetails {
   id?: number;
   title?: string;
   body?: string;

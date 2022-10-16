@@ -10,6 +10,10 @@ const routes: Routes = [
         path: 'add-event',
         loadChildren: () => import('./add-event/add-event.module').then((m) => m.AddEventModule),
       },
+      {
+        path: ':eventId',
+        loadChildren: () => import('./event-details/event-details.module').then((m) => m.EventDetailsModule),
+      },
     ],
   },
 ];

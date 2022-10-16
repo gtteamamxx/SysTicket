@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { RegionPrices } from 'src/app/core/models/event.model';
+import { RegionPrices } from 'src/app/core/models/region-prices.model';
 import { NotificationsService } from 'src/app/core/services/misc/notifications.service';
 import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
 import { AddEventState } from './store/add-event.state';

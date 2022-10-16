@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
@@ -18,6 +18,8 @@ export class EventPreviewComponent implements OnInit {
   @Input() dateFrom!: Date;
   @Input() dateTo!: Date;
   @Input() img!: string;
+
+  @Output() seeDetails = new EventEmitter<void>();
 
   constructor() {}
 

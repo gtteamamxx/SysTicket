@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Event, RegionPrices } from '../../models/event.model';
+import { EventDetails } from '../../models/event-details.model';
+import { Event } from '../../models/event.model';
+import { RegionPrices } from '../../models/region-prices.model';
 import { SettingsState } from '../../store/settings.state';
 
 export interface CreateEventRequest {
@@ -26,6 +28,10 @@ export interface GetEventsPaginationResponse {
   events?: Event[];
 }
 
+export interface GetEventDetailsRequest {
+  eventId: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class EventsService {
   constructor(
@@ -35,6 +41,10 @@ export class EventsService {
 
   createNewEvent(payload: CreateEventRequest): Observable<number> {
     return this.http.post<number>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/events`, JSON.stringify(payload));
+  }
+
+  getEventDetails(payload: GetEventDetailsRequest): Observable<EventDetails> {
+    return this.http.get<EventDetails>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/events/${payload.eventId}`);
   }
 
   getEventsPagination(payload: GetEventsPaginationRequest): Observable<GetEventsPaginationResponse> {
