@@ -1,19 +1,22 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using HtmlAgilityPack;
 using SysTicket.Application.Commands.Events;
 using SysTicket.Common.Extensions;
-using SysTicket.Domain.Entities;
+using SysTicket.Domain.Interfaces.Helpers;
 using SysTicket.Domain.Interfaces.Repositories;
 
 namespace SysTicket.Application.Handlers.Commands.Events
 {
     internal class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
     {
+        private readonly ILayoutService _layoutService;
         private readonly IUsersRepository _usersRepository;
 
-        public CreateEventCommandValidator(IUsersRepository usersRepository)
+        public CreateEventCommandValidator(
+            ILayoutService layoutService,
+            IUsersRepository usersRepository)
         {
+            _layoutService = layoutService;
             _usersRepository = usersRepository;
 
             RuleFor(x => x.Title)
@@ -60,41 +63,15 @@ namespace SysTicket.Application.Handlers.Commands.Events
 
         private void ValidateLayout(ValidationContext<CreateEventCommand> context)
         {
-            string layout = context.InstanceToValidate.Layout;
-            RegionPrices regionPrices = context.InstanceToValidate.RegionPrices;
+            _layoutService.ValidateLayout(
+                layout: context.InstanceToValidate.Layout,
+                regionPrices: context.InstanceToValidate.RegionPrices,
+                out string? error
+            );
 
-            var layoutHtml = new HtmlDocument();
-
-            try
+            if (error != null)
             {
-                layoutHtml.LoadHtml(layout);
-            }
-            catch
-            {
-                context.AddFailure("Układ hali nie jest poprawny");
-                return;
-            }
-
-            if (layoutHtml.ParseErrors.Any())
-            {
-                context.AddFailure(layoutHtml.ParseErrors.First().Reason);
-                return;
-            }
-
-            HtmlNodeCollection allChairs = layoutHtml.DocumentNode.SelectNodes("//*[contains(@class, 'chair')]");
-            if (allChairs == null)
-            {
-                context.AddFailure("Hala nie posiada krzeseł");
-                return;
-            }
-
-            List<string> regions = allChairs.Select(x => x.Id.Split(".")[0])
-                .Distinct()
-                .ToList();
-
-            if (regions.Any(region => !regionPrices.ContainsKey(region)))
-            {
-                context.AddFailure("Nie wszystkie rzędy/krzesła posiadają swoją cenę.");
+                context.AddFailure(error);
             }
         }
     }

@@ -22,6 +22,12 @@ export class EventDetailsComponent implements OnInit {
   @Select(EventDetailsState.event)
   event$!: Observable<EventDetails | null>;
 
+  @Select(EventDetailsState.reservedSeatCount)
+  reservedSeatCount$!: Observable<number>;
+
+  @Select(EventDetailsState.totalSeatCount)
+  totalSeatCount$!: Observable<number>;
+
   constructor(
     private readonly facade: EventDetailsFacade, //
     private readonly activatedRoute: ActivatedRoute
@@ -33,5 +39,9 @@ export class EventDetailsComponent implements OnInit {
     this.facade.init({
       eventId: eventId,
     });
+  }
+
+  onReserveSeatsClick(): void {
+    this.facade.openReserveSeatsModal();
   }
 }

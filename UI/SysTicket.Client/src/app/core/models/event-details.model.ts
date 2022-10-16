@@ -1,5 +1,3 @@
-import { RegionPrices } from './region-prices.model';
-
 export interface EventDetails {
   id?: number;
   title?: string;
@@ -9,5 +7,13 @@ export interface EventDetails {
   dateTo?: Date;
   headerImgBase64?: string;
   layout?: string;
-  regionPrices: RegionPrices;
+  numberOfSeats?: number;
+  regionPrices: {
+    region: string; //
+    price: number;
+  }[];
+  seats: {
+    region: string; //
+    seatNumber: string;
+  }[];
 }

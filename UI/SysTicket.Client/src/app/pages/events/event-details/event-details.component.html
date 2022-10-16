@@ -13,7 +13,8 @@
         </div>
 
         <mat-card-actions>
-            <button mat-button>Zarezerwuj bilety</button>
+            <button mat-button
+                    (click)="onReserveSeatsClick()">Zarezerwuj bilety [{{ reservedSeatCount$ | async }} / {{ totalSeatCount$ | async }}] </button>
         </mat-card-actions>
     </mat-card>
 </div>

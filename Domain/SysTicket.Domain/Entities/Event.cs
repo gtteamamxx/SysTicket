@@ -38,6 +38,8 @@ namespace SysTicket.Domain.Entities
 
         public virtual ICollection<EventPrice> EventPrices { get; set; } = new HashSet<EventPrice>();
 
+        public virtual ICollection<EventSeat> EventSeats { get; set; } = new HashSet<EventSeat>();
+
         [Key]
         public int Id { get; set; }
 

@@ -16,22 +16,28 @@ namespace SysTicket.Infrastructure.Repositories
         public async Task CreateEventAsync(Event @event, CancellationToken cancellationToken)
             => await _context.Events.AddAsync(@event, cancellationToken);
 
-        public Task<List<Event>> GetAllEventsByPaginationAsync(int pageIndex, int pageSize)
+        public Task<List<Event>> GetAllEventsByPaginationAsync(int pageIndex, int pageSize, CancellationToken cancellationToken)
             => _context.Events
                 .OrderByDescending(x => x.DateFrom)
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize)
                 .Include(x => x.User)
                 .AsNoTracking()
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
-        public Task<int> GetAllEventsCountAsync()
-            => _context.Events.CountAsync();
+        public Task<int> GetAllEventsCountAsync(CancellationToken cancellationToken)
+            => _context.Events.CountAsync(cancellationToken);
 
-        public Task<Event?> GetEventDetailsAsync(int eventId)
+        public Task<Event?> GetEventDetailsAsync(int eventId, CancellationToken cancellationToken)
             => _context.Events
                 .Include(x => x.EventPrices)
                 .Include(x => x.User)
-                .FirstOrDefaultAsync(x => x.Id == eventId);
+                .Include(x => x.EventSeats)
+                .FirstOrDefaultAsync(x => x.Id == eventId, cancellationToken);
+
+        public Task<Event> GetEventForTicketsReservationAsync(int eventId, CancellationToken cancellationToken)
+            => _context.Events
+                .Include(x => x.EventSeats)
+                .FirstAsync(x => x.Id == eventId, cancellationToken);
     }
 }

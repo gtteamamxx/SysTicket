@@ -24,10 +24,11 @@ namespace SysTicket.Application.Handlers.Queries.Events
         {
             List<Event> events = await _eventsRepository.GetAllEventsByPaginationAsync(
                 request.PageIndex,
-                request.PageSize
+                request.PageSize,
+                cancellationToken
             );
 
-            int allEventsCount = await _eventsRepository.GetAllEventsCountAsync();
+            int allEventsCount = await _eventsRepository.GetAllEventsCountAsync(cancellationToken);
 
             var dtoEvents = _sysTicketMapper.Map<List<EventDTO>>(events);
 

@@ -1,0 +1,62 @@
+<div class="reserve-sets-modal-container">
+    <mat-stepper linear>
+        <mat-step>
+            <ng-template matStepLabel>Miejsca</ng-template>
+
+            <div class="layout-container">
+                <app-seat-layout-viewer (onLoad)="onLayoutLoaded($event)"
+                                        (chairSelectionChanged)="onChairSelectionChanged($event)"
+                                        [allowChairSelect]="true"
+                                        [layoutSvgSrc]="$any(layoutSvgSrc)">
+                </app-seat-layout-viewer>
+            </div>
+
+            <div *ngIf="selectedChairs.length > 0"
+                 class="selected-chairs-list">
+                <h1>Wybrane miejsca: </h1>
+                <h3>Suma: {{ priceSum }} zł </h3>
+
+                <div *ngFor="let selectedChair of selectedChairs; trackBy: $any(trackByChairId)"
+                     class="selected-chair">
+                    Rząd: {{ selectedChair.region }}, Miejsce: {{ selectedChair.seatNumber }}, Cena: {{ selectedChair.price }}zł
+                </div>
+
+                <br />
+
+                <button mat-raised-button
+                        matStepperNext>
+                    Przejdź do nastepnego kroku
+                </button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Twoje dane</ng-template>
+
+            <mat-form-field>
+                <mat-label>Imię i nazwisko</mat-label>
+
+                <input [formControl]="userNameFormControl"
+                       matInput>
+
+                <mat-error>Pole wymagane</mat-error>
+            </mat-form-field>
+
+            <br />
+            <br />
+
+            <button mat-raised-button
+                    matStepperPrevious>
+                Wróc do wybrania miejsc
+            </button>
+
+            <br />
+            <br />
+            <button *ngIf="isValid"
+                    mat-raised-button
+                    (click)="onReserveSeatsClick()">
+                Zarezerwuj miejsca
+            </button>
+        </mat-step>
+    </mat-stepper>
+</div>

@@ -16,7 +16,11 @@
 
         public string Layout { get; set; } = default!;
 
+        public int NumberOfSeats { get; set; }
+
         public IEnumerable<EventDetailsPrice> RegionPrices { get; set; } = Enumerable.Empty<EventDetailsPrice>();
+
+        public IEnumerable<EventDetailsSeat> Seats { get; set; } = Enumerable.Empty<EventDetailsSeat>();
 
         public string Title { get; set; } = default!;
 
@@ -25,6 +29,13 @@
             public double Price { get; set; }
 
             public string Region { get; set; } = default!;
+        }
+
+        public class EventDetailsSeat
+        {
+            public string Region { get; set; } = default!;
+
+            public string SeatNumber { get; set; } = default!;
         }
     }
 }
