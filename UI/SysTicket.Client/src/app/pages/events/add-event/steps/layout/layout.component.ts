@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewEnca
 import { FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { RegionPrices } from 'src/app/core/models/event.model';
+import { RegionPrices } from 'src/app/core/models/region-prices.model';
 import { LayoutConfig } from 'src/app/shared/components/seat-layout-viewer/seat-layout-viewer.component';
 import { SelectPredefinedLayoutModalComponent } from './select-predefined-layout-modal/select-predefined-layout-modal.component';
 

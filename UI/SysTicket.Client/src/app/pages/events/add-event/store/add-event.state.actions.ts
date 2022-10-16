@@ -1,4 +1,4 @@
-import { RegionPrices } from 'src/app/core/models/event.model';
+import { RegionPrices } from 'src/app/core/models/region-prices.model';
 
 export namespace AddEventActions {
   export class AddEvent {

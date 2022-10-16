@@ -19,7 +19,8 @@
                                [body]="event.body!"
                                [dateFrom]="event.dateFrom!"
                                [dateTo]="event.dateTo!"
-                               [img]="event.headerImgBase64!">
+                               [img]="event.headerImgBase64!"
+                               (seeDetails)="onEventSeeDetailsClick(event)">
             </app-event-preview>
         </ngx-masonry>
     </div>

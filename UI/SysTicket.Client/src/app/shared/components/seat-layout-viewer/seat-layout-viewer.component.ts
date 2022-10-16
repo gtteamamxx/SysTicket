@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, Output, Renderer2, SimpleChange, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { RegionPrices } from 'src/app/core/models/event.model';
+import { RegionPrices } from 'src/app/core/models/region-prices.model';
 
 export interface LayoutConfig {
   regions: string[];
@@ -84,8 +84,12 @@ export class SeatLayoutViewerComponent implements OnChanges {
   }
 
   private emitLayoutMetadata(): void {
-    const regions: string[] = Array.from(new Set((<HTMLElement[]>Array.from(this.contentDiv.nativeElement.getElementsByClassName('chair'))) //
-      .map(x => x.id.split('.')[0])));
+    const regions: string[] = Array.from(
+      new Set(
+        (<HTMLElement[]>Array.from(this.contentDiv.nativeElement.getElementsByClassName('chair'))) //
+          .map((x) => x.id.split('.')[0])
+      )
+    );
 
     this.onLoad.emit(<LayoutConfig>{
       regions: regions,

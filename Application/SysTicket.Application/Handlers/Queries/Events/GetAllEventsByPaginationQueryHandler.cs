@@ -27,7 +27,7 @@ namespace SysTicket.Application.Handlers.Queries.Events
                 request.PageSize
             );
 
-            int allEventsCount = await _eventsRepository.GetAllEventsCount();
+            int allEventsCount = await _eventsRepository.GetAllEventsCountAsync();
 
             var dtoEvents = _sysTicketMapper.Map<List<EventDTO>>(events);
 
