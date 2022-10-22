@@ -9,8 +9,7 @@ namespace SysTicket.Domain.Builders
             int eventId,
             string userName,
             string seatNumber,
-            DateTime reservationTime,
             string region
-        ) => new(eventId, userName, seatNumber, reservationTime, region);
+        ) => new(eventId, userName, seatNumber, region);
     }
 }

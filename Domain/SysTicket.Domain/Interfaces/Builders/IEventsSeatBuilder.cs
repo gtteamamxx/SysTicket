@@ -8,7 +8,6 @@ namespace SysTicket.Domain.Interfaces.Builders
             int eventId,
             string userName,
             string seatNumber,
-            DateTime reservationTime,
             string region
         );
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SysTicket.Infrastructure;
 
@@ -11,9 +12,10 @@ using SysTicket.Infrastructure;
 namespace SysTicket.Infrastructure.Migrations
 {
     [DbContext(typeof(SysTicketContext))]
-    partial class SysTicketContextModelSnapshot : ModelSnapshot
+    [Migration("20221022061341_Add_Reservation")]
+    partial class Add_Reservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,7 +59,7 @@ namespace SysTicket.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Events", (string)null);
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("SysTicket.Domain.Entities.EventPrice", b =>
@@ -83,7 +85,7 @@ namespace SysTicket.Infrastructure.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("EventPrices", (string)null);
+                    b.ToTable("EventPrices");
                 });
 
             modelBuilder.Entity("SysTicket.Domain.Entities.EventSeat", b =>
@@ -104,6 +106,9 @@ namespace SysTicket.Infrastructure.Migrations
                     b.Property<Guid>("ReservationId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("ReservationTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SeatNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -118,7 +123,7 @@ namespace SysTicket.Infrastructure.Migrations
 
                     b.HasIndex("ReservationId");
 
-                    b.ToTable("EventSeats", (string)null);
+                    b.ToTable("EventSeats");
                 });
 
             modelBuilder.Entity("SysTicket.Domain.Entities.Reservation", b =>
@@ -137,7 +142,7 @@ namespace SysTicket.Infrastructure.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("Reservations", (string)null);
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("SysTicket.Domain.Entities.User", b =>
@@ -161,7 +166,7 @@ namespace SysTicket.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("SysTicket.Domain.Entities.Event", b =>

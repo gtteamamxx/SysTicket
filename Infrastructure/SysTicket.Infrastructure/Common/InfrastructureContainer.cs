@@ -15,6 +15,7 @@ namespace SysTicket.Infrastructure.Common
 
             container.Register<IUsersRepository, UsersRepository>(Lifestyle.Scoped);
             container.Register<IEventsRepository, EventsRepository>(Lifestyle.Scoped);
+            container.Register<IReservationsRepository, ReservationsRepository>(Lifestyle.Scoped);
         }
     }
 }

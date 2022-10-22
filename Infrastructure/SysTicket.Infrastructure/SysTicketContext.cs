@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using SysTicket.Domain.Entities;
 
@@ -20,6 +21,15 @@ namespace SysTicket.Infrastructure
 
         public virtual DbSet<EventSeat> EventSeats { get; set; } = default!;
 
+        public virtual DbSet<Reservation> Reservations { get; set; } = default!;
+
         public virtual DbSet<User> Users { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Reservation>().Property(x => x.Id).ValueGeneratedNever();
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace SysTicket.API.Controllers.Events
             => _mediator.Send(new GetEventDetailsQuery(eventId), cancellationToken);
 
         [HttpPost("{eventId}/reserveTickets")]
-        public Task ReserveTicketsAsync(int eventId, [FromBody] ReserveTicketsRequest reserveTicketsRequest, CancellationToken cancellationToken)
+        public Task<Guid> ReserveTicketsAsync(int eventId, [FromBody] ReserveTicketsRequest reserveTicketsRequest, CancellationToken cancellationToken)
             => _mediator.Send(new ReserveTicketsCommand(
                 eventId,
                 reserveTicketsRequest.UserName,

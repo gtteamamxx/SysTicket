@@ -6,4 +6,6 @@ export class Constants {
 
   static eventsPage: string = 'events';
   static addEventPage: string = 'add-event';
+
+  static reservationsPage: string = 'reservations';
 }

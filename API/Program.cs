@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using SysTicket.API.Common;
@@ -13,7 +14,11 @@ builder.Services.AddControllers(cfg =>
 });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.CustomSchemaIds(type => type.ToString());
+});
+
 builder.Services.AddSimpleInjector(SimpleInjectorContainer.Container, cfg =>
 {
     cfg.AddAspNetCore()

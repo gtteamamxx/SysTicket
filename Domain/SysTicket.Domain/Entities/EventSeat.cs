@@ -9,13 +9,11 @@ namespace SysTicket.Domain.Entities
             int eventId,
             string userName,
             string seatNumber,
-            DateTime reservationTime,
             string region)
         {
             EventId = eventId;
             UserName = userName;
             SeatNumber = seatNumber;
-            ReservationTime = reservationTime;
             Region = region;
         }
 
@@ -33,7 +31,10 @@ namespace SysTicket.Domain.Entities
         [Required]
         public string Region { get; set; } = default!;
 
-        public DateTime ReservationTime { get; set; }
+        [ForeignKey(nameof(ReservationId))]
+        public virtual Reservation Reservation { get; set; } = default!;
+
+        public Guid ReservationId { get; set; }
 
         [Required]
         public string SeatNumber { get; set; } = default!;
