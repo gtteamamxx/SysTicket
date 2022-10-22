@@ -46,11 +46,20 @@ namespace SysTicket.API.Controllers.Events
         }
 
         [HttpGet]
-        public Task<GetAllEventsByPaginationResponse> GetAllEventsAsync(int pageIndex, int pageSize)
-            => _mediator.Send(new GetAllEventsByPaginationQuery(pageIndex, pageSize));
+        public Task<GetAllEventsByPaginationResponse> GetAllEventsAsync(int pageIndex, int pageSize, CancellationToken cancellationToken)
+            => _mediator.Send(new GetAllEventsByPaginationQuery(pageIndex, pageSize), cancellationToken);
 
         [HttpGet("{eventId}")]
-        public Task<EventDetailsDTO> GetEventDetailsAsync(int eventId)
-            => _mediator.Send(new GetEventDetailsQuery(eventId));
+        public Task<EventDetailsDTO> GetEventDetailsAsync(int eventId, CancellationToken cancellationToken)
+            => _mediator.Send(new GetEventDetailsQuery(eventId), cancellationToken);
+
+        [HttpPost("{eventId}/reserveTickets")]
+        public Task ReserveTicketsAsync(int eventId, [FromBody] ReserveTicketsRequest reserveTicketsRequest, CancellationToken cancellationToken)
+            => _mediator.Send(new ReserveTicketsCommand(
+                eventId,
+                reserveTicketsRequest.UserName,
+                reserveTicketsRequest.ChairIds),
+                cancellationToken
+            );
     }
 }

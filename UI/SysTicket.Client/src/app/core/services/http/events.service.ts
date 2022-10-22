@@ -32,6 +32,12 @@ export interface GetEventDetailsRequest {
   eventId: number;
 }
 
+export interface ReserveTicketsRequest {
+  eventId: number;
+  chairIds: string[];
+  userName: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class EventsService {
   constructor(
@@ -45,6 +51,10 @@ export class EventsService {
 
   getEventDetails(payload: GetEventDetailsRequest): Observable<EventDetails> {
     return this.http.get<EventDetails>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/events/${payload.eventId}`);
+  }
+
+  reserveTickets(payload: ReserveTicketsRequest): Observable<void> {
+    return this.http.post<void>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/events/${payload.eventId}/reserveTickets`, JSON.stringify(payload));
   }
 
   getEventsPagination(payload: GetEventsPaginationRequest): Observable<GetEventsPaginationResponse> {

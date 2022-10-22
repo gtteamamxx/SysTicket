@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SysTicket.Infrastructure;
 
@@ -11,9 +12,10 @@ using SysTicket.Infrastructure;
 namespace SysTicket.Infrastructure.Migrations
 {
     [DbContext(typeof(SysTicketContext))]
-    partial class SysTicketContextModelSnapshot : ModelSnapshot
+    [Migration("20221016103615_Add_Event_Seat")]
+    partial class Add_Event_Seat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,7 +118,7 @@ namespace SysTicket.Infrastructure.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("EventSeats");
+                    b.ToTable("EventSeat");
                 });
 
             modelBuilder.Entity("SysTicket.Domain.Entities.User", b =>
@@ -168,7 +170,7 @@ namespace SysTicket.Infrastructure.Migrations
             modelBuilder.Entity("SysTicket.Domain.Entities.EventSeat", b =>
                 {
                     b.HasOne("SysTicket.Domain.Entities.Event", "Event")
-                        .WithMany("EventSeats")
+                        .WithMany("EventSeat")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -180,7 +182,7 @@ namespace SysTicket.Infrastructure.Migrations
                 {
                     b.Navigation("EventPrices");
 
-                    b.Navigation("EventSeats");
+                    b.Navigation("EventSeat");
                 });
 
             modelBuilder.Entity("SysTicket.Domain.Entities.User", b =>

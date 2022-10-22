@@ -24,6 +24,16 @@ export class EventDetailsState {
     return state.event;
   }
 
+  @Selector()
+  static totalSeatCount(state: EventDetailsStateModel): number {
+    return state.event?.numberOfSeats ?? 0;
+  }
+
+  @Selector()
+  static reservedSeatCount(state: EventDetailsStateModel): number {
+    return state.event?.seats.length ?? 0;
+  }
+
   constructor(private readonly eventService: EventsService) {}
 
   @Action(EventDetailsStateActions.LoadEvent)
@@ -35,6 +45,15 @@ export class EventDetailsState {
         });
       })
     );
+  }
+
+  @Action(EventDetailsStateActions.ReserveTickets)
+  reserveTickets(ctx: StateContext<EventDetailsStateModel>, action: EventDetailsStateActions.ReserveTickets): Observable<any> {
+    return this.eventService.reserveTickets({
+      eventId: action.payload.eventId,
+      chairIds: action.payload.seatIds,
+      userName: action.payload.userName,
+    });
   }
 
   @Action(EventDetailsStateActions.Clear)

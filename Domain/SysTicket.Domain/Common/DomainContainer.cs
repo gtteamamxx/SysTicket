@@ -20,6 +20,10 @@ namespace SysTicket.Domain.Common
             container.Register<IEventsBuilder, EventsBuilder>(Lifestyle.Singleton);
             container.Register<IEventsPriceBuilder, EventsPriceBuilder>(Lifestyle.Singleton);
             container.Register<IEventsFactory, EventsFactory>(Lifestyle.Scoped);
+
+            container.Register<IEventsSeatBuilder, EventsSeatBuilder>(Lifestyle.Singleton);
+
+            container.Register<ILayoutService, LayoutService>(Lifestyle.Singleton);
         }
     }
 }
