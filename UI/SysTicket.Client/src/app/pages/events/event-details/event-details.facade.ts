@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Actions, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { EventDetails } from 'src/app/core/models/event-details.model';
 import { RegionPrices } from 'src/app/core/models/region-prices.model';
 import { SpinnerService } from 'src/app/core/services/misc/spinner.service';

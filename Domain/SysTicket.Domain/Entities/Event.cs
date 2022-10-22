@@ -48,6 +48,8 @@ namespace SysTicket.Domain.Entities
 
         public string? LogoBase64 { get; set; }
 
+        public virtual ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
+
         [StringLength(maximumLength: 128)]
         public string? Title { get; set; }
 

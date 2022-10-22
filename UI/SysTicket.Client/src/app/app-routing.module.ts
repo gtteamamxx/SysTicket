@@ -1,4 +1,3 @@
-import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Constants } from './core/resources/constants';
@@ -20,6 +19,10 @@ const routes: Routes = [
   {
     path: Constants.eventsPage,
     loadChildren: () => import('./pages/events/events.module').then((m) => m.EventsModule),
+  },
+  {
+    path: Constants.reservationsPage,
+    loadChildren: () => import('./pages/reservations/reservations.module').then((m) => m.ReservationsModule),
   },
 ];
 

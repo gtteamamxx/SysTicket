@@ -2,7 +2,7 @@
 
 namespace SysTicket.Application.Commands.Events
 {
-    public class ReserveTicketsCommand : IRequest
+    public class ReserveTicketsCommand : IRequest<Guid>
     {
         public ReserveTicketsCommand(int eventId, string userName, IEnumerable<string> chairIds)
         {

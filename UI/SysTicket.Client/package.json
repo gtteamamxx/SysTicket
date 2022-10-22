@@ -30,6 +30,7 @@
     "masonry-layout": "^4.2.2",
     "moment": "^2.29.4",
     "ngx-masonry": "^13.0.0",
+    "qrcode": "^1.5.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -40,6 +41,7 @@
     "@angular/compiler-cli": "^14.2.2",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "@types/qrcode": "^1.5.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

@@ -24,6 +24,8 @@ namespace SysTicket.Domain.Common
             container.Register<IEventsSeatBuilder, EventsSeatBuilder>(Lifestyle.Singleton);
 
             container.Register<ILayoutService, LayoutService>(Lifestyle.Singleton);
+
+            container.Register<IReservationBuilder, ReservationBuilder>(Lifestyle.Singleton);
         }
     }
 }

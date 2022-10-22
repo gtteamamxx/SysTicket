@@ -18,6 +18,7 @@ import { SettingsState } from './core/store/settings.state';
 import { SpinnerState } from './core/store/spinner.state';
 import { UserState } from './core/store/user.state';
 import { SeatLayoutViewerComponent } from './shared/components/seat-layout-viewer/seat-layout-viewer.component';
+import { ReservationsComponent } from './pages/reservations/reservations.component';
 
 const httpInterceptors = [
   {
