@@ -29,6 +29,7 @@ namespace SysTicket.Domain.Factories
                 input.UserId,
                 input.LogoBase64,
                 input.Layout,
+                input.Place,
                 input.RegionPrices
             );
 

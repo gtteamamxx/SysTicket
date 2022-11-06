@@ -25,6 +25,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
@@ -52,6 +53,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
@@ -79,6 +81,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: string.Empty,
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
@@ -106,6 +109,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices()
             );
 
@@ -133,6 +137,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: "",
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
@@ -160,6 +165,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg><path></path></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices()
             );
 
@@ -187,6 +193,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: @"""<svg><path class=""chair"" id=""A.1""></path></svg>""",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices()
             );
 
@@ -214,6 +221,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices()
             );
 
@@ -241,6 +249,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
@@ -268,6 +277,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
@@ -295,6 +305,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: Guid.NewGuid().ToString(),
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 
@@ -322,6 +333,7 @@ namespace SysTicket.Application.UnitTests.Handlers.Commands.Events
                UserId: 1,
                LogoBase64: "",
                Layout: "<svg></svg>",
+               Place: "Pyskowice",
                RegionPrices: new RegionPrices() { ["A"] = 20 }
             );
 

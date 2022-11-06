@@ -14,6 +14,8 @@ namespace SysTicket.Domain.Interfaces.Domain.Events
 
         string LogoBase64 { get; }
 
+        string Place { get; }
+
         RegionPrices RegionPrices { get; }
 
         string Title { get; }

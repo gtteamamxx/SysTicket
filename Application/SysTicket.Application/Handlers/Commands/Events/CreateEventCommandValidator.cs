@@ -42,6 +42,10 @@ namespace SysTicket.Application.Handlers.Commands.Events
 
             RuleFor(x => x.RegionPrices)
                 .NotEmpty();
+
+            RuleFor(x => x.Place)
+                .NotEmpty()
+                .WithMessage("Wydarzenie musi posiadać lokalizacje");
         }
 
         public override async Task<ValidationResult> ValidateAsync(ValidationContext<CreateEventCommand> context, CancellationToken cancellationToken = default)

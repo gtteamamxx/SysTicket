@@ -47,5 +47,15 @@ namespace SysTicket.API.Controllers.Users
                 Password: password),
                 cancellationToken
             );
+
+        [HttpDelete("{id}")]
+        public async Task RemoveUserAsync([FromRoute] int id, CancellationToken cancellationToken)
+        {
+            await _mediator.Send(new RemoveUserCommand(UserId: id),
+                cancellationToken
+            );
+
+            await _sysTicketUnitOfWork.SaveChangesAsync(cancellationToken);
+        }
     }
 }

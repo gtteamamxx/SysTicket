@@ -16,8 +16,8 @@ namespace SysTicket.Infrastructure.Repositories
         public async Task CreateEventAsync(Event @event, CancellationToken cancellationToken)
             => await _context.Events.AddAsync(@event, cancellationToken);
 
-        public Task<List<Event>> GetAllEventsByPaginationAsync(int pageIndex, int pageSize, CancellationToken cancellationToken)
-            => _context.Events
+        public async Task<List<Event>> GetAllEventsByPaginationAsync(int pageIndex, int pageSize, CancellationToken cancellationToken)
+            => await _context.Events
                 .OrderByDescending(x => x.DateFrom)
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize)
@@ -25,19 +25,26 @@ namespace SysTicket.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
 
-        public Task<int> GetAllEventsCountAsync(CancellationToken cancellationToken)
-            => _context.Events.CountAsync(cancellationToken);
+        public async Task<int> GetAllEventsCountAsync(CancellationToken cancellationToken)
+            => await _context.Events.CountAsync(cancellationToken);
 
-        public Task<Event?> GetEventDetailsAsync(int eventId, CancellationToken cancellationToken)
-            => _context.Events
-                .Include(x => x.EventPrices)
-                .Include(x => x.User)
-                .Include(x => x.EventSeats)
-                .FirstOrDefaultAsync(x => x.Id == eventId, cancellationToken);
+        public async Task<Event?> GetEventDetailsAsync(int eventId, CancellationToken cancellationToken)
+        {
+            await _context.EventSeats.Where(x => x.EventId == eventId).LoadAsync(cancellationToken);
+            await _context.EventPrices.Where(x => x.EventId == eventId).LoadAsync(cancellationToken);
 
-        public Task<Event> GetEventForTicketsReservationAsync(int eventId, CancellationToken cancellationToken)
-            => _context.Events
-                .Include(x => x.EventSeats)
-                .FirstAsync(x => x.Id == eventId, cancellationToken);
+            var @event = await _context.Events
+                        .Include(x => x.User)
+                        .FirstOrDefaultAsync(x => x.Id == eventId, cancellationToken);
+
+            return @event;
+        }
+
+        public async Task<Event> GetEventForTicketsReservationAsync(int eventId, CancellationToken cancellationToken)
+        {
+            await _context.EventSeats.Where(x => x.EventId == eventId).LoadAsync(cancellationToken);
+
+            return await _context.Events.FirstAsync(x => x.Id == eventId, cancellationToken);
+        }
     }
 }

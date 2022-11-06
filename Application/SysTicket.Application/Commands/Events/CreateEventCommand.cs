@@ -13,6 +13,7 @@ namespace SysTicket.Application.Commands.Events
         int UserId,
         string LogoBase64,
         string Layout,
+        string Place,
         RegionPrices RegionPrices
     ) : IRequest<IEntityId>, ICreateEvent;
 }

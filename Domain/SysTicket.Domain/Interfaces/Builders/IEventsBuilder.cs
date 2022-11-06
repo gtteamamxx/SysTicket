@@ -12,6 +12,7 @@ namespace SysTicket.Domain.Interfaces.Builders
             int userId,
             string logoBase64,
             string layout,
+            string place,
             RegionPrices regionPrices
         );
     }

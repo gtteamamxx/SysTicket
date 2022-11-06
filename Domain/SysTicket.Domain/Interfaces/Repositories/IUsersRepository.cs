@@ -13,5 +13,7 @@ namespace SysTicket.Domain.Interfaces.Repositories
         Task<bool> IsUserExistById(int id);
 
         Task<bool> IsUserExistByUserName(string name);
+
+        Task RemoveUserAsync(int userId, CancellationToken cancellationToken);
     }
 }

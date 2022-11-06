@@ -35,6 +35,7 @@ namespace SysTicket.API.Controllers.Events
                     createEventRequest.UserId,
                     createEventRequest.LogoBase64!,
                     createEventRequest.Layout,
+                    createEventRequest.Place,
                     createEventRequest.RegionPrices
                 ),
                 cancellationToken

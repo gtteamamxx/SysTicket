@@ -20,6 +20,7 @@ namespace SysTicket.Domain.Builders
             int userId,
             string logoBase64,
             string layout,
+            string place,
             RegionPrices regionPrices
         )
         {
@@ -27,7 +28,7 @@ namespace SysTicket.Domain.Builders
                 .Select(value => _eventsPriceBuilder.Create(region: value.Key, price: value.Value))
                 .ToList();
 
-            return new(title, body, dateFrom, dateTo, userId, logoBase64, layout, regionPricesList);
+            return new(title, body, dateFrom, dateTo, userId, logoBase64, layout, place, regionPricesList);
         }
     }
 }
