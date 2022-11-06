@@ -8,6 +8,7 @@ export interface EventDetails {
   headerImgBase64?: string;
   layout?: string;
   numberOfSeats?: number;
+  place?: string;
   regionPrices: {
     region: string; //
     price: number;

@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { RegionPrices } from 'src/app/core/models/region-prices.model';
+import { NavigationService } from 'src/app/core/services/misc/navigation.service';
 import { NotificationsService } from 'src/app/core/services/misc/notifications.service';
 import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
 import { AddEventState } from './store/add-event.state';
@@ -11,6 +12,7 @@ export class AddEventFacade implements OnDestroy {
   constructor(
     private readonly spinner: SpinnerService, //
     private readonly notifications: NotificationsService,
+    private readonly navigationService: NavigationService,
     private readonly store: Store
   ) {}
 
@@ -25,6 +27,7 @@ export class AddEventFacade implements OnDestroy {
     dateTo: Date;
     logo: File;
     layout: string;
+    place: string;
     regionPrices: RegionPrices;
   }) {
     payload.dateFrom.setSeconds(0, 0);
@@ -47,6 +50,8 @@ export class AddEventFacade implements OnDestroy {
             timeoutInMs: 2000,
           },
         });
+
+        this.navigationService.navigateToHome();
       })
       .add(() => this.spinner.hide());
   }

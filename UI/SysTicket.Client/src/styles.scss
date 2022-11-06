@@ -5,9 +5,34 @@ body {
   height: 100%;
 }
 
-
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   background-color: $background-color;
+}
+
+mat-icon {
+  color: $text-color !important;
+}
+
+.simple-notification {
+  background-color: #565656 !important;
+  border: 1px solid #9f9f9f !important;
+
+  .sn-title {
+    color: white !important;
+  }
+  .sn-content {
+    color: $text-color;
+  }
+}
+
+button[mat-raised-button] {
+  background-color: $button-background-color !important;
+  color: $text-color !important;
+
+  &:hover {
+    color: white !important;
+    background-color: $button-hover-color !important;
+  }
 }

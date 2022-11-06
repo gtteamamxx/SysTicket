@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
+import { User } from 'src/app/core/models/user.model';
 import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
 import { AddNewUserModalOpener } from './components/add-new-user-modal/add-new-user-modal-opener';
 import { ManageUsersStateActions } from './store/manage-users.state.actions';
@@ -26,6 +27,15 @@ export class ManageUsersFacade implements OnDestroy {
         this.loadUsersList();
       }
     });
+  }
+
+  removeUser(user: User): void {
+    this.spinner.show('Usuwanie użytkownika...');
+
+    this.store
+      .dispatch(new ManageUsersStateActions.RemoveUser({ user })) //
+      .subscribe()
+      .add(() => this.spinner.hide());
   }
 
   private loadUsersList(): void {

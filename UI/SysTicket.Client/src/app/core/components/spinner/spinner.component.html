@@ -1,8 +1,10 @@
-<div *ngIf="isSpinnerVisible$ | async" class="spinner-container">
+<div *ngIf="isSpinnerVisible$ | async"
+     class="spinner-container">
     <mat-progress-spinner mode="indeterminate">
     </mat-progress-spinner>
 
-    <span *ngIf="(spinnerLoadingText$ | async) != null" class="loading-text">
+    <span *ngIf="(spinnerLoadingText$ | async) != null"
+          class="loading-text">
         {{ spinnerLoadingText$ | async }}
     </span>
 </div>

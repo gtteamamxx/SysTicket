@@ -1,20 +1,123 @@
 <div class="event-details-container">
-    <mat-card *ngIf="(event$ | async) as event">
-        <mat-card-header>
-            <mat-card-title>{{ event.title }}</mat-card-title>
-            <mat-card-subtitle> {{ event.dateFrom | date }} - {{ event.dateFrom | date }} </mat-card-subtitle>
-        </mat-card-header>
+    <div class="header-container">
+        <mat-icon mat-list-icon>event</mat-icon>
+        <div class="text-container">
+            <span class="title">{{ (event$ | async)?.title }}</span>
+        </div>
+    </div>
 
-        <img mat-card-image
-             [src]="event.headerImgBase64">
+    <div class="event-header-container">
+        <div class="event-info-container">
+            <div class="image-container">
+                <img [src]="(event$ | async)?.headerImgBase64">
+            </div>
 
-        <div class="body-container"
-             [innerHTML]="event.body">
+            <div class="event-text-container">
+                <span class="title">{{ (event$ | async)?.title }}</span>
+                <span class="time">
+                    {{ (event$ | async)?.dateFrom | date:'d MMMM yyyy':undefined:'pl' }}
+                    o godz
+                    {{ (event$ | async)?.dateFrom | date:'HH:mm':undefined:'pl' }}</span>
+                <span class="place">{{ (event$ | async)?.place }} </span>
+                <span class="info"> Ilość miejsc: {{ reservedSeatCount$ | async }} / {{ totalSeatCount$ | async }} </span>
+                <span class="info"> Dodał: {{ (event$ | async)?.creationUserName }} </span>
+            </div>
         </div>
 
-        <mat-card-actions>
-            <button mat-button
-                    (click)="onReserveSeatsClick()">Zarezerwuj bilety [{{ reservedSeatCount$ | async }} / {{ totalSeatCount$ | async }}] </button>
-        </mat-card-actions>
-    </mat-card>
+        <div class="button-container"
+             *ngIf="(isBuyingTickets$ | async) === false">
+            <button mat-raised-button
+                    (click)="onBuyTicketsClick()">
+                <mat-icon>
+                    shopping_cart
+                </mat-icon>
+                Kup bilet
+            </button>
+        </div>
+    </div>
+
+    <div class="event-body-container"
+         [innerHTML]="(event$ | async)?.body">
+
+    </div>
+
+    <div class="seat-container">
+        <div class="header-container">
+            <div *ngIf="(isBuyingTickets$ | async) === false"
+                 class="text-container">
+                <mat-icon>
+                    preview
+                </mat-icon>
+                Podgląd miejsc. Dostepne bilety: {{ (totalSeatCount$ | async)! - (reservedSeatCount$ | async)! }}.
+                Kliknij "Kup bilet" aby wybrać miejsca.
+            </div>
+
+            <div *ngIf="(isBuyingTickets$ | async) === true"
+                 class="text-container is-buying">
+                Wybierz klikając na miejsce. Dostepne bilety: {{ (totalSeatCount$ | async)! - (reservedSeatCount$ | async)! }}
+            </div>
+        </div>
+
+        <app-seat-layout-viewer [allowChairSelect]="(isBuyingTickets$ | async) === true"
+                                [layoutSvgSrc]="(event$ | async)?.layout!"
+                                (chairSelectionChanged)="onChairSelection($event)"
+                                (onLoad)="onLayoutLoaded($event)">
+        </app-seat-layout-viewer>
+
+        <div class="tickets-container">
+            <div class="tickets-list">
+
+                <div *ngFor="let selectedChair of selectedChairs$ | async"
+                     class="ticket">
+                    <div class="description-container">
+                        rząd:
+                        <span class="region"> {{ selectedChair.region }} </span>
+                        - miejsce
+                        <span class="seat"> {{ selectedChair.seatNumber }} </span>
+                    </div>
+
+                    <div class="ticket-info">
+                        <div class="info">
+                            Bilet normalny
+                        </div>
+                    </div>
+
+                    <div class="price-info">
+                        <span class="info">Cena biletu:</span>
+                        <span class="price">{{ selectedChair.price }} PLN </span>
+                    </div>
+                </div>
+            </div>
+
+            <mat-form-field class="user-name-form"
+                            [class.show]="(selectedChairs$ | async)?.length! > 0 "
+                            floatLabel="always"
+                            appearance="fill">
+                <mat-label>Imię i nazwisko osoby zamawiającej</mat-label>
+
+                <input matInput
+                       [formControl]="userNameForm">
+
+                <mat-error>Musisz podać imię i naziwsko.</mat-error>
+            </mat-form-field>
+
+
+            <button *ngIf="(selectedChairs$ | async)?.length! > 0 "
+                    class="order-button"
+                    mat-raised-button
+                    (click)="onOrderClick()">
+                <mat-icon>
+                    payments
+                </mat-icon>
+                <b>zamów</b> wybrane bilety
+            </button>
+        </div>
+    </div>
+
+    <div class="warranty-container">
+        <div class="text-container"
+             (click)="onSeeOtherEventsClick()">
+            Zobacz inne wydarzenia
+        </div>
+    </div>
 </div>

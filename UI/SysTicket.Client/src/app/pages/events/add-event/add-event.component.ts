@@ -40,6 +40,7 @@ export class AddEventComponent {
       dateTo: generalInfo.dateTo,
       logo: images.logo,
       layout: layout.layout,
+      place: generalInfo.place,
       regionPrices: layout.regionPrices,
     });
   }

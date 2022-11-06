@@ -1,31 +1,43 @@
 <div class="top-bar-container">
     <span class="title"
           (click)="home()">
-        SysTicket
+        Wydarzenia - bilety i rezerwacje
     </span>
 
     <div class="buttons-container">
         <button *ngIf="(isUserLogged$ | async) === false && (isOnLoginPage$ | async) === false"
                 mat-button
                 (click)="login()">
+            <mat-icon>
+                login
+            </mat-icon>
             Zaloguj
         </button>
 
-        <button *ngIf="(isUserAdmin$ | async) && (isOnAddEventPage$ | async) === false"
+        <button *ngIf="(isOnAddEventPage$ | async) === false"
                 mat-button
                 (click)="addEvent()">
+            <mat-icon>
+                event
+            </mat-icon>
             Dodaj wydarzenie
         </button>
 
         <button *ngIf="(isUserAdmin$ | async) && (isOnManageUsersPage$ | async) === false"
                 mat-button
                 (click)="manageUsers()">
+            <mat-icon>
+                group_add
+            </mat-icon>
             Zarządzaj użytkownikami
         </button>
 
         <button *ngIf="isUserLogged$ | async"
                 mat-button
                 (click)="logout()">
+            <mat-icon>
+                logout
+            </mat-icon>
             Wyloguj
         </button>
     </div>

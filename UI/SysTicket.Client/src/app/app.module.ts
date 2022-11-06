@@ -19,6 +19,20 @@ import { SpinnerState } from './core/store/spinner.state';
 import { UserState } from './core/store/user.state';
 import { SeatLayoutViewerComponent } from './shared/components/seat-layout-viewer/seat-layout-viewer.component';
 import { ReservationsComponent } from './pages/reservations/reservations.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import * as moment from 'moment';
+
+export function momentAdapterFactory() {
+  moment.updateLocale('pl', {
+    week: {
+      dow: 1,
+      doy: 0,
+    },
+  });
+
+  return adapterFactory(moment);
+}
 
 const httpInterceptors = [
   {
@@ -50,6 +64,10 @@ const common = [
   SimpleNotificationsModule.forRoot(),
   NgxsModule.forRoot(states, {
     developmentMode: !environment.production,
+  }),
+  CalendarModule.forRoot({
+    provide: DateAdapter, //
+    useFactory: momentAdapterFactory,
   }),
 ];
 

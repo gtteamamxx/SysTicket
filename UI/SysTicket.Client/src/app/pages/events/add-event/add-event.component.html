@@ -1,4 +1,11 @@
 <div class="add-event-container">
+	<div class="header-container">
+		<mat-icon mat-list-icon>event</mat-icon>
+		<div class="text-container">
+			<span class="title">Dodaj zdarzenie</span>
+		</div>
+	</div>
+
 	<mat-vertical-stepper labelPosition="bottom">
 		<mat-step [stepControl]="generalTab.eventDetailsFormGroup">
 			<ng-template matStepLabel>Dane wydarzenia</ng-template>
@@ -8,10 +15,9 @@
 		</mat-step>
 
 		<mat-step [stepControl]="imagesTab.imagesFormGroup">
-			<ng-template matStepLabel>Zdjęcia</ng-template>
+			<ng-template matStepLabel>Zdjęcie</ng-template>
 
 			<app-images #imagesTab></app-images>
-
 		</mat-step>
 
 		<mat-step [stepControl]="layoutTab.layoutFormGroup">

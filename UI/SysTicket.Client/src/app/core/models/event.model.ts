@@ -9,5 +9,6 @@ export interface Event {
   dateTo?: Date;
   headerImgBase64?: string;
   layout?: string;
+  place?: string;
   regionPrices: RegionPrices;
 }

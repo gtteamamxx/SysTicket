@@ -15,7 +15,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    border-radius: 32px;
+    border-radius: 4px;
+    background-color: $content-color;
 
     .mat-card-content {
       display: flex;
@@ -30,15 +31,14 @@
       }
     }
 
+    mat-card-title {
+      color: $text-header-color;
+    }
+
     .mat-card-actions {
       display: flex;
       align-items: center;
       justify-content: center;
-
-      .login-button {
-        color: white;
-        background-color: $theme-color;
-      }
     }
   }
 }

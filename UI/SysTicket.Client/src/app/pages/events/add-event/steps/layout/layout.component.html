@@ -10,6 +10,14 @@
     </app-seat-layout-viewer>
 
     <div *ngIf="regions.length > 0"
+         class="header-container">
+        <mat-icon mat-list-icon>attach_money</mat-icon>
+        <div class="text-container">
+            <span class="title">Ustal ceny biletów wpisując kwotę za bilet w konkretnym rzędzie.</span>
+        </div>
+    </div>
+
+    <div *ngIf="regions.length > 0"
          class="regions-container">
         <mat-form-field *ngFor="let region of regions"
                         floatLabel="always">
@@ -28,10 +36,13 @@
         </mat-form-field>
 
         <br />
-
-        <button mat-raised-button
-                (click)="setPrices()">
-            Ustaw ceny
-        </button>
     </div>
+
+    <button *ngIf="regions.length > 0"
+            class="set-prices-button"
+            mat-raised-button
+            (click)="setPrices()">
+        <mat-icon mat-list-icon>attach_money</mat-icon>
+        Ustaw ceny
+    </button>
 </div>

@@ -12,16 +12,13 @@ import { MatCardModule } from '@angular/material/card';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule],
 })
-export class EventPreviewComponent implements OnInit {
+export class EventPreviewComponent {
   @Input() title!: string;
   @Input() body!: string;
   @Input() dateFrom!: Date;
   @Input() dateTo!: Date;
   @Input() img!: string;
+  @Input() place!: string;
 
-  @Output() seeDetails = new EventEmitter<void>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  @Output() buyTicket = new EventEmitter<void>();
 }

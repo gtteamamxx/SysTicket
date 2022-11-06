@@ -1,62 +1,170 @@
+@import 'src/styles/colors';
+
 .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0px 10%;
 
-  .header-container {
-    height: 100px;
-    margin-top: 16px;
-    margin-left: 16px;
-    align-self: flex-start;
-
-    .filter-container {
-      height: 30px;
-      background-color: red;
-    }
-  }
-
-  .events-container {
-    width: 90vw;
+  > .header-container {
+    width: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
-
-    .event {
-      display: block;
-      margin: 4px;
-      margin-top: 8px;
-      width: 400px;
-    }
-  }
-
-  .paginator-container {
-    margin: 0 auto;
-    width: 90vw;
+    background-color: $theme-color;
     margin-top: 16px;
-  }
+    height: 60px;
+    border-radius: 4px;
+    line-height: 15px;
+    color: $text-color;
 
-  @media screen and (max-width: 1375px) {
-    .events-container {
-      width: 95vw;
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-      .event {
-        width: 500px;
-      }
+    .title {
+      font-weight: 500;
+    }
+
+    mat-icon {
+      margin-right: 8px;
     }
   }
 
-  @media screen and (max-width: 1075px) {
-    .events-container {
-      .event {
-        width: 550px;
+  .content-container {
+    margin-top: 4px;
+    display: flex;
+    width: 100%;
+
+    .calendar-view-container {
+      padding-right: 10px;
+
+      .buttons-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 4px 0px;
+        align-items: center;
+
+        .month {
+          color: $text-color;
+          font-size: 20px;
+          align-items: center;
+        }
+      }
+
+      > .header-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $theme-color;
+        margin-top: 16px;
+        height: 60px;
+        border-radius: 4px;
+        line-height: 15px;
+        color: $text-color;
+
+        .text-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .title {
+          font-weight: 500;
+        }
+
+        mat-icon {
+          margin-right: 8px;
+        }
+      }
+
+      .cal-day-badge {
+        display: none;
+      }
+
+      .cal-month-view .cal-day-cell {
+        min-width: 50px;
+      }
+
+      .cal-month-view .cal-day-cell {
+        min-height: 0px !important;
+      }
+
+      mwl-calendar-month-view {
+        display: block;
+        margin-top: 4px;
       }
     }
+
+    .events-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      > .header-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $theme-color;
+        margin-top: 16px;
+        height: 60px;
+        border-radius: 4px;
+        line-height: 15px;
+        color: $text-color;
+
+        .text-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .title {
+          font-weight: 500;
+        }
+
+        mat-icon {
+          margin-right: 8px;
+        }
+      }
+
+      .list-container {
+        display: flex;
+        flex-direction: column;
+        app-event-preview {
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+.events-paginator {
+  border-radius: 4px;
+  margin-top: 8px;
+  background-color: $content-color;
+  align-self: flex-end;
+
+  .mat-paginator-page-size-label {
+    display: none;
   }
 
-  @media screen and (max-width: 600px) {
-    .events-container {
-      .event {
-        width: 400px;
-      }
-    }
+  .mat-paginator-icon {
+    fill: #505050;
   }
+
+  .mat-paginator-range-label {
+    color: #505050;
+  }
+}
+
+.tooltip-calendar-container {
+  background: black;
+  color: white;
+  line-height: 20px;
+  border-radius: 12px;
+  padding: 8px;
 }
