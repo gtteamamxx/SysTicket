@@ -11,6 +11,10 @@ export interface CreateNewUserRequest {
   isAdmin: boolean;
 }
 
+export interface RemoveUserRequest {
+  id: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class UsersService {
   constructor(
@@ -24,6 +28,10 @@ export class UsersService {
 
   createNewUser(payload: CreateNewUserRequest): Observable<void> {
     return this.http.post<void>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users`, JSON.stringify(payload));
+  }
+
+  removeUser(payload: RemoveUserRequest) {
+    return this.http.delete<void>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/users/${payload.id}`);
   }
 
   getAllUsers(): Observable<User[]> {

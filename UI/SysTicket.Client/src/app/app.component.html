@@ -5,7 +5,7 @@
         <router-outlet></router-outlet>
     </div>
 
-    <app-spinner></app-spinner>
+    <app-spinner [class.disable-interaction]="isSpinnerVisible$ | async"></app-spinner>
 </div>
 
 <simple-notifications></simple-notifications>

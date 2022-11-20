@@ -14,6 +14,8 @@
 
         public int Id { get; set; }
 
+        public string Place { get; set; } = default!;
+
         public string? Title { get; set; }
     }
 }

@@ -1,17 +1,20 @@
 <div class="reservations-container">
-    <span class="header">Rezerwacja: {{ reservation.id }} </span>
-    <img [src]="qrCode">
-    <br />
-    <span class="title"> <b>{{ reservation.event?.title }}</b> </span>
-    <span class="title"> {{ reservation.event?.dateFrom | date:'MM.dd.YYYY HH:mm' }} - {{ reservation.event?.dateTo | date:'MM.dd.YYYY HH:mm' }} </span>
-    <br />
-    <span>Liczba miejsc: {{ reservation.seats.length }} </span>
+    <div class="content-container">
+        <span class="header">Rezerwacja: {{ reservation.id }} </span>
+        <img [src]="qrCode">
+        <br />
+        <span class="title"> <b>{{ reservation.event?.title }}</b> </span>
+        <span class="title"> {{ reservation.event?.dateFrom | date:'d MMMM YYYY HH:mm':undefined:'pl' }} </span>
+        <br />
+        <span>Liczba miejsc: {{ reservation.seats.length }} </span>
 
-    <div *ngFor="let seat of reservation.seats; let index = index"
-         class="seat">
-        {{index + 1 }}.
-        <span class="reigon">Rząd: <b>{{ seat.region }}</b></span>
-        <span class="number"> Miejsce: <b>{{ seat.seatNumber }}</b> </span>
-        <span class="number"> Cena: <b>{{ getPrice(seat.region!) | number:'1.2-2' }} zł</b> </span>
+        <div *ngFor="let seat of reservation.seats; let index = index"
+             class="seat">
+            {{index + 1 }}.
+            <span class="reigon">Rząd: <b>{{ seat.region }}</b></span>
+            <span class="number"> Miejsce: <b>{{ seat.seatNumber }}</b> </span>
+            <span class="number"> Cena: <b>{{ getPrice(seat.region!) | number:'1.2-2' }} zł</b> </span>
+        </div>
     </div>
+
 </div>

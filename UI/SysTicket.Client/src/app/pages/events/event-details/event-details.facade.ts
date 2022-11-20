@@ -1,73 +1,83 @@
-import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { EventDetails } from 'src/app/core/models/event-details.model';
 import { RegionPrices } from 'src/app/core/models/region-prices.model';
+import { NavigationService } from 'src/app/core/services/misc/navigation.service';
 import { SpinnerService } from 'src/app/core/services/misc/spinner.service';
-import { ReserveSeatsModalComponent, ReserveSeatsModalInput, ReserveSeatsModalOutput } from './reserve-seats-modal/reserve-seats-modal.component';
+import { LayoutConfig, SelectedChair } from 'src/app/shared/components/seat-layout-viewer/seat-layout-viewer.component';
 import { EventDetailsState } from './store/event-details.state';
 import { EventDetailsStateActions } from './store/event-details.state.actions';
 
 @Injectable()
-export class EventDetailsFacade {
+export class EventDetailsFacade implements OnDestroy {
   constructor(
-    private readonly dialog: MatDialog, //
-    private readonly spinner: SpinnerService,
+    private readonly spinner: SpinnerService, //
+    private readonly navigationService: NavigationService,
     private readonly store: Store
   ) {}
 
   init(payload: { eventId: number }): void {
     this.spinner.show();
 
-    this.store.dispatch(
-      new EventDetailsStateActions.LoadEvent({
-        eventId: payload.eventId,
-      })
-    );
-
-    this.spinner.hide();
+    this.store
+      .dispatch(
+        new EventDetailsStateActions.LoadEvent({
+          eventId: payload.eventId,
+        })
+      )
+      .subscribe(() => {
+        this.spinner.hide();
+      });
   }
 
-  openReserveSeatsModal(): void {
+  ngOnDestroy(): void {
+    this.store.dispatch(new EventDetailsStateActions.Clear());
+  }
+
+  setLayoutProp(loadConfig: LayoutConfig): void {
     const event: EventDetails = this.store.selectSnapshot(EventDetailsState.event)!;
 
     const regionPrices: RegionPrices = {};
     event.regionPrices.forEach((x) => (regionPrices[x.region] = x.price));
 
-    this.dialog
-      .open(ReserveSeatsModalComponent, {
-        width: '640px',
-        height: '70vh',
-        panelClass: 'reserve-seats-modal',
-        data: <ReserveSeatsModalInput>{
-          layout: event.layout,
-          prices: regionPrices,
-          reservedChairs: event.seats.map((x) => {
-            return `${x.region}.${x.seatNumber}`;
-          }),
-        },
+    loadConfig.setRegionPrices(regionPrices);
+    loadConfig.setSelectedSeats(
+      event.seats.map((x) => {
+        return `${x.region}.${x.seatNumber}`;
       })
-      .afterClosed()
-      .subscribe((result: ReserveSeatsModalOutput | null) => {
-        if (result == null) {
-          return;
-        }
+    );
+  }
 
-        this.spinner.show();
+  navigateToEvents() {
+    this.navigationService.navigateToHome();
+  }
 
-        this.store
-          .dispatch(
-            new EventDetailsStateActions.ReserveTickets({
-              eventId: event.id!,
-              seatIds: result.seatIds,
-              userName: result.userName,
-            })
-          )
-          .subscribe(() => {
-            this.spinner.hide();
+  selectChairs(selectedChairs: SelectedChair[]): void {
+    this.store.dispatch(new EventDetailsStateActions.SelectChairs(selectedChairs));
+  }
 
-            this.init({ eventId: event.id! });
-          });
+  orderSelectedTickets(userName: string): void {
+    const event: EventDetails = this.store.selectSnapshot(EventDetailsState.event)!;
+
+    this.spinner.show();
+    this.store
+      .dispatch(
+        new EventDetailsStateActions.ReserveTickets({
+          eventId: event.id!,
+          seatIds: this.store.selectSnapshot(EventDetailsState.selectedChairs).map((x) => x.id),
+          userName: userName,
+        })
+      )
+      .subscribe(() => {
+        this.navigationService
+          .navigateToReservation({
+            reservation: this.store.selectSnapshot(EventDetailsState.reservationId),
+          })
+          .subscribe(() => this.spinner.hide());
       });
+  }
+
+  buyTickets(): void {
+    this.store.dispatch(new EventDetailsStateActions.BuyTickets());
   }
 }

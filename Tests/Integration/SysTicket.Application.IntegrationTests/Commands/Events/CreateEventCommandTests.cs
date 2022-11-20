@@ -31,6 +31,8 @@ namespace SysTicket.Application.IntegrationTests.Commands.Events
             </svg>
             """;
 
+            string expectedPlace = "Pyskowice";
+
             RegionPrices expectedPrices = new RegionPrices
             {
                 ["A"] = 20,
@@ -49,6 +51,7 @@ namespace SysTicket.Application.IntegrationTests.Commands.Events
                 expectedUser.Id,
                 expectedLogoB64,
                 expectedLayout,
+                expectedPlace,
                 expectedPrices
             ));
 
@@ -66,6 +69,7 @@ namespace SysTicket.Application.IntegrationTests.Commands.Events
             @event!.DateTo.Should().Be(expectedDateTo);
             @event!.UserId.Should().Be(expectedUser.Id);
             @event!.Layout.Should().Be(expectedLayout);
+            @event!.Place.Should().Be(expectedPlace);
 
             @event!.EventPrices.Should().HaveCount(expectedPrices.Count);
             foreach (KeyValuePair<string, double> eventPrice in expectedPrices)

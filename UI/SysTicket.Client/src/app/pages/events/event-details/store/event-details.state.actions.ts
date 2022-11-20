@@ -1,3 +1,5 @@
+import { SelectedChair } from 'src/app/shared/components/seat-layout-viewer/seat-layout-viewer.component';
+
 export namespace EventDetailsStateActions {
   export class LoadEvent {
     static type = '[Event Details State] Load Event';
@@ -13,6 +15,15 @@ export namespace EventDetailsStateActions {
         seatIds: string[];
       }
     ) {}
+  }
+
+  export class BuyTickets {
+    static type = '[Event Details State] Buy Tickets';
+  }
+
+  export class SelectChairs {
+    static type = '[Event Details State] Select Chairs';
+    constructor(public payload: SelectedChair[]) {}
   }
 
   export class Clear {

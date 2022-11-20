@@ -12,6 +12,7 @@ export namespace AddEventActions {
         dateTo: Date;
         logo: File;
         layout: string;
+        place: string;
         regionPrices: RegionPrices;
       }
     ) {}

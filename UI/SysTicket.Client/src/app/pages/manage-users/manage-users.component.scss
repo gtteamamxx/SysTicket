@@ -1,71 +1,78 @@
 .manage-users-container {
+  @import 'src/styles/colors';
+  margin: 0px 10%;
+
   .header-container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    background-color: $theme-color;
     margin-top: 16px;
-    margin-left: 16px;
-    position: relative;
+    height: 60px;
+    border-radius: 4px;
+    line-height: 15px;
+    color: $text-color;
 
-    > span {
-      margin-left: 8px;
-    }
-
-    .add-new-user-button {
-      position: absolute;
-      right: 16px;
-      padding: 3px;
-      padding-right: 8px;
-      color: white;
-      background-color: #64b51a;
-
-      @media screen and (max-width: 555px) {
-        .text {
-          display: none;
-        }
-      }
-    }
-
-    @media screen and (max-width: 410px) {
+    .text-container {
+      display: flex;
       flex-direction: column;
-      text-align: center;
+      align-items: center;
+      margin-top: 15px;
+    }
 
-      .add-new-user-button {
-        position: unset;
+    .title {
+      font-weight: 500;
+    }
 
-        .mat-button-wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+    .sub-header {
+      margin-top: 4px;
+      font-weight: 500;
+    }
 
-          .text {
-            display: block;
-          }
-        }
-      }
+    mat-icon {
+      margin-right: 8px;
     }
   }
 
+  .add-new-user-button {
+    margin-top: 4px;
+  }
+
   .items-container {
+    margin-top: 4px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    margin-top: 16px;
+    flex-direction: column;
+    background-color: $content-color;
+    border-radius: 4px;
 
-    mat-card {
-      margin: 8px;
-      width: 300px;
-
-      .mat-card-header-text {
-        margin: 0px;
+    .user-item {
+      height: 100%;
+      padding: 4px 4px;
+      display: grid;
+      grid-template-columns: 20px auto 150px 75px;
+      overflow: hidden;
+      align-items: center;
+      &:nth-child(even) {
+        background-color: #dfdfdf;
       }
 
-      mat-card-title {
+      .user-name {
         display: flex;
         align-items: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
 
-        span {
-          margin-left: 8px;
+        .icon {
+          color: $text-header-color !important;
+        }
+      }
+
+      .buttons {
+        button {
+          &:first-child {
+            margin-right: 8px;
+          }
         }
       }
     }

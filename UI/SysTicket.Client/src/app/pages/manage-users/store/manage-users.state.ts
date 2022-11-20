@@ -37,6 +37,15 @@ export class ManageUsersState {
     );
   }
 
+  @Action(Actions.RemoveUser)
+  removeUser(ctx: StateContext<ManageUsersStateModel>, action: Actions.RemoveUser): Observable<any> {
+    return this.usersService.removeUser({ id: action.payload.user.id! }).pipe(
+      tap(() => {
+        ctx.dispatch(new Actions.LoadAllUsers());
+      })
+    );
+  }
+
   @Action(Actions.Clear)
   clear(ctx: StateContext<ManageUsersStateModel>): void {
     ctx.setState(defaultState);

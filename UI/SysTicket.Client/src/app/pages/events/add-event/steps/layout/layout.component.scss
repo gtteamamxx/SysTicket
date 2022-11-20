@@ -1,16 +1,56 @@
 .layout-container {
+  @import 'src/styles/colors';
+
   padding: 16px;
 
   app-seat-layout-viewer {
     max-width: 60vw;
+    max-height: 396px;
+
+    .seat-layout-viewer-container svg {
+      max-height: 396px;
+    }
+  }
+
+  .generator-container {
+    display: flex;
+    flex-direction: column;
+    textarea {
+      margin-top: 10px;
+      height: 100px;
+      width: 300px;
+    }
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $theme-color;
+    height: 60px;
+    border-radius: 4px;
+    line-height: 15px;
+    color: $text-color;
+
+    .text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   .regions-container {
+    margin-top: 4px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+
+    mat-icon {
+      margin-right: 8px;
+    }
 
     mat-form-field {
       max-width: 300px;
+      margin: 16px 8px;
     }
   }
 }

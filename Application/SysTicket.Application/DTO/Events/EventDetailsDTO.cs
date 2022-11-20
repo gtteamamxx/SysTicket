@@ -18,6 +18,8 @@
 
         public int NumberOfSeats { get; set; }
 
+        public string Place { get; set; } = default!;
+
         public IEnumerable<EventDetailsPrice> RegionPrices { get; set; } = Enumerable.Empty<EventDetailsPrice>();
 
         public IEnumerable<EventDetailsSeat> Seats { get; set; } = Enumerable.Empty<EventDetailsSeat>();

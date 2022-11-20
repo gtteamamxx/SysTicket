@@ -19,13 +19,20 @@ namespace SysTicket.Infrastructure.Repositories
         public async Task<IReadOnlyCollection<User>> GetAllUsersAsync(CancellationToken cancellationToken)
             => (await _context.Users.ToListAsync(cancellationToken)).AsReadOnly();
 
-        public Task<User?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken)
-            => _context.Users.FirstOrDefaultAsync(x => x.Name == name && x.Password == password, cancellationToken: cancellationToken);
+        public async Task<User?> GetUserByNameAndPasswordAsync(string name, string password, CancellationToken cancellationToken)
+            => await _context.Users.FirstOrDefaultAsync(x => x.Name == name && x.Password == password, cancellationToken: cancellationToken);
 
-        public Task<bool> IsUserExistById(int id)
-             => _context.Users.AnyAsync(x => x.Id == id);
+        public async Task<bool> IsUserExistById(int id)
+             => await _context.Users.AnyAsync(x => x.Id == id);
 
-        public Task<bool> IsUserExistByUserName(string name)
-            => _context.Users.AnyAsync(x => x.Name == name);
+        public async Task<bool> IsUserExistByUserName(string name)
+            => await _context.Users.AnyAsync(x => x.Name == name);
+
+        public async Task RemoveUserAsync(int userId, CancellationToken cancellationToken)
+        {
+            User? user = await _context.Users.FindAsync(userId);
+
+            _context.Users.Remove(user!);
+        }
     }
 }

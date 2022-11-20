@@ -14,6 +14,7 @@ namespace SysTicket.Domain.Entities
             int userId,
             string logoBase64,
             string layout,
+            string place,
             List<EventPrice> eventPrices)
         {
             Title = title;
@@ -23,6 +24,7 @@ namespace SysTicket.Domain.Entities
             UserId = userId;
             LogoBase64 = logoBase64;
             Layout = layout;
+            Place = place;
             EventPrices = eventPrices;
         }
 
@@ -47,6 +49,9 @@ namespace SysTicket.Domain.Entities
         public string? Layout { get; set; }
 
         public string? LogoBase64 { get; set; }
+
+        [StringLength(maximumLength: 256)]
+        public string Place { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; } = new HashSet<Reservation>();
 

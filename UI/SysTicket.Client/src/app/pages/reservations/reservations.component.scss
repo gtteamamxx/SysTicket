@@ -1,17 +1,27 @@
 .reservations-container {
+  @import 'src/styles/colors';
   display: flex;
-  align-items: center;
-  padding: 20px;
-  flex-direction: column;
+  justify-content: center;
 
-  .header {
-    font-size: 20px;
-    font-weight: 500;
-  }
+  .content-container {
+    border-radius: 4px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $content-color;
+    width: fit-content;
+    padding: 10px;
 
-  img {
-    margin-top: 50px;
-    width: 250px;
-    height: 250px;
+    .header {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    img {
+      margin-top: 50px;
+      width: 250px;
+      height: 250px;
+    }
   }
 }

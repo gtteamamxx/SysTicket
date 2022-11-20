@@ -53,6 +53,10 @@ export class SeatLayoutViewerComponent implements OnChanges {
   }
 
   private loadLayout(): void {
+    if (this.layoutSvgSrc == null) {
+      return;
+    }
+
     const svgSource$: Observable<string> = this.layoutSvgSrc.startsWith('<svg') //
       ? of(this.layoutSvgSrc)
       : this.http.get('./' + this.layoutSvgSrc, { responseType: 'text' });
@@ -136,7 +140,7 @@ export class SeatLayoutViewerComponent implements OnChanges {
       return;
     }
 
-    const left: number = event.offsetX - tooltipDiv.offsetWidth / 2;
+    const left: number = (event as any).layerX - tooltipDiv.offsetWidth / 2;
     const top: number = event.offsetY - 100;
 
     this.renderer.setStyle(tooltipDiv, 'left', `${left}px`);
@@ -164,7 +168,7 @@ export class SeatLayoutViewerComponent implements OnChanges {
       <div class='tooltip-container'>
           <span class="region">Rząd: ${region}</span>
           <span class="seat-number">Miejsce: ${seatNumber}</span>
-          <span class="price">Miejsce zajęte</span>
+          <span class="price" style="color: #f96767 !important">Miejsce zajęte</span>
         </div>
     `;
     } else {

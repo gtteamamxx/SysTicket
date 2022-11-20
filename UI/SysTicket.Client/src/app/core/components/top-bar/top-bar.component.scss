@@ -19,6 +19,9 @@
 
   .buttons-container {
     display: flex;
+    button {
+      color: $text-color;
+    }
   }
 
   @media screen and (max-width: 500px) {
@@ -31,5 +34,11 @@
       margin-left: 16px;
       display: block !important;
     }
+  }
+}
+
+@media print {
+  .top-bar-container {
+    display: none;
   }
 }

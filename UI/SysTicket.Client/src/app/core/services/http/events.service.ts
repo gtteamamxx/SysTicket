@@ -15,6 +15,7 @@ export interface CreateEventRequest {
   userId: number;
   logoBase64: string;
   layout: string;
+  place: string;
   regionPrices: RegionPrices;
 }
 
@@ -53,8 +54,8 @@ export class EventsService {
     return this.http.get<EventDetails>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/events/${payload.eventId}`);
   }
 
-  reserveTickets(payload: ReserveTicketsRequest): Observable<void> {
-    return this.http.post<void>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/events/${payload.eventId}/reserveTickets`, JSON.stringify(payload));
+  reserveTickets(payload: ReserveTicketsRequest): Observable<string> {
+    return this.http.post<string>(`${this.store.selectSnapshot(SettingsState.apiUrl)}/api/events/${payload.eventId}/reserveTickets`, JSON.stringify(payload));
   }
 
   getEventsPagination(payload: GetEventsPaginationRequest): Observable<GetEventsPaginationResponse> {

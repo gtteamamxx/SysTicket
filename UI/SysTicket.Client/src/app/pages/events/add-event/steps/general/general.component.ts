@@ -8,12 +8,14 @@ interface EventDetailsFormGroup {
   body: FormControl<string | null>;
   dateFrom: FormControl<Date | null>;
   dateTo: FormControl<Date | null>;
+  place: FormControl<string | null>;
 }
 
 export interface GeneralStepData {
   title: string;
   body: string;
   dateFrom: Date;
+  place: string;
   dateTo: Date;
 }
 
@@ -32,6 +34,7 @@ export class GeneralComponent {
     body: new FormControl<string>('', [Validators.required]),
     dateFrom: new FormControl<Date>(null!, [Validators.required]),
     dateTo: new FormControl<Date>(null!, [Validators.required]),
+    place: new FormControl<string>('', [Validators.required]),
   });
 
   minDate!: Date;
@@ -50,7 +53,15 @@ export class GeneralComponent {
       body: this.eventDetailsFormGroup.controls.body.value!,
       dateFrom: new Date(this.eventDetailsFormGroup.controls.dateFrom.value!),
       dateTo: new Date(this.eventDetailsFormGroup.controls.dateTo.value!),
+      place: this.eventDetailsFormGroup.controls.place.value!,
     };
+  }
+
+  onMinDateChange(): void {
+    const dateFrom: Date = new Date(this.eventDetailsFormGroup.controls.dateFrom.value!);
+    dateFrom.setHours(dateFrom.getHours() + 1);
+
+    this.eventDetailsFormGroup.controls.dateTo.setValue(dateFrom);
   }
 
   private setMinDate(): void {

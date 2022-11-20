@@ -47,6 +47,7 @@ export class AddEventState {
             userId: this.store.selectSnapshot(UserState.loggedUser)?.id!,
             logoBase64: logoB64,
             layout: action.payload.layout,
+            place: action.payload.place,
             regionPrices: action.payload.regionPrices,
           })
           .pipe(

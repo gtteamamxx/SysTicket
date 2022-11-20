@@ -14,6 +14,8 @@ namespace SysTicket.API.Models.Requests.Events
 
         public string? LogoBase64 { get; set; }
 
+        public string Place { get; set; } = default!;
+
         public RegionPrices RegionPrices { get; set; } = default!;
 
         public string? Title { get; set; }

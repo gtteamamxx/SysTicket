@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Select } from '@ngxs/store';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { Observable } from 'rxjs';
 import { Event } from 'src/app/core/models/event.model';
 import { HomeFacade } from './home.facade';
@@ -15,6 +16,10 @@ import { HomeState } from './store/home.state';
   providers: [HomeFacade],
 })
 export class HomeComponent implements OnInit {
+  CalendarView = CalendarView;
+
+  currentDate = new Date();
+
   @Select(HomeState.pageSize)
   pageSize$!: Observable<number>;
 
@@ -24,8 +29,9 @@ export class HomeComponent implements OnInit {
   @Select(HomeState.totalEventsCount)
   totalEventsCount$!: Observable<number>;
 
-  @Select(HomeState.events)
-  events$!: Observable<Event[]>;
+  get events$(): Observable<CalendarEvent<Event>[]> {
+    return this.facade.events$;
+  }
 
   constructor(private readonly facade: HomeFacade) {}
 
@@ -39,7 +45,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onEventSeeDetailsClick(event: Event): void {
+  onCalendarEventClick(event: { event: CalendarEvent<Event> }): void {
+    this.facade.navigateToEventDetails(event.event.meta!);
+  }
+
+  onEventBuyTicketClick(event: Event): void {
     this.facade.navigateToEventDetails(event);
   }
 }

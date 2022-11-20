@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/models/user.model';
+import { UserState } from 'src/app/core/store/user.state';
 import { ManageUsersFacade } from './manage-users.facade';
 import { ManageUsersState } from './store/manage-users.state';
 
@@ -17,6 +18,9 @@ export class ManageUsersComponent implements OnInit {
   @Select(ManageUsersState.users)
   users$!: Observable<User[]>;
 
+  @Select(UserState.isUserAdmin)
+  isUserAdmin$!: Observable<boolean>;
+
   constructor(private readonly facade: ManageUsersFacade) {}
 
   ngOnInit(): void {
@@ -25,5 +29,9 @@ export class ManageUsersComponent implements OnInit {
 
   addNewUser(): void {
     this.facade.openAddNewUserModal();
+  }
+
+  removeUser(user: User): void {
+    this.facade.removeUser(user);
   }
 }
