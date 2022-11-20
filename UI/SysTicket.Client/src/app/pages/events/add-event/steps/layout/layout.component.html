@@ -4,6 +4,24 @@
         Wybierz predefiniowany układ hali
     </button>
 
+    <br />
+    <br />
+
+    <button mat-raised-button
+            (click)="useGenerator()">
+        Wygeneruj halę
+    </button>
+
+    <div *ngIf="isGeneratorVisible"
+         class="generator-container">
+        <br />
+        <p><b>,</b> - nowe miejsce. Nowa linia - nowy rząd</p>
+        <textarea [(ngModel)]="generatorText">
+
+        </textarea>
+    </div>
+
+
     <app-seat-layout-viewer *ngIf="selectedLayoutSrc != null"
                             (onLoad)="onLayoutLoaded($event)"
                             [layoutSvgSrc]="$any(selectedLayoutSrc)">

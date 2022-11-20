@@ -57,6 +57,13 @@ export class GeneralComponent {
     };
   }
 
+  onMinDateChange(): void {
+    const dateFrom: Date = new Date(this.eventDetailsFormGroup.controls.dateFrom.value!);
+    dateFrom.setHours(dateFrom.getHours() + 1);
+
+    this.eventDetailsFormGroup.controls.dateTo.setValue(dateFrom);
+  }
+
   private setMinDate(): void {
     const date = new Date();
     this.minDate = new Date(moment(date).toString());

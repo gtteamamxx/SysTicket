@@ -12,6 +12,16 @@
     }
   }
 
+  .generator-container {
+    display: flex;
+    flex-direction: column;
+    textarea {
+      margin-top: 10px;
+      height: 100px;
+      width: 300px;
+    }
+  }
+
   .header-container {
     display: flex;
     align-items: center;

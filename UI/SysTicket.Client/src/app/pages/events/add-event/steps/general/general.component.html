@@ -26,6 +26,7 @@
             <input matInput
                    formControlName="dateFrom"
                    [min]="minDate"
+                   (ngModelChange)="onMinDateChange()"
                    [ngxMatDatetimePicker]="pickerFrom">
 
             <mat-datepicker-toggle matSuffix
